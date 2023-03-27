@@ -1,4 +1,4 @@
-import { GetServerSideProps } from "next";
+import type { GetServerSideProps } from "next";
 import React from 'react';
 
 const StoreStatus = ({ storeStatusData }: StoreStatus) => {
@@ -23,7 +23,7 @@ export default StoreStatus;
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const brand = context?.query.brand as string;
 
-    const response = await fetch(`https://${brand}.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
+    const response: StoreStatus = await fetch(`https://${brand}.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
 
     const { data: storeStatusData } = response;
 
