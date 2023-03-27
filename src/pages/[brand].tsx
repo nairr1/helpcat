@@ -1,16 +1,7 @@
 import type { GetServerSideProps } from "next";
 import React from 'react';
 
-const StoreStatus = ({ storeStatusData }: StoreStatus) => {
-
-    console.log(storeStatusData);
-
-    if (!storeStatusData) (
-        <div>
-            Not found
-        </div>
-    );
-
+const StoreStatus = () => {
     return (
         <div>
             hey
