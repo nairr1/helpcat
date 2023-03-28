@@ -9,5 +9,5 @@ export const formatTradingTime = (time: string) => {
         return `${formatTime}PM`;
     } else {
         return `${time.replace(/^0+/, "")}AM`;
-    };
+    }
 };
