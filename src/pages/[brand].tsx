@@ -19,10 +19,18 @@ const StoreStatus = ({ response }: StoreStatus) => {
         || location.StoreStatus.toLowerCase().includes(searchLocation.toLowerCase())
         || location.StoreID.toString().includes(searchLocation.toLowerCase())
     );
+
+    async function getData() {
+        const res: unknown = await fetch(`https://camys.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
+
+        console.log(res);
+    };
+
     
-      let onlineLocations: string[] = [];
-      let offlineLocations: string[] = [];
-      let unknownLocations: string[] = [];
+    
+    let onlineLocations: string[] = [];
+    let offlineLocations: string[] = [];
+    let unknownLocations: string[] = [];
     
     if (filteredStoreStatusData) {
         for (let i = 0; i < filteredStoreStatusData?.length; i++) {
@@ -44,6 +52,8 @@ const StoreStatus = ({ response }: StoreStatus) => {
         <div className='hidden lg:flex flex-col items-center justify-center mt-[1rem]'>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
                 <div className='my-[0.5rem] flex items-center text-xs font-normal py-2 px-3 space-x-4 rounded-md'>
+
+                    <button onClick={(() => getData())}>get data</button>
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
