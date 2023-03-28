@@ -24,9 +24,9 @@ const StoreStatus = ({ response }: StoreStatus) => {
         const res: unknown = await fetch(`https://camys.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
 
         console.log(res);
-    };
+    }
 
-    
+    getData()
     
     let onlineLocations: string[] = [];
     let offlineLocations: string[] = [];
@@ -52,8 +52,6 @@ const StoreStatus = ({ response }: StoreStatus) => {
         <div className='hidden lg:flex flex-col items-center justify-center mt-[1rem]'>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
                 <div className='my-[0.5rem] flex items-center text-xs font-normal py-2 px-3 space-x-4 rounded-md'>
-
-                    <button onClick={(() => getData())}>get data</button>
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
