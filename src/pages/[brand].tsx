@@ -20,7 +20,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
         || location.StoreID.toString().includes(searchLocation.toLowerCase())
     );
 
-    async function getData() {
+    void async function getData() {
         const res: unknown = await fetch(`https://camys.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
 
         console.log(res);
@@ -395,3 +395,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         },
     };
 }; 
+
+function getData() {
+    throw new Error("Function not implemented.");
+}
