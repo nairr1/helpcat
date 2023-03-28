@@ -57,5 +57,7 @@ interface StoreStatusData {
 };
 
 interface StoreStatus {
-    data: StoreStatusData[];
+    response: {
+        data: StoreStatusData[];
+    };
 };
