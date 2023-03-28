@@ -19,14 +19,6 @@ const StoreStatus = ({ response }: StoreStatus) => {
         || location.StoreStatus.toLowerCase().includes(searchLocation.toLowerCase())
         || location.StoreID.toString().includes(searchLocation.toLowerCase())
     );
-
-    void async function getData() {
-        const res: unknown = await fetch(`https://camys.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
-
-        console.log(res);
-    }
-
-    getData()
     
     let onlineLocations: string[] = [];
     let offlineLocations: string[] = [];
