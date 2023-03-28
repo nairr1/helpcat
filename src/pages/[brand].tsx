@@ -28,17 +28,17 @@ const StoreStatus = ({ response }: StoreStatus) => {
         for (let i = 0; i < filteredStoreStatusData?.length; i++) {
             if (filteredStoreStatusData[i]?.StoreStatus === "Online") {
                 onlineLocations = [...onlineLocations, filteredStoreStatusData[i]?.LocationName ?? ""];
-            };
+            }
         
             if (filteredStoreStatusData[i]?.StoreStatus === "OffLine") {
                 offlineLocations = [...offlineLocations, filteredStoreStatusData[i]?.LocationName ?? ""];
-            };
+            }
         
             if (filteredStoreStatusData[i]?.StoreStatus === "Unknown") {
                 unknownLocations = [...unknownLocations, filteredStoreStatusData[i]?.LocationName ?? ""]
-            };
-        };
-    };
+            }
+        }
+    }
 
     return (
         <div className='hidden lg:flex flex-col items-center justify-center mt-[1rem]'>
