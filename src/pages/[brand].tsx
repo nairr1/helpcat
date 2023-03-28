@@ -1,5 +1,6 @@
 import type { GetServerSideProps } from "next";
 import React, { useState } from "react";
+import { formatTradingTime } from "~/utils/formatTradingTime";
 
 const StoreStatus = ({ response }: StoreStatus) => {
     const { data: storeStatusData } = response;
@@ -225,7 +226,9 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Monday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Monday.OpeningTime} - ${OpeningHours.Monday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Monday.OpeningTime)} 
+                                            - ${formatTradingTime(OpeningHours.Monday.ClosingTime)}
+                                            `
                                         }
                                     </p>
                                     <p> 
