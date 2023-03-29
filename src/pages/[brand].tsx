@@ -150,9 +150,6 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 <p className='text-2xl mb-2 px-2 py-1 mr-[1rem] bg-edc2d8ff/60 rounded-lg '>{LocationName}</p>
 
                                 <p className={`text-lg mb-1 capitalize
-                                    ${StoreStatus === 'Online' && 'text-2db34d'}
-                                    ${StoreStatus === 'OffLine' && 'text-b32d2d'}
-                                    ${StoreStatus === 'Unknown' && 'text-5e4fb3'}
                                 `}>
                                     {StoreStatus === 'OffLine' ? `${StoreStatus.charAt(0).toUpperCase()}${StoreStatus.slice(1).toLowerCase()}` : StoreStatus}
                                 </p>
