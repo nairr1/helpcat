@@ -1,7 +1,7 @@
 export const formatTradingTime = (time: string) => {
     const hour = time.slice(0, 2);
 
-    const formatHour = Number(time.slice(0, 2)) - 12;
+    const formatHour = Number(hour) - 12;
 
     const formatTime = `${formatHour.toString()}${time.slice(2)}`;
 

@@ -56,8 +56,16 @@ interface StoreStatusData {
     };
 };
 
+interface MenuData {
+    LastUpdateDate: string;
+};
+
 interface StoreStatus {
-    response: {
+    res1: {
         data: StoreStatusData[];
-    }
+    };
+
+    res2: {
+        data: MenuData;
+    };
 };

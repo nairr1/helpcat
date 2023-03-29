@@ -1,9 +1,13 @@
 import type { GetServerSideProps } from "next";
 import React, { useState } from "react";
+import { formatDateTime } from "~/utils/formatDateTime";
 import { formatTradingTime } from "~/utils/formatTradingTime";
+import { yesNoString } from "~/utils/yesNoString";
 
-const StoreStatus = ({ response }: StoreStatus) => {
-    const { data: storeStatusData } = response;
+const StoreStatus = ({ res1, res2 }: StoreStatus) => {
+    const { data: storeStatusData } = res1;
+
+    const { data: menuData } = res2;
 
     const [searchLocation, setSearchLocation] = useState("");
     const [showOnlineLocations, setShowOnlineLocations] = useState(false);
@@ -44,18 +48,18 @@ const StoreStatus = ({ response }: StoreStatus) => {
     return (
         <div className='hidden lg:flex flex-col items-center justify-center mt-[1rem]'>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
-                <div className='my-[0.5rem] flex items-center text-xs font-normal py-2 px-3 space-x-4 rounded-md'>
+                <div className='my-[0.5rem] bg-b5bfc9 flex items-center text-xs font-normal py-2 px-3 space-x-4 rounded-md'>
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
-                        className='cursor-pointer'
+                        className='cursor-pointer text-2db34d'
                         onMouseEnter={(() => {setShowOnlineLocations(true)})}
                         onMouseLeave={(() => {setShowOnlineLocations(false)})}
                     >
                         Online: {onlineLocations.length}
 
                         {showOnlineLocations && onlineLocations.length > 0 && (
-                            <div className='max-h-[30rem] z-10 p-2 rounded-lg text-[10px] font-light'>
+                            <div className='max-h-[30rem] text-000000 z-10 p-2 rounded-lg text-[10px] font-light'>
                                 {onlineLocations.map((location, index) => (
                                     <p key={index}>{location}</p>
                                 ))}
@@ -106,7 +110,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                     type='text'
                     spellCheck='false'
                     placeholder='Search Locations'
-                    className='w-[20rem] font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
+                    className='w-[20rem] bg-b5bfc9 font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
                     onChange={handleSearchLocationChange}
                     />
                 </form>
@@ -139,27 +143,35 @@ const StoreStatus = ({ response }: StoreStatus) => {
                 }) => (
                     <div 
                         key={StoreID} 
-                        className='cursor-pointer transform transition duration-500 hover:scale-[1.01] text-sm font-light  mb-[2rem] p-[1rem] rounded-md'
+                        className='cursor-pointer transform transition duration-500 bg-b5bfc9 hover:scale-[1.01] text-sm font-light  mb-[2rem] p-[0.25rem] rounded-md'
                     >
-                        <div className='flex'>
-                            <div className='flex-1 flex flex-col items-start justify-center'>
-                                <p className='text-2xl mb-2 pr-[1rem]'>{LocationName}</p>
+                        <div className='flex space-x-4 p-[1rem]'>
+                            <div className='flex-1 flex flex-col items-start justify-center bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
+                                <p className='text-2xl mb-2 px-2 py-1 mr-[1rem] bg-edc2d8ff/60 rounded-lg '>{LocationName}</p>
 
-                                <p className='text-lg mb-1'>{StoreStatus}</p>
+                                <p className={`text-lg mb-1 capitalize
+                                    ${StoreStatus === 'Online' && 'text-2db34d'}
+                                    ${StoreStatus === 'OffLine' && 'text-b32d2d'}
+                                    ${StoreStatus === 'Unknown' && 'text-5e4fb3'}
+                                `}>
+                                    {StoreStatus === 'OffLine' ? `${StoreStatus.charAt(0).toUpperCase()}${StoreStatus.slice(1).toLowerCase()}` : StoreStatus}
+                                </p>
 
                                 <p className='text-lg mb-1'>ID: {StoreID}</p>
 
                                 <p className='w-[30rem] pr-[1rem]'>Address: {Address1}, {Suburb}, {Postcode}, {State}, {Country}</p>
+
+                                <p className="mt-1">Menu updated: {formatDateTime(menuData?.LastUpdateDate)}</p>
                             </div>
 
-                            <div className='p-[1rem] rounded-md'>
+                            <div className='flex-1 p-[1rem] rounded-md bg-ced7d9/40 shadow-lg'>
                                 <div className='mb-3'>
-                                    <p className='text-center font-normal'>Configuration</p>
+                                    <p className='text-center font-normal underline'>Configuration</p>
                                 </div>
 
                                 <div className='grid grid-cols-2 text-left text-xs'>
                                     <div className='py-1 px-4'>
-                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>Customer Ordering Interface: {OrderingEnabled}</p>
+                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>Customer Ordering Interface: {yesNoString(OrderingEnabled)}</p>
                                     </div>
 
                                     <div className='py-1 px-4'>
@@ -169,7 +181,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                     </div>
 
                                     <div className='py-1 px-4 mt-0.5'>
-                                        <p className='rounded-md cursor-pointer px-1 py-0.5'>Hidden on The App Picklist: {HiddenStore}</p>
+                                        <p className='rounded-md cursor-pointer px-1 py-0.5'>Hidden on The App Picklist: {yesNoString(HiddenStore)}</p>
                                     </div>
 
                                     <div className='py-1 px-4 mt-0.5'>
@@ -187,7 +199,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                     </div>
 
                                     <div className='py-1 px-4 mt-0.5'>
-                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>Order After Hours: {OrderAfterHours}</p>
+                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>Order After Hours: {yesNoString(OrderAfterHours)}</p>
                                     </div>
 
                                     <div className='py-1 px-4 mt-0.5'>
@@ -212,10 +224,10 @@ const StoreStatus = ({ response }: StoreStatus) => {
 
                         </div>
 
-                        <div className='flex space-x-[5rem] mt-[1rem] rounded-md p-[1rem]'>
-                            <div className='flex flex-col flex-1'>
+                        <div className='flex space-x-[5rem] rounded-md px-[1rem] pb-[1rem]'>
+                            <div className='flex flex-col flex-1 bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
-                                    <p className='text-center font-normal'>
+                                    <p className='text-center font-normal underline'>
                                         Store Trading Hours
                                     </p>
                                 </div>
@@ -226,9 +238,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Monday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Monday.OpeningTime)} 
-                                            - ${formatTradingTime(OpeningHours.Monday.ClosingTime)}
-                                            `
+                                            : ` ${formatTradingTime(OpeningHours.Monday.OpeningTime)} - ${formatTradingTime(OpeningHours.Monday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -236,7 +246,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Tuesday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Tuesday.OpeningTime} - ${OpeningHours.Tuesday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Tuesday.OpeningTime)} - ${formatTradingTime(OpeningHours.Tuesday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -244,7 +254,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Wednesday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Wednesday.OpeningTime} - ${OpeningHours.Wednesday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Wednesday.OpeningTime)} - ${formatTradingTime(OpeningHours.Wednesday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -252,7 +262,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Thursday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Thursday.OpeningTime} - ${OpeningHours.Thursday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Thursday.OpeningTime)} - ${formatTradingTime(OpeningHours.Thursday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -260,7 +270,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Friday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Friday.OpeningTime} - ${OpeningHours.Friday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Friday.OpeningTime)} - ${formatTradingTime(OpeningHours.Friday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -268,7 +278,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Saturday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Saturday.OpeningTime} - ${OpeningHours.Saturday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Saturday.OpeningTime)} - ${formatTradingTime(OpeningHours.Saturday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -276,7 +286,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Sunday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Sunday.OpeningTime} - ${OpeningHours.Sunday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Sunday.OpeningTime)} - ${formatTradingTime(OpeningHours.Sunday.ClosingTime)}`
                                         }
                                     </p>
                                     <p> 
@@ -284,16 +294,16 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                         {
                                             OpeningHours.Publicholiday.OpeningTime === 'Closed' 
                                             ? ' Closed' 
-                                            : ` ${OpeningHours.Publicholiday.OpeningTime} - ${OpeningHours.Publicholiday.ClosingTime}`
+                                            : ` ${formatTradingTime(OpeningHours.Publicholiday.OpeningTime)} - ${formatTradingTime(OpeningHours.Publicholiday.ClosingTime)}`
                                         }
                                     </p>
                                 </div>
 
                             </div>
 
-                            <div className='flex flex-col flex-1'>
+                            <div className='flex flex-col flex-1 bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
-                                    <p className='text-center font-normal'>Ordering Provider Menus</p>
+                                    <p className='text-center font-normal underline'>Ordering Provider Menus</p>
                                 </div>
 
                                 <div className='w-max space-y-3 text-xs'>
@@ -328,9 +338,9 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                 </div>
                             </div>
 
-                            <div className='flex flex-col flex-1'>
+                            <div className='flex flex-col flex-1 bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
-                                    <p className='text-center font-normal'>Sale Type Menus</p>
+                                    <p className='text-center font-normal underline'>Sale Type Menus</p>
                                 </div>
 
                                 <div className='w-max space-y-3 text-xs'>
@@ -359,7 +369,7 @@ const StoreStatus = ({ response }: StoreStatus) => {
                                     </p>
 
                                     <p>
-                                        Catering: {SaleTypeMenus['107'] ? SaleTypeMenus['106'] : 'None'}
+                                        Catering: {SaleTypeMenus['107'] ? SaleTypeMenus['107'] : 'None'}
                                     </p>
 
                                 </div>
@@ -382,15 +392,14 @@ export default StoreStatus;
 export const getServerSideProps: GetServerSideProps = async (context) => {
     const brand = context?.query.brand as string;
 
-    const response: unknown = await fetch(`https://${brand}.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
+    const res1: unknown = await fetch(`https://${brand}.redcatcloud.com.au/api/v1/stores`).then(res => res.json());
+
+    const res2: unknown = await fetch(`https://${brand}.redcatcloud.com.au/api/v1/stores/1/menu`).then(res => res.json());
 
     return {
         props: {
-            response
+            res1,
+            res2
         },
     };
-}; 
-
-function getData() {
-    throw new Error("Function not implemented.");
-}
+};
