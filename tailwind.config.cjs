@@ -12,6 +12,9 @@ const config = {
         "5e4fb3": "#5e4fb3",
         "000000": "#000000",
     },
+    fontFamily: {
+        rubik: ['Rubik', 'sans-serif'],
+    },
   },
   plugins: [],
 };

@@ -1,5 +1,8 @@
 import type { GetServerSideProps } from "next";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { Brands } from "~/utils/brands";
 import { formatDateTime } from "~/utils/formatDateTime";
 import { formatTradingTime } from "~/utils/formatTradingTime";
 import { yesNoString } from "~/utils/yesNoString";
@@ -8,6 +11,8 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
 
     const { data: menuData } = res2;
+
+    const router = useRouter();
 
     const [searchLocation, setSearchLocation] = useState("");
     const [showOnlineLocations, setShowOnlineLocations] = useState(false);
@@ -48,7 +53,21 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     return (
         <div className='hidden lg:flex flex-col items-center justify-center mt-[1rem]'>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
-                <div className='my-[0.5rem] bg-b5bfc9 flex items-center text-xs font-normal py-2 px-3 space-x-4 rounded-md'>
+                {Brands.map((brand) => (
+                    <div key={brand.id}>
+                        {router.query.brand === brand.query && (
+                            <Image 
+                                src={brand.image} 
+                                height={50}
+                                width={50}
+                                className='rounded-md'
+                                alt="Brand Logo"
+                            />
+                        )}
+                    </div>
+                ))}
+
+                <div className='my-[0.5rem] bg-b5bfc9 flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
@@ -143,11 +162,11 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                 }) => (
                     <div 
                         key={StoreID} 
-                        className='cursor-pointer transform transition duration-500 bg-b5bfc9 hover:scale-[1.01] text-sm font-light  mb-[2rem] p-[0.25rem] rounded-md'
+                        className='cursor-pointer transform transition duration-500 bg-b5bfc9 hover:scale-[1.01] text-sm font-light mb-[2rem] p-[0.25rem] rounded-md'
                     >
                         <div className='flex space-x-4 p-[1rem]'>
                             <div className='flex-1 flex flex-col items-start justify-center bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
-                                <p className='text-2xl mb-2 px-2 py-1 mr-[1rem] bg-edc2d8ff/60 rounded-lg '>{LocationName}</p>
+                                <p className='text-2xl mb-2 px-1 py-0.5 mr-[1rem] bg-edc2d8ff/60 font-normal rounded-lg '>{LocationName}</p>
 
                                 <p className={`text-lg mb-1 capitalize
                                 `}>

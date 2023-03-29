@@ -6,10 +6,10 @@ import "~/styles/globals.css";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-  <>
+  <div className="h-screen overflow-y-scroll">
     
     <Component {...pageProps} />
-  </>
+  </div>
   
   )
 };
