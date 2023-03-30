@@ -68,11 +68,11 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     </div>
                 ))}
 
-                <div className='my-[0.5rem] bg-282a36 flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
+                <div className='my-[0.5rem] bg-20222e flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
-                        className={`cursor-pointer text-2db34d`}
+                        className={`cursor-pointer text-4ca662`}
                         onMouseEnter={(() => {setShowOnlineLocations(true)})}
                         onMouseLeave={(() => {setShowOnlineLocations(false)})}
                     >
@@ -130,7 +130,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     type='text'
                     spellCheck='false'
                     placeholder='Search Locations'
-                    className='w-[20rem] bg-282a36 font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
+                    className='w-[20rem] bg-20222e font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
                     onChange={handleSearchLocationChange}
                     />
                 </form>
@@ -163,14 +163,14 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                 }) => (
                     <div 
                         key={StoreID} 
-                        className='cursor-pointer transform transition duration-500 bg-282a36 hover:scale-[1.01] text-sm font-light mb-[2rem] p-[0.25rem] rounded-md'
+                        className='cursor-pointer transform transition duration-500 bg-20222e hover:scale-[1.01] text-sm font-light mb-[2rem] p-[0.25rem] rounded-md'
                     >
                         <div className='flex space-x-4 p-[1rem]'>
-                            <div className='flex-1 flex flex-col items-start justify-center bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex-1 flex flex-col items-start justify-center bg-282a36 shadow-lg p-[1rem] rounded-md'>
                                 <p className='text-2xl mb-1 px-1 py-0.5 mr-[1rem] text-edc2d8ff font-normal rounded-md '>{LocationName}</p>
 
                                 {StoreStatus === "Online" && (
-                                    <p className="text-lg text-2db34d">{StoreStatus}</p>
+                                    <p className="text-lg text-4ca662">{StoreStatus}</p>
                                 )}
 
                                 {StoreStatus === "OffLine" && (
@@ -188,7 +188,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 <p className="mt-1">Menu updated: {formatDateTime(menuData?.LastUpdateDate)}</p>
                             </div>
 
-                            <div className='flex-1 p-[1rem] rounded-md bg-b5bfc9 shadow-lg'>
+                            <div className='flex-1 p-[1rem] rounded-md bg-282a36 shadow-lg'>
                                 <div className='mb-3'>
                                     <p className='text-center font-normal underline'>Configuration</p>
                                 </div>
@@ -249,7 +249,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         </div>
 
                         <div className='flex space-x-[5rem] rounded-md px-[1rem] pb-[1rem]'>
-                            <div className='flex flex-col flex-1 bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex flex-col flex-1 bg-282a36 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
                                     <p className='text-center font-normal underline'>
                                         Store Trading Hours
@@ -325,7 +325,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
                             </div>
 
-                            <div className='flex flex-col flex-1 bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex flex-col flex-1 bg-282a36 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
                                     <p className='text-center font-normal underline'>Ordering Provider Menus</p>
                                 </div>
@@ -362,7 +362,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 </div>
                             </div>
 
-                            <div className='flex flex-col flex-1 bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex flex-col flex-1 bg-282a36 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
                                     <p className='text-center font-normal underline'>Sale Type Menus</p>
                                 </div>
