@@ -2,6 +2,7 @@ import type { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import styled from "styled-components";
 import { Brands } from "~/utils/brands";
 import { formatDateTime } from "~/utils/formatDateTime";
 import { formatTradingTime } from "~/utils/formatTradingTime";
@@ -51,7 +52,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     }
 
     return (
-        <div className='hidden lg:flex flex-col items-center justify-center mt-[1rem]'>
+        <div className='hidden lg:flex flex-col items-center justify-center '>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
                 {Brands.map((brand) => (
                     <div key={brand.id}>
@@ -67,57 +68,57 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     </div>
                 ))}
 
-                <div className='my-[0.5rem] bg-b5bfc9 flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
+                <div className='my-[0.5rem] bg-282a36 flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
-                        className='cursor-pointer text-2db34d'
+                        className={`${offlineLocations.length > 0 && 'cursor-pointer'} text-2db34d`}
                         onMouseEnter={(() => {setShowOnlineLocations(true)})}
                         onMouseLeave={(() => {setShowOnlineLocations(false)})}
                     >
                         Online: {onlineLocations.length}
 
                         {showOnlineLocations && onlineLocations.length > 0 && (
-                            <div className='max-h-[30rem] text-000000 z-10 p-2 rounded-lg text-[10px] font-light'>
+                            <ScrollContainer className='max-h-[30rem] bg-3a3d52 text-ffffff z-10 p-2 rounded-lg text-[10px] font-light'>
                                 {onlineLocations.map((location, index) => (
                                     <p key={index}>{location}</p>
                                 ))}
-                            </div>
+                            </ScrollContainer>
                         )}
 
                     </div>
 
                     <div
-                        className='cursor-pointer'
+                        className={`${offlineLocations.length > 0 && 'cursor-pointer'} text-b32d2d`}
                         onMouseEnter={(() => {setShowOfflineLocations(true)})}
                         onMouseLeave={(() => {setShowOfflineLocations(false)})}
                     >
                         Offline: {offlineLocations.length}
 
                         {showOfflineLocations && offlineLocations.length > 0 && (
-                            <div className='max-h-[30rem] z-10 p-2 rounded-lg text-[10px] font-light'>
+                            <ScrollContainer className='max-h-[30rem] bg-3a3d52 text-ffffff z-10 p-2 rounded-lg text-[10px] font-light'>
                                 {offlineLocations.map((location, index) => (
                                     <p key={index} className='mr-2'>{location}</p>
                                 ))}
-                            </div>
+                            </ScrollContainer>
                         )}
                         
                     </div>
                 
 
                     <div 
-                        className='cursor-pointer'
+                        className={`${offlineLocations.length > 0 && 'cursor-pointer'} text-5e4fb3`}
                         onMouseEnter={(() => {setShowUnknownLocations(true)})}
                         onMouseLeave={(() => {setShowUnknownLocations(false)})}
                     >
                         Unknown: {unknownLocations.length}
 
                         {showUnknownLocations && unknownLocations.length > 0 && (
-                            <div className='z-10 p-2 rounded-lg text-[10px] font-light'>                       
+                            <ScrollContainer className='max-h-[30rem] bg-3a3d52 text-ffffff z-10 p-2 rounded-lg text-[10px] font-light'>                       
                                 {unknownLocations.map((location, index) => (
                                     <p key={index} className='mr-2'>{location}</p>
                                 ))}
-                            </div>
+                            </ScrollContainer>
                         )}
 
                     </div>
@@ -129,7 +130,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     type='text'
                     spellCheck='false'
                     placeholder='Search Locations'
-                    className='w-[20rem] bg-b5bfc9 font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
+                    className='w-[20rem] bg-282a36 font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
                     onChange={handleSearchLocationChange}
                     />
                 </form>
@@ -162,25 +163,32 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                 }) => (
                     <div 
                         key={StoreID} 
-                        className='cursor-pointer transform transition duration-500 bg-b5bfc9 hover:scale-[1.01] text-sm font-light mb-[2rem] p-[0.25rem] rounded-md'
+                        className='cursor-pointer transform transition duration-500 bg-282a36 hover:scale-[1.01] text-sm font-light mb-[2rem] p-[0.25rem] rounded-md'
                     >
                         <div className='flex space-x-4 p-[1rem]'>
-                            <div className='flex-1 flex flex-col items-start justify-center bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
-                                <p className='text-2xl mb-2 px-1 py-0.5 mr-[1rem] bg-edc2d8ff/60 font-normal rounded-lg '>{LocationName}</p>
+                            <div className='flex-1 flex flex-col items-start justify-center bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
+                                <p className='text-2xl mb-1 px-1 py-0.5 mr-[1rem] text-edc2d8ff font-normal rounded-md '>{LocationName}</p>
 
-                                <p className={`text-lg mb-1 capitalize
-                                `}>
-                                    {StoreStatus === 'OffLine' ? `${StoreStatus.charAt(0).toUpperCase()}${StoreStatus.slice(1).toLowerCase()}` : StoreStatus}
-                                </p>
+                                {StoreStatus === "Online" && (
+                                    <p className="text-lg text-2db34d">{StoreStatus}</p>
+                                )}
 
-                                <p className='text-lg mb-1'>ID: {StoreID}</p>
+                                {StoreStatus === "OffLine" && (
+                                    <p className="text-lg text-b32d2d">{StoreStatus.charAt(0).toUpperCase()}{StoreStatus.slice(1).toLowerCase()}</p>
+                                )}
 
-                                <p className='w-[30rem] pr-[1rem]'>Address: {Address1}, {Suburb}, {Postcode}, {State}, {Country}</p>
+                                {StoreStatus === "Unknown" && (
+                                    <p className="text-lg text-5e4fb3">{StoreStatus}</p>
+                                )}
+
+                                <p className='text-lg my-1'>ID: {StoreID}</p>
+
+                                <p className='w-[30rem] pr-[1rem] my-1'>Address: {Address1}, {Suburb}, {Postcode}, {State}, {Country}</p>
 
                                 <p className="mt-1">Menu updated: {formatDateTime(menuData?.LastUpdateDate)}</p>
                             </div>
 
-                            <div className='flex-1 p-[1rem] rounded-md bg-ced7d9/40 shadow-lg'>
+                            <div className='flex-1 p-[1rem] rounded-md bg-b5bfc9 shadow-lg'>
                                 <div className='mb-3'>
                                     <p className='text-center font-normal underline'>Configuration</p>
                                 </div>
@@ -241,7 +249,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         </div>
 
                         <div className='flex space-x-[5rem] rounded-md px-[1rem] pb-[1rem]'>
-                            <div className='flex flex-col flex-1 bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex flex-col flex-1 bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
                                     <p className='text-center font-normal underline'>
                                         Store Trading Hours
@@ -317,7 +325,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
                             </div>
 
-                            <div className='flex flex-col flex-1 bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex flex-col flex-1 bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
                                     <p className='text-center font-normal underline'>Ordering Provider Menus</p>
                                 </div>
@@ -354,7 +362,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 </div>
                             </div>
 
-                            <div className='flex flex-col flex-1 bg-ced7d9/40 shadow-lg p-[1rem] rounded-md'>
+                            <div className='flex flex-col flex-1 bg-b5bfc9 shadow-lg p-[1rem] rounded-md'>
                                 <div className='mb-4'>
                                     <p className='text-center font-normal underline'>Sale Type Menus</p>
                                 </div>
@@ -419,3 +427,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
         },
     };
 };
+
+const ScrollContainer = styled.div`
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    max-height: 12rem;
+    overflow: auto;
+    position: absolute;
+`
