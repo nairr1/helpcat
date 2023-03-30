@@ -72,7 +72,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     <p className=''>Locations: {filteredStoreStatusData?.length}</p>
                     
                     <div 
-                        className={`${offlineLocations.length > 0 && 'cursor-pointer'} text-2db34d`}
+                        className={`cursor-pointer text-2db34d`}
                         onMouseEnter={(() => {setShowOnlineLocations(true)})}
                         onMouseLeave={(() => {setShowOnlineLocations(false)})}
                     >
@@ -89,7 +89,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     </div>
 
                     <div
-                        className={`${offlineLocations.length > 0 && 'cursor-pointer'} text-b32d2d`}
+                        className={`cursor-pointer text-b32d2d`}
                         onMouseEnter={(() => {setShowOfflineLocations(true)})}
                         onMouseLeave={(() => {setShowOfflineLocations(false)})}
                     >
@@ -107,7 +107,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                 
 
                     <div 
-                        className={`${offlineLocations.length > 0 && 'cursor-pointer'} text-5e4fb3`}
+                        className={`cursor-pointer text-5e4fb3`}
                         onMouseEnter={(() => {setShowUnknownLocations(true)})}
                         onMouseLeave={(() => {setShowUnknownLocations(false)})}
                     >
