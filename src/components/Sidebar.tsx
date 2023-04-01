@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { Dispatch, SetStateAction } from "react";
+import React, { type Dispatch, type SetStateAction } from "react";
 
 import { Brands } from "~/utils/brands";
 

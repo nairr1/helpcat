@@ -13,10 +13,14 @@ const Home: NextPage = () => {
   const [searchBrand, setSearchbrand] = useState("");
 
   function handleBrandSearch(event: React.ChangeEvent<HTMLInputElement>) {
-    event.preventDefault()
+    event.preventDefault();
 
     setSearchbrand(event.target.value);
-  };
+  }
+
+  function submitBrandSearch() {
+    return router.push(`/${searchBrand}`);
+  }
 
   return (
     <>
@@ -28,7 +32,7 @@ const Home: NextPage = () => {
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
         <form 
           className='flex flex-col pb-[5rem] pt-[3rem] items-center justify-center text-center font-light'
-          onSubmit={(() => router.push(`/${searchBrand}`))}
+          onSubmit={submitBrandSearch}
         >
           <input 
             type='text' 

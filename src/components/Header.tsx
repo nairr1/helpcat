@@ -1,4 +1,4 @@
-import { useState, useEffect, MouseEvent } from 'react';
+import { useState } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 import helpcatLogo from '../components/assets/helpcatLogo.png';
