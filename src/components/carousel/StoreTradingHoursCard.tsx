@@ -41,7 +41,7 @@ interface Props {
     };
     activeIndex: number;
     index: number;
-};
+}
 
 const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
     return (

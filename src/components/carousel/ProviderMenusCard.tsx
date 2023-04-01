@@ -7,7 +7,7 @@ interface Props {
     orderingProviderMenus: string;
     activeIndex: number;
     index: number;
-};
+}
 
 const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props) => {
     return (

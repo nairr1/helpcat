@@ -7,7 +7,7 @@ interface Props {
     saleTypeMenus: string;
     activeIndex: number;
     index: number;
-};
+}
 
 const SaleTypeMenusCard = ({ saleTypeMenus, activeIndex, index }: Props) => {
     return (

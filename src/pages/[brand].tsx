@@ -39,28 +39,28 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     function handleNextCardBtn(sliderId: number) {
         setSliderState((prev) => {
 
-            let currIndex = prev[sliderId] || 0;
+            const currIndex = prev[sliderId] || 0;
 
-            let newIndex = currIndex + 1 < 5 ? currIndex + 1 : currIndex;
+            const newIndex = currIndex + 1 < 5 ? currIndex + 1 : currIndex;
             
             return {...prev, [sliderId]: newIndex};
         });
-    };
+    }
 
     function handlePrevCardBtn(sliderId: number) {
         setSliderState((prev) => {
 
-            let currIndex = prev[sliderId] || 0;
+            const currIndex = prev[sliderId] || 0;
 
-            let newIndex = currIndex - 1 >= 0 ? currIndex - 1 : currIndex;
+            const newIndex = currIndex - 1 >= 0 ? currIndex - 1 : currIndex;
             
             return {...prev, [sliderId]: newIndex};
         });
-    };
+    }
   
     function handleSearchLocationChange(event: React.ChangeEvent<HTMLInputElement>) {
         setSearchLocation(event.target.value);
-    };
+    }
     
     const filteredStoreStatusData = storeStatusData?.filter((location) =>
         location.LocationName.toLowerCase().includes(searchLocation.toLowerCase())

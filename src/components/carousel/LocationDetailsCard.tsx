@@ -17,7 +17,7 @@ interface Props {
     activeIndex: number;
     index: number;
     brand: string;
-};
+}
 
 const LocationDetailsCard = ({ 
     locationName, 

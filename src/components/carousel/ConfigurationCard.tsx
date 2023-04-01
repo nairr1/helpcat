@@ -17,7 +17,7 @@ interface Props {
     phone: string;
     activeIndex: number;
     index: number;
-};
+}
 
 const ConfigurationCard = ({ 
     orderingEnabled,
