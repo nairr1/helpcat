@@ -20,7 +20,7 @@ const Header = () => {
     };
 
     return (
-        <div className={`text-sm sticky top-0 bg-181818 hidden lg:flex lg:flex-col z-50 pb-[0.5rem]`}>
+        <div className={`text-sm sticky top-0 bg-1c1b1c hidden lg:flex lg:flex-col z-50 pb-[0.5rem]`}>
             <HeaderContainer>
                     <HeaderLeft>
                         {true && (
@@ -31,7 +31,7 @@ const Header = () => {
 
                                 <input 
                                     type='text' 
-                                    className='placeholder-ffffff/60 w-[15rem] outline-none bg-181818'
+                                    className='placeholder-ffffff/60 w-[15rem] outline-none bg-1c1b1c'
                                     placeholder='Helpcat is here to help!' 
                                     spellCheck='false' 
                                     onChange={handleSearchChange}

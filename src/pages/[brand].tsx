@@ -2,11 +2,18 @@ import type { GetServerSideProps } from "next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+
 import styled from "styled-components";
+
+import ConfigurationCard from "~/components/carousel/ConfigurationCard";
+import LocationDetailsCard from "~/components/carousel/LocationDetailsCard";
+import ProviderMenusCard from "~/components/carousel/ProviderMenusCard";
+import SaleTypeMenusCard from "~/components/carousel/SaleTypeMenusCard";
+import StoreTradingHoursCard from "~/components/carousel/StoreTradingHoursCard";
+
 import { Brands } from "~/utils/brands";
-import { formatDateTime } from "~/utils/formatDateTime";
-import { formatTradingTime } from "~/utils/formatTradingTime";
-import { yesNoString } from "~/utils/yesNoString";
+
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
@@ -16,11 +23,42 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const router = useRouter();
 
     const [searchLocation, setSearchLocation] = useState("");
+
     const [showOnlineLocations, setShowOnlineLocations] = useState(false);
     const [showOfflineLocations, setShowOfflineLocations] = useState(false);
     const [showUnknownLocations, setShowUnknownLocations] = useState(false);
+
+    const obj: {[key: number]: number} = {};
+
+    storeStatusData.forEach((item) => {
+        obj[item.StoreID] = 2;
+    });
+
+    const [sliderState, setSliderState] = useState(obj);
+
+    function handleNextCardBtn(sliderId: number) {
+        setSliderState((prev) => {
+
+            let currIndex = prev[sliderId] || 0;
+
+            let newIndex = currIndex + 1 < 5 ? currIndex + 1 : currIndex;
+            
+            return {...prev, [sliderId]: newIndex};
+        });
+    };
+
+    function handlePrevCardBtn(sliderId: number) {
+        setSliderState((prev) => {
+
+            let currIndex = prev[sliderId] || 0;
+
+            let newIndex = currIndex - 1 >= 0 ? currIndex - 1 : currIndex;
+            
+            return {...prev, [sliderId]: newIndex};
+        });
+    };
   
-    const handleSearchLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    function handleSearchLocationChange(event: React.ChangeEvent<HTMLInputElement>) {
         setSearchLocation(event.target.value);
     };
     
@@ -51,6 +89,8 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         }
     }
 
+    console.log(sliderState)
+
     return (
         <div className='hidden lg:flex flex-col items-center justify-center '>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
@@ -79,7 +119,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         Online: {onlineLocations.length}
 
                         {showOnlineLocations && onlineLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-3a3d52 text-ffffff z-10 p-2 rounded-lg text-[10px] font-light'>
+                            <ScrollContainer className='max-h-[30rem] bg-282a36 text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
                                 {onlineLocations.map((location, index) => (
                                     <p key={index}>{location}</p>
                                 ))}
@@ -96,9 +136,9 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         Offline: {offlineLocations.length}
 
                         {showOfflineLocations && offlineLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-3a3d52 text-ffffff z-10 p-2 rounded-lg text-[10px] font-light'>
+                            <ScrollContainer className='max-h-[30rem] bg-282a36 text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
                                 {offlineLocations.map((location, index) => (
-                                    <p key={index} className='mr-2'>{location}</p>
+                                    <p key={index}>{location}</p>
                                 ))}
                             </ScrollContainer>
                         )}
@@ -114,9 +154,9 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         Unknown: {unknownLocations.length}
 
                         {showUnknownLocations && unknownLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-3a3d52 text-ffffff z-10 p-2 rounded-lg text-[10px] font-light'>                       
+                            <ScrollContainer className='max-h-[30rem] bg-282a36 text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>                       
                                 {unknownLocations.map((location, index) => (
-                                    <p key={index} className='mr-2'>{location}</p>
+                                    <p key={index}>{location}</p>
                                 ))}
                             </ScrollContainer>
                         )}
@@ -162,250 +202,98 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     Phone
                 }) => (
                     <div 
-                        key={StoreID} 
-                        className='cursor-pointer transform transition duration-500 bg-20222e hover:scale-[1.01] text-sm font-light mb-[2rem] p-[0.25rem] rounded-md'
+                        key={StoreID}  
+                        className="flex justify-center items-center"
                     >
-                        <div className='flex space-x-4 p-[1rem]'>
-                            <div className='flex-1 flex flex-col items-start justify-center bg-282a36 shadow-lg p-[1rem] rounded-md'>
-                                <p className='text-2xl mb-1 px-1 py-0.5 mr-[1rem] text-edc2d8ff font-normal rounded-md '>{LocationName}</p>
+                        {sliderState[StoreID] as number < 4 ? (
+                            <button 
+                                className="carousel-btn-switch-card right-28"
+                                onClick={(() => handleNextCardBtn(StoreID))}
+                            >
+                                <IoIosArrowBack />
+                            </button>
+                        ): (
+                            <button 
+                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-1c1b1c bg-1c1b1c text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-1c1b1c"
+                                onClick={(() => handleNextCardBtn(StoreID))}
+                            >
+                                <IoIosArrowBack />
+                            </button>
+                        )}
 
-                                {StoreStatus === "Online" && (
-                                    <p className="text-lg text-4ca662">{StoreStatus}</p>
-                                )}
 
-                                {StoreStatus === "OffLine" && (
-                                    <p className="text-lg text-b32d2d">{StoreStatus.charAt(0).toUpperCase()}{StoreStatus.slice(1).toLowerCase()}</p>
-                                )}
+                        <div className="carousel-container">
 
-                                {StoreStatus === "Unknown" && (
-                                    <p className="text-lg text-5e4fb3">{StoreStatus}</p>
-                                )}
+                            <LocationDetailsCard 
+                                locationName={LocationName}
+                                storeStatus={StoreStatus}
+                                storeId={StoreID}
+                                address={Address1}
+                                suburb={Suburb}
+                                postcode={Postcode}
+                                state={State}
+                                country={Country}
+                                lastMenuUpdate={menuData.LastUpdateDate}
+                                activeIndex={sliderState[StoreID] as number}
+                                index={2}
+                                brand={router.query.brand as string}
+                            />
 
-                                <p className='text-lg my-1'>ID: {StoreID}</p>
+                            <ConfigurationCard 
+                                orderingEnabled={OrderingEnabled}
+                                holidayName={HolidayName}
+                                hiddenStore={HiddenStore}
+                                longitude={Longitude}
+                                avgOrderTime={AvgOrderTime}
+                                latitude={Latitude}
+                                orderAfterHours={OrderAfterHours}
+                                timezone={Timezone}
+                                posType={PosType}
+                                phone={Phone}
+                                activeIndex={sliderState[StoreID] as number}
+                                index={1}
+                            />
 
-                                <p className='w-[30rem] pr-[1rem] my-1'>Address: {Address1}, {Suburb}, {Postcode}, {State}, {Country}</p>
+                            <StoreTradingHoursCard 
+                                openingHours={OpeningHours} 
+                                activeIndex={sliderState[StoreID] as number}
+                                index={0}
+                            />
 
-                                <p className="mt-1">Menu updated: {formatDateTime(menuData?.LastUpdateDate)}</p>
-                            </div>
+                            <ProviderMenusCard 
+                                orderingProviderMenus={OrderingProviderMenus} 
+                                activeIndex={sliderState[StoreID] as number}
+                                index={3}
+                            />
 
-                            <div className='flex-1 p-[1rem] rounded-md bg-282a36 shadow-lg'>
-                                <div className='mb-3'>
-                                    <p className='text-center font-normal underline'>Configuration</p>
-                                </div>
-
-                                <div className='grid grid-cols-2 text-left text-xs'>
-                                    <div className='py-1 px-4'>
-                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>Customer Ordering Interface: {yesNoString(OrderingEnabled)}</p>
-                                    </div>
-
-                                    <div className='py-1 px-4'>
-                                        <p className='px-1 py-0.5 cursor-pointer rounded-md'>
-                                            Public Holiday: {HolidayName ? ` ${HolidayName}` : 'None'}
-                                        </p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='rounded-md cursor-pointer px-1 py-0.5'>Hidden on The App Picklist: {yesNoString(HiddenStore)}</p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='rounded-md cursor-pointer px-1 py-0.5'>Longitude: {Longitude}</p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='rounded-md cursor-pointer px-1 py-0.5'>
-                                            Average Order Time: {AvgOrderTime} {AvgOrderTime === 1 ? 'Minute' : 'Minutes'}
-                                        </p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='px-1 py-0.5 cursor-pointer  rounded-md'>Latitude: {Latitude}</p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>Order After Hours: {yesNoString(OrderAfterHours)}</p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='px-1 py-0.5 cursor-pointer ounded-md'>Timezone: {Timezone}</p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='px-1 py-0.5 cursor-pointer rounded-md'>
-                                            POS: {PosType === '1' ? 'Legacy' : 'Polygon'}
-                                        </p>
-                                    </div>
-
-                                    <div className='py-1 px-4 mt-0.5'>
-                                        <p className='cursor-pointer rounded-md px-1 py-0.5'>
-                                            Phone: {Phone ? `${Phone}` : 'None'}
-                                        </p>
-                                    </div>
-                                    
-                                </div>
-
-                            </div>
-
+                            <SaleTypeMenusCard 
+                                saleTypeMenus={SaleTypeMenus} 
+                                activeIndex={sliderState[StoreID] as number}
+                                index={4}
+                            />
                         </div>
 
-                        <div className='flex space-x-[5rem] rounded-md px-[1rem] pb-[1rem]'>
-                            <div className='flex flex-col flex-1 bg-282a36 shadow-lg p-[1rem] rounded-md'>
-                                <div className='mb-4'>
-                                    <p className='text-center font-normal underline'>
-                                        Store Trading Hours
-                                    </p>
-                                </div>
-
-                                <div className='w-max space-y-3 text-xs'>
-                                    <p>
-                                        Monday: 
-                                        {
-                                            OpeningHours.Monday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Monday.OpeningTime)} - ${formatTradingTime(OpeningHours.Monday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Tuesday: 
-                                        {
-                                            OpeningHours.Tuesday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Tuesday.OpeningTime)} - ${formatTradingTime(OpeningHours.Tuesday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Wednesday: 
-                                        {
-                                            OpeningHours.Wednesday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Wednesday.OpeningTime)} - ${formatTradingTime(OpeningHours.Wednesday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Thursday: 
-                                        {
-                                            OpeningHours.Thursday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Thursday.OpeningTime)} - ${formatTradingTime(OpeningHours.Thursday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Friday: 
-                                        {
-                                            OpeningHours.Friday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Friday.OpeningTime)} - ${formatTradingTime(OpeningHours.Friday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Saturday: 
-                                        {
-                                            OpeningHours.Saturday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Saturday.OpeningTime)} - ${formatTradingTime(OpeningHours.Saturday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Sunday: 
-                                        {
-                                            OpeningHours.Sunday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Sunday.OpeningTime)} - ${formatTradingTime(OpeningHours.Sunday.ClosingTime)}`
-                                        }
-                                    </p>
-                                    <p> 
-                                        Public Holiday: 
-                                        {
-                                            OpeningHours.Publicholiday.OpeningTime === 'Closed' 
-                                            ? ' Closed' 
-                                            : ` ${formatTradingTime(OpeningHours.Publicholiday.OpeningTime)} - ${formatTradingTime(OpeningHours.Publicholiday.ClosingTime)}`
-                                        }
-                                    </p>
-                                </div>
-
-                            </div>
-
-                            <div className='flex flex-col flex-1 bg-282a36 shadow-lg p-[1rem] rounded-md'>
-                                <div className='mb-4'>
-                                    <p className='text-center font-normal underline'>Ordering Provider Menus</p>
-                                </div>
-
-                                <div className='w-max space-y-3 text-xs'>
-                                    <p>
-                                        Deliveroo: {OrderingProviderMenus['2']? OrderingProviderMenus['2']: 'None'}
-                                    </p>
-
-                                    <p>
-                                        Uber: {OrderingProviderMenus['4'] ? OrderingProviderMenus['4'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        Menulog: {OrderingProviderMenus['7'] ? OrderingProviderMenus['7'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        Google: {OrderingProviderMenus['10'] ? OrderingProviderMenus['10']['106'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        DoorDash: {OrderingProviderMenus['12'] ? OrderingProviderMenus['12'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        TabSquare: {OrderingProviderMenus['14'] ? OrderingProviderMenus['14'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        Mr Yum: {OrderingProviderMenus['15'] ? OrderingProviderMenus['15'] : 'None'}
-                                    </p>
-
-                                </div>
-                            </div>
-
-                            <div className='flex flex-col flex-1 bg-282a36 shadow-lg p-[1rem] rounded-md'>
-                                <div className='mb-4'>
-                                    <p className='text-center font-normal underline'>Sale Type Menus</p>
-                                </div>
-
-                                <div className='w-max space-y-3 text-xs'>
-                                    <p>
-                                        Dine In: {SaleTypeMenus['100'] ? SaleTypeMenus['100']: 'None'}
-                                    </p>
-
-                                    <p>
-                                        Takeaway: {SaleTypeMenus['101'] ? SaleTypeMenus['101'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        Pick Up: {SaleTypeMenus['102'] ? SaleTypeMenus['102']: 'None'}
-                                    </p>
-
-                                    <p>
-                                        Delivery: {SaleTypeMenus['103'] ? SaleTypeMenus['103']: 'None'}
-                                    </p>
-
-                                    <p>
-                                        Table Ordering: {SaleTypeMenus['104'] ? SaleTypeMenus['104'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        Web Ordering: {SaleTypeMenus['106'] ? SaleTypeMenus['106'] : 'None'}
-                                    </p>
-
-                                    <p>
-                                        Catering: {SaleTypeMenus['107'] ? SaleTypeMenus['107'] : 'None'}
-                                    </p>
-
-                                </div>
-                            </div>
-
-                        </div>
+                        {sliderState[StoreID] as number > 0 ? (
+                            <button 
+                                className="carousel-btn-switch-card left-28"
+                                onClick={(() => handlePrevCardBtn(StoreID))}
+                            >
+                                <IoIosArrowForward />
+                            </button>
+                        ): (
+                            <button 
+                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-1c1b1c bg-1c1b1c text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-1c1b1c"
+                                onClick={(() => handlePrevCardBtn(StoreID))}
+                            >
+                                <IoIosArrowForward />
+                            </button>
+                        )}
 
                     </div>
                 ))}
 
             </div>
-
+            
         </div>
 
     );
