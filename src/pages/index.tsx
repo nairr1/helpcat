@@ -16,10 +16,10 @@ const Home: NextPage = () => {
     setSearchbrand(event.target.value);
   }
 
-  async function submitBrandSearch(event: FormEvent<HTMLFormElement>) {
+  function submitBrandSearch(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
 
-    return await router.push(`/${searchBrand}`);
+    router.push(`/${searchBrand}`);
   }
 
   return (
