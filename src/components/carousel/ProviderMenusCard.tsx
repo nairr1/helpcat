@@ -20,7 +20,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center mt-[1rem] space-y-1 bg-2f334a/30  m-auto w-fit px-4 py-2 rounded-xl text-3xl'>
+                <div className='w-full text-center mt-[1rem] space-y-1 bg-2f334a/30  m-auto w-fit px-4 py-2 rounded-xl text-3xl'>
                     <p className='text-center '>Ordering Provider Menus</p>
 
                     <p className="text-xs font-light">Keypad data that reflects for external ordering provider menus</p>

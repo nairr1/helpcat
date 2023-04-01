@@ -89,8 +89,6 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         }
     }
 
-    console.log(sliderState)
-
     return (
         <div className='hidden lg:flex flex-col items-center justify-center '>
             <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
@@ -174,7 +172,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     onChange={handleSearchLocationChange}
                     />
                 </form>
-            
+
             </div>
 
             <div>

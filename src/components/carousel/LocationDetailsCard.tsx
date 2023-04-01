@@ -61,18 +61,18 @@ const LocationDetailsCard = ({
 
                 <div className=" font-light text-xs space-y-3 p-4 rounded-xl">
                     {storeStatus === "Online" && (
-                        <p className="text-lg text-4ca662">{storeStatus}</p>
+                        <p className="text-xl text-4ca662">{storeStatus}</p>
                     )}
 
                     {storeStatus === "OffLine" && (
-                        <p className="text-lg text-b32d2d">{storeStatus.charAt(0).toUpperCase()}{storeStatus.slice(1).toLowerCase()}</p>
+                        <p className="text-xl text-b32d2d">{storeStatus.charAt(0).toUpperCase()}{storeStatus.slice(1).toLowerCase()}</p>
                     )}
 
                     {storeStatus === "Unknown" && (
-                        <p className="text-lg text-5e4fb3">{storeStatus}</p>
+                        <p className="text-xl text-5e4fb3">{storeStatus}</p>
                     )}
 
-                    <p className=''>• ID: {storeId}</p>
+                    <p className='text-lg'>ID: {storeId}</p>
 
                     <p>• Last Online: None</p>
 
@@ -83,6 +83,7 @@ const LocationDetailsCard = ({
                         <a 
                             href={`https://${brand}.redcatcloud.com.au/admin`}
                             target="_blank" 
+                            className="hover:text-edc2d8ff"
                         >
                         {`${brand}.redcatcloud.com.au`}
                         </a>
