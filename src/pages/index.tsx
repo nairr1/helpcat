@@ -16,19 +16,6 @@ const Home: NextPage = () => {
     setSearchbrand(event.target.value);
   }
 
-  function preventDefault(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-  }
-
-  async function brandSearch() {
-    try {
-      void await router.push(`/${searchBrand}`)
-      .catch(err => console.log('Async error thrown', err));
-    } catch(error) {
-      console.log(error)
-    }
-  }
-
   return (
     <>
       <Head>
@@ -37,9 +24,8 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
-        <form 
+        <div 
           className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
-          onSubmit={preventDefault}
         >
           <input 
             type='text' 
@@ -49,19 +35,19 @@ const Home: NextPage = () => {
             onChange={handleSearchBrand}
           />
 
-          <button 
+          <button  
             className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
-            onClick={brandSearch}
+            onClick={(() => router.push(`/${searchBrand}`))}
           >
             Search
           </button>
-        </form>
+        </div>
 
         <div className='grid grid-cols-5'>
           {Brands.map((brand) => (
             <ul key={brand.id}>
               <li className='px-[5rem] mb-1'>
-                <Link href={`https://helpcat.io/storestatus/${brand.query}`}>
+                <Link href={`http://localhost:3000/${brand.query}`}>
                   <div>
                     <Image 
                       src={brand.image} 

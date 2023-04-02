@@ -54,24 +54,24 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center mt-[1rem] space-y-1 bg-2f334a/30 py-2 rounded-xl'>
-                    <p className=' text-3xl'>
+                <div className='text-center my-[1rem] space-y-1 bg-2f334a/30 py-2 rounded-xl'>
+                    <p className=' text-2xl'>
                         Store Trading Hours
                     </p>
 
                     <p className="text-xs font-light">Trading hours configured in Polygon POS Management</p>
                 </div>
 
-                <div className='grid grid-cols-2 gap-4 p-4 text-xs font-light'>
-                    <p>
-                        Monday: 
+                <div className='grid grid-cols-2 gap-6 p-4 text-xs font-light'>
+                    <p className="">
+                        Monday:
                         {
                             openingHours.Monday.OpeningTime === 'Closed' 
                             ? ' Closed' 
                             : ` ${formatTradingTime(openingHours.Monday.OpeningTime)} - ${formatTradingTime(openingHours.Monday.ClosingTime)}`
                         }
                     </p>
-                    <p> 
+                    <p>
                         Tuesday: 
                         {
                             openingHours.Tuesday.OpeningTime === 'Closed' 
@@ -79,7 +79,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
                             : ` ${formatTradingTime(openingHours.Tuesday.OpeningTime)} - ${formatTradingTime(openingHours.Tuesday.ClosingTime)}`
                         }
                     </p>
-                    <p> 
+                    <p>
                         Wednesday: 
                         {
                             openingHours.Wednesday.OpeningTime === 'Closed' 
@@ -87,7 +87,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
                             : ` ${formatTradingTime(openingHours.Wednesday.OpeningTime)} - ${formatTradingTime(openingHours.Wednesday.ClosingTime)}`
                         }
                     </p>
-                    <p> 
+                    <p>
                         Thursday: 
                         {
                             openingHours.Thursday.OpeningTime === 'Closed' 
@@ -95,7 +95,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
                             : ` ${formatTradingTime(openingHours.Thursday.OpeningTime)} - ${formatTradingTime(openingHours.Thursday.ClosingTime)}`
                         }
                     </p>
-                    <p> 
+                    <p>
                         Friday: 
                         {
                             openingHours.Friday.OpeningTime === 'Closed' 
@@ -103,7 +103,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
                             : ` ${formatTradingTime(openingHours.Friday.OpeningTime)} - ${formatTradingTime(openingHours.Friday.ClosingTime)}`
                         }
                     </p>
-                    <p> 
+                    <p>
                         Saturday: 
                         {
                             openingHours.Saturday.OpeningTime === 'Closed' 
@@ -111,7 +111,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index }: Props) => {
                             : ` ${formatTradingTime(openingHours.Saturday.OpeningTime)} - ${formatTradingTime(openingHours.Saturday.ClosingTime)}`
                         }
                     </p>
-                    <p> 
+                    <p>
                         Sunday: 
                         {
                             openingHours.Sunday.OpeningTime === 'Closed' 

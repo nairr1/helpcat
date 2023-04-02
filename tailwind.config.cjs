@@ -15,6 +15,7 @@ const config = {
         "000000": "#000000",
         "1c1b1c": "#1c1b1c",
         "ffffff": "#ffffff",
+        "99a4b0": "#99a4b0"
     },
     fontFamily: {
         mono: ['Roboto Mono', 'monospace'],

@@ -43,11 +43,11 @@ const LocationDetailsCard = ({
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center mt-[1rem] space-y-1 bg-2f334a/30 py-2 rounded-xl'>
-                    <p className="text-3xl">{locationName}</p>
+                <div className='text-center mt-[1rem] bg-2f334a/30 py-2 rounded-xl'>
+                    <p className="text-2xl">{locationName}</p>
 
-                    <p className="text-xs text-center font-light">
-                        <span className=''>Address: {address}</span>
+                    <p className="text-xs text-center p-1 font-light">
+                        <span className=''>{address}</span>
 
                         <span className='capitalize'>, {suburb.charAt(0).toUpperCase()}{suburb.slice(1).toLowerCase()}</span>
 
@@ -83,9 +83,21 @@ const LocationDetailsCard = ({
                         <a 
                             href={`https://${brand}.redcatcloud.com.au/admin`}
                             target="_blank" 
-                            className="hover:text-edc2d8ff"
+                            className="hover:text-ffffff/80"
                         >
-                        {`${brand}.redcatcloud.com.au`}
+                            {`${brand}.redcatcloud.com.au`}
+                        </a>
+                    </p>
+
+                    <p>
+                        • Endpoint: {" "}
+
+                        <a 
+                            href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}`}
+                            target="_blank" 
+                            className="hover:text-ffffff/80"
+                        >
+                            {`api/v1/stores/${storeId}`}
                         </a>
                     </p>
 

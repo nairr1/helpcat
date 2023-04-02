@@ -43,10 +43,10 @@ const ConfigurationCard = ({
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center mt-[1rem] space-y-1 bg-2f334a/30 py-2 rounded-xl'>
-                    <p className='text-3xl'>Configuration</p>
+                <div className='text-center mt-[1rem] bg-2f334a/30 py-2 rounded-xl'>
+                    <p className='text-2xl'>Configuration</p>
 
-                    <p className="text-xs font-light">Web Ordering settings configured in Polygon POS Management</p>
+                    <p className="text-xs font-light p-1">Web Ordering settings configured in Polygon POS Management</p>
                 </div>
 
                 <div className='grid grid-cols-2 gap-4 text-left font-light text-xs p-4'>
