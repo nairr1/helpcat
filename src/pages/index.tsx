@@ -22,7 +22,7 @@ const Home: NextPage = () => {
 
   async function brandSearch() {
     try {
-      return await router.push(`/${searchBrand}`)
+      void await router.push(`/${searchBrand}`)
       .catch(err => console.log('Async error thrown', err));
     } catch(error) {
       console.log(error)
