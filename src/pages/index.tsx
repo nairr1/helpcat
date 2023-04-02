@@ -16,12 +16,14 @@ const Home: NextPage = () => {
     setSearchbrand(event.target.value);
   }
 
-  function brandSearch() {
-    router.push(`/${searchBrand}`);
-  }
-
-  function preventDefaultSubmit(event: FormEvent<HTMLFormElement>) {
+  async function submitBrandSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    try {
+      await router.push(`/${searchBrand}`);
+    } catch (error) {
+      console.log(error)
+    };
   }
 
   return (
@@ -34,7 +36,7 @@ const Home: NextPage = () => {
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
         <form 
           className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
-          onSubmit={preventDefaultSubmit}
+          onSubmit={submitBrandSearch}
         >
           <input 
             type='text' 
@@ -44,10 +46,7 @@ const Home: NextPage = () => {
             onChange={handleBrandSearch}
           />
 
-          <button
-            className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500"
-            onClick={brandSearch}
-          >
+          <button className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500">
             Search
           </button>
         </form>
