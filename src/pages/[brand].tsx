@@ -231,7 +231,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 postcode={Postcode}
                                 state={State}
                                 country={Country}
-                                lastMenuUpdate={menuData.LastUpdateDate}
+                                lastMenuUpdate={menuData?.LastUpdateDate}
                                 activeIndex={sliderState[StoreID] as number}
                                 index={2}
                                 brand={router.query.brand as string}
@@ -256,6 +256,8 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 openingHours={OpeningHours} 
                                 activeIndex={sliderState[StoreID] as number}
                                 index={0}
+                                holidayName={HolidayName}
+                                timezone={Timezone}
                             />
 
                             <ProviderMenusCard 

@@ -16,7 +16,7 @@ const Home: NextPage = () => {
   function submitSearchBrand(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    location.href = `\${searchBrand}`;
+    location.href = `/${searchBrand}`;
   }
 
   return (

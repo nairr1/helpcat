@@ -43,7 +43,7 @@ const LocationDetailsCard = ({
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center mt-[1rem] bg-2f334a/30 py-2 rounded-xl'>
+                <div className='text-center my-[0.5rem] bg-2f334a/30 py-2 rounded-xl'>
                     <p className="text-2xl">{locationName}</p>
 
                     <p className="text-xs text-center p-1 font-light">
@@ -74,32 +74,49 @@ const LocationDetailsCard = ({
 
                     <p className='text-lg'>ID: {storeId}</p>
 
-                    <p>• Last Online: None</p>
+                    <div className="flex items-center space-x-1">
+                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
 
-                    <p className="">• Menu Synced: {lastMenuUpdate ? formatDateTime(lastMenuUpdate) : "None"}</p>
+                        <p>Last Online: None</p>
+                    </div>
 
-                    <p>
-                        • Polygon Central: {" "}
-                        <a 
-                            href={`https://${brand}.redcatcloud.com.au/admin`}
-                            target="_blank" 
-                            className="hover:text-ffffff/80"
-                        >
-                            {`${brand}.redcatcloud.com.au`}
-                        </a>
-                    </p>
+                    <div className="flex items-center space-x-1">
+                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
 
-                    <p>
-                        • Endpoint: {" "}
+                        <p>Menu Synced: {lastMenuUpdate ? formatDateTime(lastMenuUpdate) : "None"}</p>
+                    </div>
 
-                        <a 
-                            href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}`}
-                            target="_blank" 
-                            className="hover:text-ffffff/80"
-                        >
-                            {`api/v1/stores/${storeId}`}
-                        </a>
-                    </p>
+                    <div className="flex items-center space-x-1">
+                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
+
+                        <p>
+                            Polygon Central: {" "}
+
+                            <a 
+                                href={`https://${brand}.redcatcloud.com.au/admin`}
+                                target="_blank" 
+                                className="hover:text-ffffff/80 hover:underline"
+                            >
+                                {`${brand}.redcatcloud.com.au`}
+                            </a>
+                        </p>
+                    </div>
+
+                    <div className="flex items-center space-x-1">
+                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
+
+                        <p>
+                            Endpoint: {" "}
+
+                            <a 
+                                href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}`}
+                                target="_blank" 
+                                className="hover:text-ffffff/80 hover:underline"
+                            >
+                                {`api/v1/stores/${storeId}`}
+                            </a>
+                        </p>
+                    </div>
 
                 </div>
             </div>
