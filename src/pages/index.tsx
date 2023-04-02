@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   const submitBrandSearch = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    router.push(`/${searchBrand}`);
+    void router.push(`/${searchBrand}`);
   }
 
   return (
