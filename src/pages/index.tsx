@@ -20,10 +20,10 @@ const Home: NextPage = () => {
     event.preventDefault();
 
     try {
-      await router.push(`/${searchBrand}`);
+      return await router.push(`/${searchBrand}`);
     } catch (error) {
       console.log(error)
-    };
+    }
   }
 
   return (
