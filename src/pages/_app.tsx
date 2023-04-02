@@ -7,6 +7,7 @@ import Header from "~/components/Header";
 import { useEffect, useState } from "react";
 import { Router } from "next/router";
 import HelpcatPageLoader from "~/components/HelpcatPageLoader";
+import { ClerkProvider } from "@clerk/nextjs";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [loading, setLoading] = useState(false);
@@ -32,19 +33,20 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, []);
   
   return (
-  <div className="h-screen overflow-y-scroll">
-    {loading ? (
-      <HelpcatPageLoader />
-    ) : (
-      <>
-        <Header />
-        
-        <Component {...pageProps} />
-      </>
-    )}
+    <ClerkProvider>
+      <div className="h-screen overflow-y-scroll">
+        {loading ? (
+          <HelpcatPageLoader />
+        ) : (
+          <>
+            <Header />
+            
+            <Component {...pageProps} />
+          </>
+        )}
 
-  </div>
-  
+      </div>
+    </ClerkProvider>
   )
 };
 

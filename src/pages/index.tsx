@@ -33,7 +33,7 @@ const Home: NextPage = () => {
         >
           <input 
             type='text' 
-            className='text-2xl w-[15rem] outline-none bg-1c1b1c mb-4'
+            className='text-2xl w-[15rem] outline-none bg-18181a mb-4'
             placeholder='*.redcatcloud.com.au' 
             spellCheck='false' 
             onChange={handleSearchBrand}

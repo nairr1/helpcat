@@ -135,7 +135,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         Offline: {offlineLocations.length}
 
                         {showOfflineLocations && offlineLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-282a36 text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
+                            <ScrollContainer className='max-h-[30rem] bg-18181a text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
                                 {offlineLocations.map((location, index) => (
                                     <p key={index}>{location}</p>
                                 ))}
@@ -213,7 +213,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                             </button>
                         ): (
                             <button 
-                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-1c1b1c bg-1c1b1c text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-1c1b1c"
+                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-18181a"
                                 onClick={(() => handleNextCardBtn(StoreID))}
                             >
                                 <IoIosArrowBack />
@@ -290,7 +290,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                             </button>
                         ): (
                             <button 
-                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-1c1b1c bg-1c1b1c text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-1c1b1c"
+                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-18181a"
                                 onClick={(() => handlePrevCardBtn(StoreID))}
                             >
                                 <IoIosArrowForward />
