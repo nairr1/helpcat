@@ -2,18 +2,24 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Brands } from "~/utils/brands";
 
 const Home: NextPage = () => {
-  const router = useRouter();
+  const { push } = useRouter();
 
   const [searchBrand, setSearchbrand] = useState("");
 
   function handleSearchBrand(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchbrand(event.target.value);
+  }
+
+  function submitSearchBrand(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    push(`/${searchBrand}`);
   }
 
   return (
@@ -24,8 +30,9 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
-        <div 
+        <form 
           className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
+          onSubmit={submitSearchBrand}
         >
           <input 
             type='text' 
@@ -35,13 +42,12 @@ const Home: NextPage = () => {
             onChange={handleSearchBrand}
           />
 
-          <div  
+          <button  
             className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
-            onClick={(() => router.push(`/${searchBrand}`))}
           >
             Search
-          </div>
-        </div>
+          </button>
+        </form>
 
         <div className='grid grid-cols-5'>
           {Brands.map((brand) => (
