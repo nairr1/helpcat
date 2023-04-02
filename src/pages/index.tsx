@@ -1,10 +1,8 @@
-import { rejects } from "assert";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { resolve } from "path";
 import { type FormEvent, useState } from "react";
 
 import { Brands } from "~/utils/brands";
@@ -27,7 +25,11 @@ const Home: NextPage = () => {
   }
 
   function routerPush() {
-    router.push(`/${searchBrand}`);
+    try {
+      router.push(`/${searchBrand}`);
+    } catch(error) {
+      console.log(error)
+    }
   }
 
   return (
