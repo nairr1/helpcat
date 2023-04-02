@@ -22,8 +22,8 @@ const Home: NextPage = () => {
 
   async function brandSearch() {
     try {
-      await router.push(`/${searchBrand}`)
-      .then(() => console.log('Changed route'));
+      return await router.push(`/${searchBrand}`)
+      .catch(err => console.log('Async error thrown', err));
     } catch(error) {
       console.log(error)
     }
