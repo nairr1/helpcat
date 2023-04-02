@@ -2,14 +2,11 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Brands } from "~/utils/brands";
 
 const Home: NextPage = () => {
-  const { push } = useRouter();
-
   const [searchBrand, setSearchbrand] = useState("");
 
   function handleSearchBrand(event: React.ChangeEvent<HTMLInputElement>) {
@@ -19,7 +16,7 @@ const Home: NextPage = () => {
   function submitSearchBrand(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    push(`/${searchBrand}`);
+    location.href = `\${searchBrand}`;
   }
 
   return (
