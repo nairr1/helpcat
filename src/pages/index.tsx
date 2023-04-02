@@ -12,18 +12,16 @@ const Home: NextPage = () => {
 
   const [searchBrand, setSearchbrand] = useState("");
 
-  function handleBrandSearch(event: React.ChangeEvent<HTMLInputElement>) {
+  function handleSearchBrand(event: React.ChangeEvent<HTMLInputElement>) {
     setSearchbrand(event.target.value);
   }
 
-  async function submitBrandSearch(event: FormEvent<HTMLFormElement>) {
+  function preventDefault(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
+  }
 
-    try {
-      return await router.push(`/${searchBrand}`);
-    } catch (error) {
-      console.log(error)
-    }
+  function brandSearch() {
+    router.push(`/${searchBrand}`);
   }
 
   return (
@@ -36,17 +34,20 @@ const Home: NextPage = () => {
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
         <form 
           className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
-          onSubmit={submitBrandSearch}
+          onSubmit={void preventDefault}
         >
           <input 
             type='text' 
             className='text-2xl w-[15rem] outline-none bg-1c1b1c mb-4'
             placeholder='*.redcatcloud.com.au' 
             spellCheck='false' 
-            onChange={handleBrandSearch}
+            onChange={handleSearchBrand}
           />
 
-          <button className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500">
+          <button 
+            className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
+            onClick={brandSearch}
+          >
             Search
           </button>
         </form>
