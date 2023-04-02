@@ -20,14 +20,10 @@ const Home: NextPage = () => {
     event.preventDefault();
   }
 
-  function brandSearch() {
-    routerPush()
-  }
-
-  function routerPush() {
+  async function brandSearch() {
     try {
-      router.push(`/${searchBrand}`)
-      .then(console.log);
+      await router.push(`/${searchBrand}`)
+      .then(() => console.log('Changed route'));
     } catch(error) {
       console.log(error)
     }
