@@ -26,7 +26,8 @@ const Home: NextPage = () => {
 
   function routerPush() {
     try {
-      router.push(`/${searchBrand}`);
+      router.push(`/${searchBrand}`)
+      .then(console.log);
     } catch(error) {
       console.log(error)
     }
