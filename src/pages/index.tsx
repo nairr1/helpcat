@@ -19,7 +19,7 @@ const Home: NextPage = () => {
   async function submitBrandSearch(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    await router.push(`/${searchBrand}`);
+    await router.push(`/${searchBrand}`).then().catch(Error);
   }
 
   return (
