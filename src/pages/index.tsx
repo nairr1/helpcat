@@ -1,8 +1,10 @@
+import { rejects } from "assert";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { resolve } from "path";
 import { type FormEvent, useState } from "react";
 
 import { Brands } from "~/utils/brands";
@@ -21,6 +23,10 @@ const Home: NextPage = () => {
   }
 
   function brandSearch() {
+    routerPush()
+  }
+
+  function routerPush() {
     router.push(`/${searchBrand}`);
   }
 
@@ -34,7 +40,7 @@ const Home: NextPage = () => {
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
         <form 
           className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
-          onSubmit={void preventDefault}
+          onSubmit={preventDefault}
         >
           <input 
             type='text' 
