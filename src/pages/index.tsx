@@ -16,7 +16,7 @@ const Home: NextPage = () => {
     setSearchbrand(event.target.value);
   }
 
-  const submitBrandSearch = (event: FormEvent<HTMLFormElement>) => {
+  const submitBrandSearch = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
     router.push(`/${searchBrand}`);
