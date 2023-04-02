@@ -44,7 +44,7 @@ const LocationDetailsCard = ({
                 }}
             >
                 <div className='text-center my-[0.5rem] bg-2f334a/30 py-2 rounded-xl'>
-                    <p className="text-2xl">{locationName}</p>
+                    <p className="text-2xl px-2">{locationName}</p>
 
                     <p className="text-xs text-center p-1 font-light">
                         <span className=''>{address}</span>
@@ -59,66 +59,71 @@ const LocationDetailsCard = ({
                     </p>
                 </div>
 
-                <div className=" font-light text-xs space-y-3 p-4 rounded-xl">
-                    {storeStatus === "Online" && (
-                        <p className="text-xl text-4ca662">{storeStatus}</p>
-                    )}
+                <div className="flex font-light text-xs mb-[1rem]">
+                    <div className="flex-1 space-y-4 px-4 py-2">
 
-                    {storeStatus === "OffLine" && (
-                        <p className="text-xl text-b32d2d">{storeStatus.charAt(0).toUpperCase()}{storeStatus.slice(1).toLowerCase()}</p>
-                    )}
+                        <div className="space-y-3">
+                            {storeStatus === "Online" && (
+                                <p className="text-2xl text-4ca662">{storeStatus}</p>
+                            )}
 
-                    {storeStatus === "Unknown" && (
-                        <p className="text-xl text-5e4fb3">{storeStatus}</p>
-                    )}
+                            {storeStatus === "OffLine" && (
+                                <p className="text-2xl text-b32d2d">{storeStatus.charAt(0).toUpperCase()}{storeStatus.slice(1).toLowerCase()}</p>
+                            )}
 
-                    <p className='text-lg'>ID: {storeId}</p>
+                            {storeStatus === "Unknown" && (
+                                <p className="text-2xl text-5e4fb3">{storeStatus}</p>
+                            )}
 
-                    <div className="flex items-center space-x-1">
-                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
+                            <p className='text-xl'>ID: {storeId}</p>
+                        </div>
 
-                        <p>Last Online: None</p>
+                        <div className="flex items-center space-x-1">
+                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+
+                            <p>Last Online: None</p>
+                        </div>
+
+                        <div className="flex items-center space-x-1">
+                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+
+                            <p>Menu Synced: {lastMenuUpdate ? formatDateTime(lastMenuUpdate) : "None"}</p>
+                        </div>
                     </div>
 
-                    <div className="flex items-center space-x-1">
-                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
+                    <div className="space-y-4 p-4">
+                        <div className="flex items-center space-x-1">
+                            <p>
+                                Polygon Central: {" "}
 
-                        <p>Menu Synced: {lastMenuUpdate ? formatDateTime(lastMenuUpdate) : "None"}</p>
-                    </div>
+                                <a 
+                                    href={`https://${brand}.redcatcloud.com.au/admin`}
+                                    target="_blank" 
+                                    className="hover:text-ffffff/80 hover:underline"
+                                >
+                                    Admin Url
+                                </a>
+                            </p>
+                        </div>
 
-                    <div className="flex items-center space-x-1">
-                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
+                        <div className="flex items-center space-x-1">
+                            <p>
+                                API Endpoint: {" "}
 
-                        <p>
-                            Polygon Central: {" "}
+                                <a 
+                                    href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}`}
+                                    target="_blank" 
+                                    className="hover:text-ffffff/80 hover:underline"
+                                >
+                                    {`api/v1/stores/${storeId}`}
+                                </a>
+                            </p>
+                        </div>
 
-                            <a 
-                                href={`https://${brand}.redcatcloud.com.au/admin`}
-                                target="_blank" 
-                                className="hover:text-ffffff/80 hover:underline"
-                            >
-                                {`${brand}.redcatcloud.com.au`}
-                            </a>
-                        </p>
-                    </div>
-
-                    <div className="flex items-center space-x-1">
-                        <span className='border border-ffffff rounded-full h-1 w-1 bg-ffffff'>{' '}</span>
-
-                        <p>
-                            Endpoint: {" "}
-
-                            <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}`}
-                                target="_blank" 
-                                className="hover:text-ffffff/80 hover:underline"
-                            >
-                                {`api/v1/stores/${storeId}`}
-                            </a>
-                        </p>
                     </div>
 
                 </div>
+
             </div>
         </>
     );

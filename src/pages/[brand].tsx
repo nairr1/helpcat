@@ -14,6 +14,7 @@ import StoreTradingHoursCard from "~/components/carousel/StoreTradingHoursCard";
 import { Brands } from "~/utils/brands";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import EndpointsCard from "~/components/carousel/EndpointsCard";
 
 const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
@@ -31,7 +32,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const obj: {[key: number]: number} = {};
 
     storeStatusData.forEach((item) => {
-        obj[item.StoreID] = 2;
+        obj[item.StoreID] = 3;
     });
 
     const [sliderState, setSliderState] = useState(obj);
@@ -41,7 +42,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
             const currIndex = prev[sliderId] || 0;
 
-            const newIndex = currIndex + 1 < 5 ? currIndex + 1 : currIndex;
+            const newIndex = currIndex + 1 < 6 ? currIndex + 1 : currIndex;
             
             return {...prev, [sliderId]: newIndex};
         });
@@ -203,7 +204,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                         key={StoreID}  
                         className="flex justify-center items-center"
                     >
-                        {sliderState[StoreID] as number < 4 ? (
+                        {sliderState[StoreID] as number < 5 ? (
                             <button 
                                 className="carousel-btn-switch-card right-28"
                                 onClick={(() => handleNextCardBtn(StoreID))}
@@ -233,7 +234,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 country={Country}
                                 lastMenuUpdate={menuData?.LastUpdateDate}
                                 activeIndex={sliderState[StoreID] as number}
-                                index={2}
+                                index={3}
                                 brand={router.query.brand as string}
                             />
 
@@ -249,27 +250,34 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 posType={PosType}
                                 phone={Phone}
                                 activeIndex={sliderState[StoreID] as number}
-                                index={1}
+                                index={2}
                             />
 
                             <StoreTradingHoursCard 
                                 openingHours={OpeningHours} 
                                 activeIndex={sliderState[StoreID] as number}
-                                index={0}
+                                index={1}
                                 holidayName={HolidayName}
                                 timezone={Timezone}
+                            />
+
+                            <EndpointsCard 
+                                activeIndex={sliderState[StoreID] as number}
+                                index={0}
+                                brand={router.query.brand as string}
+                                storeId={StoreID}
                             />
 
                             <ProviderMenusCard 
                                 orderingProviderMenus={OrderingProviderMenus} 
                                 activeIndex={sliderState[StoreID] as number}
-                                index={3}
+                                index={4}
                             />
 
                             <SaleTypeMenusCard 
                                 saleTypeMenus={SaleTypeMenus} 
                                 activeIndex={sliderState[StoreID] as number}
-                                index={4}
+                                index={5}
                             />
                         </div>
 

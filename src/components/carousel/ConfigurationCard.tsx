@@ -62,13 +62,13 @@ const ConfigurationCard = ({
                     </div>
 
                     <p>Public Holiday: {holidayName ? ` ${holidayName}` : 'None'}</p>
-
+        
                     <p>Hidden on The App Picklist: {yesNoString(hiddenStore)}</p>
 
                     <div className="flex items-center space-x-1">
                         <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
 
-                        <p>Latitude: {latitude}</p> 
+                        <p>Longitude: {longitude}</p> 
                     </div>
 
                     <div className="flex items-center space-x-1">

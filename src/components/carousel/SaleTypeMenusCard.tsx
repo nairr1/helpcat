@@ -20,13 +20,13 @@ const SaleTypeMenusCard = ({ saleTypeMenus, activeIndex, index }: Props) => {
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center mt-[1rem] bg-2f334a/30 py-2 rounded-xl'>
+                <div className='text-center my-[0.5rem] bg-2f334a/30 py-2 rounded-xl'>
                     <p className='text-2xl'>Sale Type Menus</p>
 
                     <p className="font-light text-xs p-1">Keypad menu data that reflects for Polygon Central Web Ordering</p>
                 </div>
 
-                <div className='space-y-3 p-4 font-light text-xs'>
+                <div className='grid grid-cols-2 gap-6 p-4 font-light text-xs'>
                     <p>
                         Dine In: {saleTypeMenus['100'] ? saleTypeMenus['100']: 'None'}
                     </p>

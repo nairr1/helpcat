@@ -20,13 +20,13 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='w-full text-center mt-[1rem] bg-2f334a/30 m-auto px-4 py-2 rounded-xl'>
+                <div className='w-full text-center my-[0.5rem] bg-2f334a/30 m-auto px-4 py-2 rounded-xl'>
                     <p className='text-center text-2xl'>Ordering Provider Menus</p>
 
                     <p className="text-xs font-light p-1">Keypad menu data that reflects for External Ordering Providers</p>
                 </div>
 
-                <div className='grid grid-cols-2 p-4 font-light text-xs rounded-xl space-y-1'>
+                <div className='grid grid-cols-2 font-light text-xs rounded-xl space-y-1'>
                     <div className="flex items-center space">
                         <img 
                             src="http://www.greenspeares.co.uk/wp-content/uploads/2020/12/Deliveroo-logo.png" 
