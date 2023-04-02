@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { type FormEvent, useState } from "react";
+import { useState } from "react";
 
 import { Brands } from "~/utils/brands";
 
@@ -35,12 +35,12 @@ const Home: NextPage = () => {
             onChange={handleSearchBrand}
           />
 
-          <button  
+          <div  
             className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
             onClick={(() => router.push(`/${searchBrand}`))}
           >
             Search
-          </button>
+          </div>
         </div>
 
         <div className='grid grid-cols-5'>
