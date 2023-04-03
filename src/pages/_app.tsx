@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Router } from "next/router";
 import HelpcatPageLoader from "~/components/HelpcatPageLoader";
 import { ClerkProvider } from "@clerk/nextjs";
+import Head from "next/head";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [loading, setLoading] = useState(false);
@@ -34,6 +35,12 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   
   return (
     <ClerkProvider publishableKey="pk_test_c2luZ3VsYXItYmFzcy0xOS5jbGVyay5hY2NvdW50cy5kZXYk">
+      <Head>
+        <title>Helpcat</title>
+        <meta name="description" content="Helpcat" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
       <div className="h-screen overflow-y-scroll">
         {loading ? (
           <HelpcatPageLoader />

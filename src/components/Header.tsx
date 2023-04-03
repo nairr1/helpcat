@@ -38,7 +38,7 @@ const Header = () => {
                     )}
                 </div>
 
-                <Link href={"http://localhost:3000"}>
+                <Link href={"/"}>
                     <div className='flex flex-1 font-sans text-[3rem] items-center justify-center'>
                         <Image 
                             src={helpcatLogo} 

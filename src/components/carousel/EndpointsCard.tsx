@@ -46,7 +46,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: Props) => {
                 <div className="flex mb-[1rem]">
                     <div className='flex flex-col flex-1 space-y-2 p-4 font-light text-xs'>
                         <div className="flex items-center space-x-1">
-                            <span className='border mr-1 border-4549b5 rounded-full h-1.5 w-1.5 bg-4549b5'>{' '}</span>
+                            <span className='border border-4549b5 rounded-full h-1.5 w-1.5 bg-4549b5'>{' '}</span>
 
                             <a 
                                 href={`https://${brand}.redcatcloud.com.au/admin`}
@@ -207,7 +207,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: Props) => {
                 </div>
 
                 <div className="flex items-center space-x-1 text-xs italic font-light">
-                    <span className='border mr-1 border-4549b5 rounded-full h-1.5 w-1.5 bg-4549b5'>{' '}</span>
+                    <span className='border border-4549b5 rounded-full h-1.5 w-1.5 bg-4549b5'>{' '}</span>
 
                     <p>Login into Polygon Central to cache your authentication token to the browser.</p>
                 </div>

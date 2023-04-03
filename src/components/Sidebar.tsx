@@ -34,7 +34,7 @@ const SideBar = ({ toggleSidebar, setToggleSidebar }: Props) => {
 
                     {Brands.map((brand) => (
                         <div key={brand.id}>
-                            <Link href={`http://localhost:3000/${brand.query}`}>
+                            <Link href={`/${brand.query}`}>
                                 <ShakeContainer>
                                     <Image 
                                         src={brand.image} 
