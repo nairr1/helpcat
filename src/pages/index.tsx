@@ -1,12 +1,16 @@
+import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import HelpcatPageLoader from "~/components/HelpcatPageLoader";
 
 import { Brands } from "~/utils/brands";
 
 const Home: NextPage = () => {
+  const user = useUser();
+
   const [searchBrand, setSearchbrand] = useState("");
 
   function handleSearchBrand(event: React.ChangeEvent<HTMLInputElement>) {

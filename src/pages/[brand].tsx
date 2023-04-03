@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import React, { useState } from "react";
 
 import styled from "styled-components";
+import { useUser } from "@clerk/nextjs";
 
 import ConfigurationCard from "~/components/carousel/ConfigurationCard";
 import LocationDetailsCard from "~/components/carousel/LocationDetailsCard";
@@ -15,11 +16,18 @@ import { Brands } from "~/utils/brands";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import EndpointsCard from "~/components/carousel/EndpointsCard";
+import { userVerification } from "~/utils/userVerification";
+import HelpcatPageLoader from "~/components/HelpcatPageLoader";
+import HelpcatError from "~/components/HelpcatError";
+
+import helpcat from '~/components/assets/helpcatNotFound.jpeg';
 
 const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
 
     const { data: menuData } = res2;
+
+    const user = useUser();
 
     const router = useRouter();
 
@@ -90,220 +98,225 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         }
     }
 
+    console.log(user.user?.fullName)
+
     return (
-        <div className='hidden lg:flex flex-col items-center justify-center '>
-            <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
-                {Brands.map((brand) => (
-                    <div key={brand.id}>
-                        {router.query.brand === brand.query && (
-                            <Image 
-                                src={brand.image} 
-                                height={50}
-                                width={50}
-                                className='rounded-md'
-                                alt="Brand Logo"
-                            />
-                        )}
-                    </div>
-                ))}
+        <>
+            {userVerification(user.user?.primaryEmailAddress?.toString() || "", router.query.brand as string) && (
+                <div className='hidden lg:flex flex-col items-center justify-center '>
+                    <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
+                        {Brands.map((brand) => (
+                            <div key={brand.id}>
+                                {router.query.brand === brand.query && (
+                                    <Image 
+                                        src={brand.image} 
+                                        height={50}
+                                        width={50}
+                                        className='rounded-md'
+                                        alt="Brand Logo"
+                                    />
+                                )}
+                            </div>
+                        ))}
 
-                <div className='my-[0.5rem] bg-20222e flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
-                    <p className=''>Locations: {filteredStoreStatusData?.length}</p>
-                    
-                    <div 
-                        className={`cursor-pointer text-4ca662`}
-                        onMouseEnter={(() => {setShowOnlineLocations(true)})}
-                        onMouseLeave={(() => {setShowOnlineLocations(false)})}
-                    >
-                        Online: {onlineLocations.length}
+                        <div className='my-[0.5rem] bg-20222e flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
+                            <p className=''>Locations: {filteredStoreStatusData?.length}</p>
+                            
+                            <div 
+                                className={`cursor-pointer text-4ca662`}
+                                onMouseEnter={(() => {setShowOnlineLocations(true)})}
+                                onMouseLeave={(() => {setShowOnlineLocations(false)})}
+                            >
+                                Online: {onlineLocations.length}
 
-                        {showOnlineLocations && onlineLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-282a36 text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
-                                {onlineLocations.map((location, index) => (
-                                    <p key={index}>{location}</p>
-                                ))}
-                            </ScrollContainer>
-                        )}
+                                {showOnlineLocations && onlineLocations.length > 0 && (
+                                    <ScrollContainer className='max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
+                                        {onlineLocations.map((location, index) => (
+                                            <p key={index}>{location}</p>
+                                        ))}
+                                    </ScrollContainer>
+                                )}
 
-                    </div>
+                            </div>
 
-                    <div
-                        className={`cursor-pointer text-b32d2d`}
-                        onMouseEnter={(() => {setShowOfflineLocations(true)})}
-                        onMouseLeave={(() => {setShowOfflineLocations(false)})}
-                    >
-                        Offline: {offlineLocations.length}
+                            <div
+                                className={`cursor-pointer text-b32d2d`}
+                                onMouseEnter={(() => {setShowOfflineLocations(true)})}
+                                onMouseLeave={(() => {setShowOfflineLocations(false)})}
+                            >
+                                Offline: {offlineLocations.length}
 
-                        {showOfflineLocations && offlineLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-18181a text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
-                                {offlineLocations.map((location, index) => (
-                                    <p key={index}>{location}</p>
-                                ))}
-                            </ScrollContainer>
-                        )}
+                                {showOfflineLocations && offlineLocations.length > 0 && (
+                                    <ScrollContainer className='max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
+                                        {offlineLocations.map((location, index) => (
+                                            <p key={index}>{location}</p>
+                                        ))}
+                                    </ScrollContainer>
+                                )}
+                                
+                            </div>
                         
-                    </div>
-                
 
-                    <div 
-                        className={`cursor-pointer text-5e4fb3`}
-                        onMouseEnter={(() => {setShowUnknownLocations(true)})}
-                        onMouseLeave={(() => {setShowUnknownLocations(false)})}
-                    >
-                        Unknown: {unknownLocations.length}
-
-                        {showUnknownLocations && unknownLocations.length > 0 && (
-                            <ScrollContainer className='max-h-[30rem] bg-282a36 text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>                       
-                                {unknownLocations.map((location, index) => (
-                                    <p key={index}>{location}</p>
-                                ))}
-                            </ScrollContainer>
-                        )}
-
-                    </div>
-
-                </div>
-
-                <form className='mt-[0.5rem]'>
-                    <input
-                    type='text'
-                    spellCheck='false'
-                    placeholder='Search Locations'
-                    className='w-[20rem] bg-20222e font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
-                    onChange={handleSearchLocationChange}
-                    />
-                </form>
-
-            </div>
-
-            <div>
-                {filteredStoreStatusData?.map(({ 
-                    StoreID, 
-                    LocationName, 
-                    StoreStatus, 
-                    Address1, 
-                    Suburb, 
-                    Postcode, 
-                    State, 
-                    Country, 
-                    OrderingEnabled, 
-                    HiddenStore, 
-                    AvgOrderTime, 
-                    Longitude,
-                    Latitude,
-                    HolidayName, 
-                    Timezone,
-                    PosType,
-                    OrderingProviderMenus,
-                    SaleTypeMenus,
-                    OpeningHours,
-                    OrderAfterHours,
-                    Phone
-                }) => (
-                    <div 
-                        key={StoreID}  
-                        className="flex justify-center items-center"
-                    >
-                        {sliderState[StoreID] as number < 5 ? (
-                            <button 
-                                className="carousel-btn-switch-card right-28"
-                                onClick={(() => handleNextCardBtn(StoreID))}
+                            <div 
+                                className={`cursor-pointer text-5e4fb3`}
+                                onMouseEnter={(() => {setShowUnknownLocations(true)})}
+                                onMouseLeave={(() => {setShowUnknownLocations(false)})}
                             >
-                                <IoIosArrowBack />
-                            </button>
-                        ): (
-                            <button 
-                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-18181a"
-                                onClick={(() => handleNextCardBtn(StoreID))}
-                            >
-                                <IoIosArrowBack />
-                            </button>
-                        )}
+                                Unknown: {unknownLocations.length}
 
+                                {showUnknownLocations && unknownLocations.length > 0 && (
+                                    <ScrollContainer className='max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>                       
+                                        {unknownLocations.map((location, index) => (
+                                            <p key={index}>{location}</p>
+                                        ))}
+                                    </ScrollContainer>
+                                )}
 
-                        <div className="carousel-container">
+                            </div>
 
-                            <LocationDetailsCard 
-                                locationName={LocationName}
-                                storeStatus={StoreStatus}
-                                storeId={StoreID}
-                                address={Address1}
-                                suburb={Suburb}
-                                postcode={Postcode}
-                                state={State}
-                                country={Country}
-                                lastMenuUpdate={menuData?.LastUpdateDate}
-                                activeIndex={sliderState[StoreID] as number}
-                                index={3}
-                                brand={router.query.brand as string}
-                            />
-
-                            <ConfigurationCard 
-                                orderingEnabled={OrderingEnabled}
-                                holidayName={HolidayName}
-                                hiddenStore={HiddenStore}
-                                longitude={Longitude}
-                                avgOrderTime={AvgOrderTime}
-                                latitude={Latitude}
-                                orderAfterHours={OrderAfterHours}
-                                timezone={Timezone}
-                                posType={PosType}
-                                phone={Phone}
-                                activeIndex={sliderState[StoreID] as number}
-                                index={2}
-                            />
-
-                            <StoreTradingHoursCard 
-                                openingHours={OpeningHours} 
-                                activeIndex={sliderState[StoreID] as number}
-                                index={1}
-                                holidayName={HolidayName}
-                                timezone={Timezone}
-                            />
-
-                            <EndpointsCard 
-                                activeIndex={sliderState[StoreID] as number}
-                                index={0}
-                                brand={router.query.brand as string}
-                                storeId={StoreID}
-                            />
-
-                            <ProviderMenusCard 
-                                orderingProviderMenus={OrderingProviderMenus} 
-                                activeIndex={sliderState[StoreID] as number}
-                                index={4}
-                            />
-
-                            <SaleTypeMenusCard 
-                                saleTypeMenus={SaleTypeMenus} 
-                                activeIndex={sliderState[StoreID] as number}
-                                index={5}
-                            />
                         </div>
 
-                        {sliderState[StoreID] as number > 0 ? (
-                            <button 
-                                className="carousel-btn-switch-card left-28"
-                                onClick={(() => handlePrevCardBtn(StoreID))}
-                            >
-                                <IoIosArrowForward />
-                            </button>
-                        ): (
-                            <button 
-                                className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-18181a"
-                                onClick={(() => handlePrevCardBtn(StoreID))}
-                            >
-                                <IoIosArrowForward />
-                            </button>
-                        )}
+                        <form className='mt-[0.5rem]'>
+                            <input
+                            type='text'
+                            spellCheck='false'
+                            placeholder='Search Locations'
+                            className='w-[20rem] bg-20222e font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
+                            onChange={handleSearchLocationChange}
+                            />
+                        </form>
 
                     </div>
-                ))}
 
-            </div>
-            
-        </div>
+                    <div>
+                        {filteredStoreStatusData?.map(({ 
+                            StoreID, 
+                            LocationName, 
+                            StoreStatus, 
+                            Address1, 
+                            Suburb, 
+                            Postcode, 
+                            State, 
+                            Country, 
+                            OrderingEnabled, 
+                            HiddenStore, 
+                            AvgOrderTime, 
+                            Longitude,
+                            Latitude,
+                            HolidayName, 
+                            Timezone,
+                            PosType,
+                            OrderingProviderMenus,
+                            SaleTypeMenus,
+                            OpeningHours,
+                            OrderAfterHours,
+                            Phone
+                        }) => (
+                            <div 
+                                key={StoreID}  
+                                className="flex justify-center items-center"
+                            >
+                                {sliderState[StoreID] as number < 5 ? (
+                                    <button 
+                                        className="carousel-btn-switch-card right-28"
+                                        onClick={(() => handleNextCardBtn(StoreID))}
+                                    >
+                                        <IoIosArrowBack />
+                                    </button>
+                                ): (
+                                    <button 
+                                        className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-18181a"
+                                        onClick={(() => handleNextCardBtn(StoreID))}
+                                    >
+                                        <IoIosArrowBack />
+                                    </button>
+                                )}
 
+
+                                <div className="carousel-container">
+
+                                    <LocationDetailsCard 
+                                        locationName={LocationName}
+                                        storeStatus={StoreStatus}
+                                        storeId={StoreID}
+                                        address={Address1}
+                                        suburb={Suburb}
+                                        postcode={Postcode}
+                                        state={State}
+                                        country={Country}
+                                        lastMenuUpdate={menuData?.LastUpdateDate}
+                                        activeIndex={sliderState[StoreID] as number}
+                                        index={3}
+                                        brand={router.query.brand as string}
+                                    />
+
+                                    <ConfigurationCard 
+                                        orderingEnabled={OrderingEnabled}
+                                        holidayName={HolidayName}
+                                        hiddenStore={HiddenStore}
+                                        longitude={Longitude}
+                                        avgOrderTime={AvgOrderTime}
+                                        latitude={Latitude}
+                                        orderAfterHours={OrderAfterHours}
+                                        timezone={Timezone}
+                                        posType={PosType}
+                                        phone={Phone}
+                                        activeIndex={sliderState[StoreID] as number}
+                                        index={2}
+                                    />
+
+                                    <StoreTradingHoursCard 
+                                        openingHours={OpeningHours} 
+                                        activeIndex={sliderState[StoreID] as number}
+                                        index={1}
+                                        holidayName={HolidayName}
+                                        timezone={Timezone}
+                                    />
+
+                                    <EndpointsCard 
+                                        activeIndex={sliderState[StoreID] as number}
+                                        index={0}
+                                        brand={router.query.brand as string}
+                                        storeId={StoreID}
+                                    />
+
+                                    <ProviderMenusCard 
+                                        orderingProviderMenus={OrderingProviderMenus} 
+                                        activeIndex={sliderState[StoreID] as number}
+                                        index={4}
+                                    />
+
+                                    <SaleTypeMenusCard 
+                                        saleTypeMenus={SaleTypeMenus} 
+                                        activeIndex={sliderState[StoreID] as number}
+                                        index={5}
+                                    />
+                                </div>
+
+                                {sliderState[StoreID] as number > 0 ? (
+                                    <button 
+                                        className="carousel-btn-switch-card left-28"
+                                        onClick={(() => handlePrevCardBtn(StoreID))}
+                                    >
+                                        <IoIosArrowForward />
+                                    </button>
+                                ): (
+                                    <button 
+                                        className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-18181a"
+                                        onClick={(() => handlePrevCardBtn(StoreID))}
+                                    >
+                                        <IoIosArrowForward />
+                                    </button>
+                                )}
+
+                            </div>
+                        ))}
+
+                    </div>
+                    
+                </div>
+            )}
+        </>
     );
 };
 
@@ -333,4 +346,15 @@ const ScrollContainer = styled.div`
     max-height: 12rem;
     overflow: auto;
     position: absolute;
+`
+
+const HelpcatErrorAnimation = styled.div`
+    animation: gelatine 0.5s infinite;
+
+    @keyframes gelatine {
+    from, to { transform: scale(1, 1); }
+    25% { transform: scale(0.9, 1.1); }
+    50% { transform: scale(1.1, 0.9); }
+    75% { transform: scale(0.95, 1.05); }
+    }
 `

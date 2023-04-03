@@ -106,7 +106,7 @@ const ConfigurationCard = ({
                 <div className="flex items-center space-x-1 text-xs italic font-light">
                     <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
 
-                    <p>Settings are required to enable Web Ordering.</p>
+                    <p>These settings are required to enable Web Ordering.</p>
                 </div>
 
             </div>

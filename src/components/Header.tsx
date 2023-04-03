@@ -65,7 +65,7 @@ const Header = () => {
                                     placeholder='Helpcat is here to help!' 
                                     spellCheck='false' 
                                     onChange={handleSearchChange}
-                                    disabled={!true}
+                                    disabled={!user.user?.primaryEmailAddress?.toString().includes("@redcat.com.au")}
                                     value={search}
                                     onClick={(() => setOpenSearch(!openSearch))}
                                 />
@@ -78,7 +78,7 @@ const Header = () => {
                     ) : (
                         <SignInButton />
                     )}
-                    
+
                 </div>
 
             </div>
