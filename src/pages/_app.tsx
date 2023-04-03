@@ -33,7 +33,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, []);
   
   return (
-    <ClerkProvider>
+    <ClerkProvider publishableKey="pk_test_c2luZ3VsYXItYmFzcy0xOS5jbGVyay5hY2NvdW50cy5kZXYk">
       <div className="h-screen overflow-y-scroll">
         {loading ? (
           <HelpcatPageLoader />
