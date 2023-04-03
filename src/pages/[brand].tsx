@@ -17,10 +17,6 @@ import { Brands } from "~/utils/brands";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import EndpointsCard from "~/components/carousel/EndpointsCard";
 import { userVerification } from "~/utils/userVerification";
-import HelpcatPageLoader from "~/components/HelpcatPageLoader";
-import HelpcatError from "~/components/HelpcatError";
-
-import helpcat from '~/components/assets/helpcatNotFound.jpeg';
 
 const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
