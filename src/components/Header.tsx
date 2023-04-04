@@ -15,6 +15,8 @@ const Header = () => {
     const [openSearch, setOpenSearch] = useState(false);
     const [search, setSearch] = useState('');
 
+    const [showLogin, setShowLogin] = useState(false);
+
     const [toggleSidebar, setToggleSidebar] = useState(false);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +53,19 @@ const Header = () => {
                     </div>
                 </Link>
 
-                <div className="flex-1 flex items-center justify-end p-[2rem] space-x-4 font-light">
+                <div className="flex-1 flex items-center justify-end p-[2rem] space-x-6 font-light">
+                    {user.isSignedIn ? (
+                        <SignOutButton />
+                    ) : (
+                        <>
+                            <div className="px-2 py-1 rounded-md bg-6C47FF hover:bg-20222e duration-500">
+                                <SignInButton />
+                            </div>
+                        </>
+
+
+                    )}
+
                     <div className="flex">
                         {true && (
                             <>
@@ -73,14 +87,11 @@ const Header = () => {
                         )}
                     </div>
 
-                    {user.isSignedIn ? (
-                        <SignOutButton />
-                    ) : (
-                        <SignInButton />
-                    )}
-
                 </div>
 
+            </div>
+
+            <div className={`absolute right-4 transform transition duration-700 top-24 ${!showLogin && `opacity-0`}`}>
             </div>
 
         </div>

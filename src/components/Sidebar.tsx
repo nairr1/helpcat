@@ -20,7 +20,7 @@ const SideBar = ({ toggleSidebar, setToggleSidebar }: Props) => {
                 onMouseLeave={(() => setToggleSidebar(!toggleSidebar))}
             >
                 <div className="grid grid-cols-4 gap-y-6 gap-x-10 p-4">
-                    <Link href={`http://localhost:3000`} className="flex justify-center items-center">
+                    <Link href={"/"} className="flex justify-center items-center">
                         <ShakeContainer>
                             <Image 
                                 src={helpcatLogo} 

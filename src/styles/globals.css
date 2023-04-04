@@ -19,7 +19,7 @@
   }
 
   .carousel-item {
-    @apply absolute h-full w-full bg-20222e rounded-xl px-10 py-4 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.2)] transition-all duration-700;
+    @apply absolute h-full w-full bg-20222e rounded-xl px-10 py-4 overflow-hidden shadow-[0_3px_10px_rgb(0,0,0,0.5)] transition-all duration-700;
   }
 
   .carousel-btn-switch-card {

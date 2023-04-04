@@ -11,12 +11,12 @@ import LocationDetailsCard from "~/components/carousel/LocationDetailsCard";
 import ProviderMenusCard from "~/components/carousel/ProviderMenusCard";
 import SaleTypeMenusCard from "~/components/carousel/SaleTypeMenusCard";
 import StoreTradingHoursCard from "~/components/carousel/StoreTradingHoursCard";
+import EndpointsCard from "~/components/carousel/EndpointsCard";
 
 import { Brands } from "~/utils/brands";
+import { userVerification } from "~/utils/userVerification";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
-import EndpointsCard from "~/components/carousel/EndpointsCard";
-import { userVerification } from "~/utils/userVerification";
 
 const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
@@ -98,7 +98,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
     return (
         <>
-            {userVerification(user.user?.primaryEmailAddress?.toString() || "", router.query.brand as string) && (
+            {userVerification(user.user?.primaryEmailAddress?.toString() || "", router.query.brand as string) ? (
                 <div className='hidden lg:flex flex-col items-center justify-center '>
                     <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
                         {Brands.map((brand) => (
@@ -311,6 +311,14 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     </div>
                     
                 </div>
+            ) : (
+                <>
+                    {user?.user && (
+                        <div className="text-center mt-[2rem]">
+                            YOU AREN'T AUTHORIZED TO VIEW THIS PAGE.
+                        </div>
+                    )}
+                </>
             )}
         </>
     );
@@ -342,15 +350,4 @@ const ScrollContainer = styled.div`
     max-height: 12rem;
     overflow: auto;
     position: absolute;
-`
-
-const HelpcatErrorAnimation = styled.div`
-    animation: gelatine 0.5s infinite;
-
-    @keyframes gelatine {
-    from, to { transform: scale(1, 1); }
-    25% { transform: scale(0.9, 1.1); }
-    50% { transform: scale(1.1, 0.9); }
-    75% { transform: scale(0.95, 1.05); }
-    }
 `

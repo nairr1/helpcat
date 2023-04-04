@@ -46,7 +46,7 @@ const LocationDetailsCard = ({
                 <div className='text-center my-[0.5rem] bg-2f334a/30 py-2 rounded-xl'>
                     <p className="text-2xl px-2">{locationName}</p>
 
-                    <p className="text-xs text-center p-1 font-light">
+                    <p className="text-xs text-center py-1 px-2 font-light">
                         <span className=''>{address}</span>
 
                         <span className='capitalize'>, {suburb.charAt(0).toUpperCase()}{suburb.slice(1).toLowerCase()}</span>
@@ -60,7 +60,7 @@ const LocationDetailsCard = ({
                 </div>
 
                 <div className="flex font-light text-xs mb-[1rem]">
-                    <div className="flex-1 space-y-4 px-4 py-2">
+                    <div className="flex-1 px-4 py-2">
 
                         <div className="space-y-3">
                             {storeStatus === "Online" && (
@@ -77,8 +77,10 @@ const LocationDetailsCard = ({
 
                             <p className='text-xl'>ID: {storeId}</p>
                         </div>
+                    </div>
 
-                        <div className="flex items-center space-x-1">
+                    <div className="space-y-3 p-4">
+                    <div className="flex items-center space-x-1">
                             <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
 
                             <p>Last Online: None</p>
@@ -89,35 +91,15 @@ const LocationDetailsCard = ({
 
                             <p>Menu Synced: {lastMenuUpdate ? formatDateTime(lastMenuUpdate) : "None"}</p>
                         </div>
-                    </div>
 
-                    <div className="space-y-4 p-4">
-                        <div className="flex items-center space-x-1">
-                            <p>
-                                Polygon Central: {" "}
-
-                                <a 
-                                    href={`https://${brand}.redcatcloud.com.au/admin`}
-                                    target="_blank" 
-                                    className="hover:text-ffffff/80 hover:underline"
-                                >
-                                    Admin Url
-                                </a>
-                            </p>
-                        </div>
-
-                        <div className="flex items-center space-x-1">
-                            <p>
-                                API Endpoint: {" "}
-
-                                <a 
-                                    href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}`}
-                                    target="_blank" 
-                                    className="hover:text-ffffff/80 hover:underline"
-                                >
-                                    {`api/v1/stores/${storeId}`}
-                                </a>
-                            </p>
+                        <div>
+                            <a 
+                                href={`https://${brand}.redcatcloud.com.au/api/v1/users`}
+                                target="_blank" 
+                                className="hover:text-ffffff/80 hover:underline"
+                            >
+                                Polygon Central Users
+                            </a>
                         </div>
 
                     </div>

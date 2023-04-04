@@ -6,6 +6,8 @@ import { useState } from "react";
 
 import { Brands } from "~/utils/brands";
 
+import redcat from "~/components/assets/redcat.jpg";
+
 const Home: NextPage = () => {
   const user = useUser();
 
@@ -28,16 +30,23 @@ const Home: NextPage = () => {
           className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
           onSubmit={submitSearchBrand}
         >
-          <input 
-            type='text' 
-            className='text-2xl w-[15rem] outline-none bg-18181a mb-4'
-            placeholder='*.redcatcloud.com.au' 
-            spellCheck='false' 
-            onChange={handleSearchBrand}
-          />
+          <div className="flex items- space-x-3">
+            <Image 
+              src={redcat}
+              className="w-8 h-8 rounded-md"
+              alt="Redcat Logo"
+            />
+            <input 
+              type='text' 
+              className='text-2xl w-[15rem] outline-none bg-18181a'
+              placeholder='Search Redcat Brands' 
+              spellCheck='false' 
+              onChange={handleSearchBrand}
+            />
+          </div>
 
           <button  
-            className="bg-20222e px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
+            className="bg-20222e mt-4 px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
           >
             Search
           </button>

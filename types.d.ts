@@ -68,4 +68,6 @@ interface StoreStatus {
     res2: {
         data: MenuData;
     };
+
+    user: User | string | null;
 };
