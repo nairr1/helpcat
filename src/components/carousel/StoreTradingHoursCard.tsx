@@ -5,8 +5,6 @@ import { cssOpacity } from "~/utils/cssOpacity";
 import { cssTransformProperties } from "~/utils/cssTransformProperties";
 import { formatTradingTime } from "~/utils/formatTradingTime";
 
-import { BsArrowRight } from "react-icons/bs";
-
 interface Props {
     openingHours: {
         Friday: {

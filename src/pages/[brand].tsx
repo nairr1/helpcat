@@ -315,7 +315,8 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                 <>
                     {user?.user && (
                         <div className="text-center mt-[2rem]">
-                            YOU AREN'T AUTHORIZED TO VIEW THIS PAGE.
+                            <p>YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.</p>
+                            
                         </div>
                     )}
                 </>

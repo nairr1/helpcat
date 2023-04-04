@@ -1,4 +1,3 @@
-import { useUser } from "@clerk/nextjs";
 import { type NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,8 +8,6 @@ import { Brands } from "~/utils/brands";
 import redcat from "~/components/assets/redcat.jpg";
 
 const Home: NextPage = () => {
-  const user = useUser();
-
   const [searchBrand, setSearchbrand] = useState("");
 
   function handleSearchBrand(event: React.ChangeEvent<HTMLInputElement>) {
