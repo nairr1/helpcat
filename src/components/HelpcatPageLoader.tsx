@@ -14,7 +14,7 @@ console.log(counter)
 
     return (
         <>
-            <div className={`text-center flex items-center justify-center z-999 backdrop-blur-lg transition transform duration-100 ${counter !== 1 && `opacity-0`}`}>
+            <div className={`text-center flex items-center justify-center z-999 backdrop-blur-lg transition transform duration-100 ${counter !== 1 && `opacity-0` || "opacity-100"}`}>
                 <div className="bg-18181a flex w-fit m-auto flex-col items-center justify-center p-10 rounded-lg">
                     <div>
                         <p className='mt-[4rem] text-2xl'>
