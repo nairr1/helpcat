@@ -15,8 +15,6 @@ const Header = () => {
     const [openSearch, setOpenSearch] = useState(false);
     const [search, setSearch] = useState('');
 
-    const [showLogin, setShowLogin] = useState(false);
-
     const [toggleSidebar, setToggleSidebar] = useState(false);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -89,9 +87,6 @@ const Header = () => {
 
                 </div>
 
-            </div>
-
-            <div className={`absolute right-4 transform transition duration-700 top-24 ${!showLogin && `opacity-0`}`}>
             </div>
 
         </div>

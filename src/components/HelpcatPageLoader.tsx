@@ -10,11 +10,9 @@ const HelpcatPageLoader = () => {
         setCounter(1);
     }, 1000);
 
-console.log(counter)
-
     return (
         <>
-            <div className={`text-center flex items-center justify-center z-999 backdrop-blur-lg transition transform duration-100 ${counter !== 1 && `opacity-0` || "opacity-100"}`}>
+            <div className={`text-center flex items-center justify-center z-999 backdrop-blur-lg transition transform duration-100 ${counter !== 1 && "opacity-0" || "opacity-100"}`}>
                 <div className="bg-18181a flex w-fit m-auto flex-col items-center justify-center p-10 rounded-lg">
                     <div>
                         <p className='mt-[4rem] text-2xl'>
@@ -35,7 +33,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimation className="absolute top-1/2 left-52">
                 <Image 
-                    className={`m-auto rounded-full transition shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-5e4fb3 transform duration-1000 ${counter !== 1 && `translate-y-full opacity-0`}`}
+                    className={`m-auto rounded-full transition shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-5e4fb3 transform duration-1000 ${counter !== 1 && "translate-y-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -45,7 +43,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationTwo className="absolute top-72 left-1/2">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-cf7b3c transition transform duration-1000 ${counter !== 1 && `-translate-y-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-cf7b3c transition transform duration-1000 ${counter !== 1 && "-translate-y-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -55,7 +53,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationFive className="absolute top-40 right-2/3">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-ac4fb3 transition transform duration-1000 ${counter !== 1 && `-translate-y-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-ac4fb3 transition transform duration-1000 ${counter !== 1 && "-translate-y-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -65,7 +63,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationSix className="absolute top-80 right-60">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-b32d2d transition transform duration-1000 ${counter !== 1 && `translate-y-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-b32d2d transition transform duration-1000 ${counter !== 1 && "translate-y-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -75,7 +73,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationThree className="absolute top-20 left-52">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-4ca662 transition transform duration-1000 ${counter !== 1 && `-translate-y-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-4ca662 transition transform duration-1000 ${counter !== 1 && "-translate-y-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -85,7 +83,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationSeven className="absolute top-56 right-1/3 p-2">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-cfca3c transition transform duration-1000 ${counter !== 1 && `-translate-y-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-cfca3c transition transform duration-1000 ${counter !== 1 && "-translate-y-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -95,7 +93,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationFour className="absolute top- left-80">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-99a4b0 transition transform duration-1000 ${counter !== 1 && `-translate-x-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-99a4b0 transition transform duration-1000 ${counter !== 1 && "-translate-x-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
@@ -105,7 +103,7 @@ console.log(counter)
 
             <HelpcatLoadingAnimationFour className="absolute top-28 right-96">
                 <Image 
-                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-edc2d8ff transition transform duration-700 ${counter !== 1 && `translate-x-full opacity-0`}`}
+                    className={`m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)] p-1 bg-edc2d8ff transition transform duration-700 ${counter !== 1 && "translate-x-full opacity-0" || "opacity-100"}`}
                     src={helpcat} 
                     width={50}
                     height={50}
