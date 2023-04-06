@@ -1,4 +1,4 @@
-import { StoreStatusLogs } from "@prisma/client";
+import type { StoreStatusLogs } from "@prisma/client";
 import React from "react";
 import { cssDisplay } from "~/utils/cssDisplay";
 import { cssOpacity } from "~/utils/cssOpacity";
@@ -96,7 +96,7 @@ const LocationDetailsCard = ({
                             </span>
 
                             <p>
-                                Last Online: {log ? formatDateTime(log?.lastOnline.toISOString() as string)?.slice(0, 20) : "None"}
+                                Last Online: {log ? formatDateTime(log?.lastOnline.toISOString())?.slice(0, 20) : "None"}
                             </p>
                             
                         </div>

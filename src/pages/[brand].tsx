@@ -221,11 +221,11 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                             OrderAfterHours,
                             Phone
                         }) => (
-                            <div className="flex flex-col justify-center items-center mb-[2rem]">
-                                <div 
-                                    key={StoreID}  
-                                    className="flex justify-center items-center"
-                                >
+                            <div 
+                                key={StoreID}  
+                                className="flex flex-col justify-center items-center mb-[2rem]"
+                            >
+                                <div className="flex justify-center items-center">
                                     {sliderState[StoreID] as number < 5 ? (
                                         <button 
                                             className="carousel-btn-switch-card right-28"
