@@ -34,7 +34,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
   }, []);
   
   return (
-    <ClerkProvider publishableKey="pk_test_c2luZ3VsYXItYmFzcy0xOS5jbGVyay5hY2NvdW50cy5kZXYk">
+    <ClerkProvider publishableKey="pk_live_Y2xlcmsuaGVscGNhdC5pbyQ">
       <Head>
         <title>Helpcat</title>
         <meta name="description" content="Helpcat" />
