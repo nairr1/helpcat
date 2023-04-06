@@ -17,21 +17,36 @@ import { Brands } from "~/utils/brands";
 import { userVerification } from "~/utils/userVerification";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { api } from "~/utils/api";
 
 const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const { data: storeStatusData } = res1;
 
     const { data: menuData } = res2;
 
+    const { data: statusLogs } = api.logs.getAll.useQuery();
+
     const user = useUser();
 
     const router = useRouter();
+
+    const filteredLogsByBrand = statusLogs?.filter(function(log): boolean {
+        return log.brand === router.query.brand;
+    });
 
     const [searchLocation, setSearchLocation] = useState("");
 
     const [showOnlineLocations, setShowOnlineLocations] = useState(false);
     const [showOfflineLocations, setShowOfflineLocations] = useState(false);
     const [showUnknownLocations, setShowUnknownLocations] = useState(false);
+
+    const [counter, setCounter] = useState(0);
+
+    setTimeout(() => {
+        if(counter < 1) {
+            setCounter(1);
+        }
+    }, 1000);
 
     const obj: {[key: number]: number} = {};
 
@@ -94,13 +109,11 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         }
     }
 
-    console.log(user.user?.fullName)
-
     return (
         <>
             {userVerification(user.user?.primaryEmailAddress?.toString() || "", router.query.brand as string) ? (
-                <div className='hidden lg:flex flex-col items-center justify-center '>
-                    <div className='sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]'>
+                <div className="hidden lg:flex flex-col items-center justify-center ">
+                    <div className="sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]">
                         {Brands.map((brand) => (
                             <div key={brand.id}>
                                 {router.query.brand === brand.query && (
@@ -108,15 +121,15 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                         src={brand.image} 
                                         height={50}
                                         width={50}
-                                        className='rounded-md'
+                                        className="rounded-md"
                                         alt="Brand Logo"
                                     />
                                 )}
                             </div>
                         ))}
 
-                        <div className='my-[0.5rem] bg-20222e flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md'>
-                            <p className=''>Locations: {filteredStoreStatusData?.length}</p>
+                        <div className="my-[0.5rem] bg-20222e flex items-center text-xs font-normal py-2 mt-3.5 px-3 space-x-4 rounded-md">
+                            <p className="">Locations: {filteredStoreStatusData?.length}</p>
                             
                             <div 
                                 className={`cursor-pointer text-4ca662`}
@@ -126,7 +139,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 Online: {onlineLocations.length}
 
                                 {showOnlineLocations && onlineLocations.length > 0 && (
-                                    <ScrollContainer className='max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
+                                    <ScrollContainer className="max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light">
                                         {onlineLocations.map((location, index) => (
                                             <p key={index}>{location}</p>
                                         ))}
@@ -143,7 +156,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 Offline: {offlineLocations.length}
 
                                 {showOfflineLocations && offlineLocations.length > 0 && (
-                                    <ScrollContainer className='max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>
+                                    <ScrollContainer className="max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light">
                                         {offlineLocations.map((location, index) => (
                                             <p key={index}>{location}</p>
                                         ))}
@@ -161,7 +174,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 Unknown: {unknownLocations.length}
 
                                 {showUnknownLocations && unknownLocations.length > 0 && (
-                                    <ScrollContainer className='max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light'>                       
+                                    <ScrollContainer className="max-h-[30rem] bg-1b1b1c text-ffffff space-y-2 z-10 p-3 rounded-lg font-light">                       
                                         {unknownLocations.map((location, index) => (
                                             <p key={index}>{location}</p>
                                         ))}
@@ -172,12 +185,12 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
                         </div>
 
-                        <form className='mt-[0.5rem]'>
+                        <form className="mt-[0.5rem]">
                             <input
-                            type='text'
-                            spellCheck='false'
-                            placeholder='Search Locations'
-                            className='w-[20rem] bg-20222e font-light rounded-md px-[1rem] py-[0.5rem] outline-none'
+                            type="text"
+                            spellCheck="false"
+                            placeholder="Search Locations"
+                            className="w-[20rem] bg-20222e font-light rounded-md px-[1rem] py-[0.5rem] outline-none"
                             onChange={handleSearchLocationChange}
                             />
                         </form>
@@ -208,102 +221,122 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                             OrderAfterHours,
                             Phone
                         }) => (
-                            <div 
-                                key={StoreID}  
-                                className="flex justify-center items-center"
-                            >
-                                {sliderState[StoreID] as number < 5 ? (
-                                    <button 
-                                        className="carousel-btn-switch-card right-28"
-                                        onClick={(() => handleNextCardBtn(StoreID))}
-                                    >
-                                        <IoIosArrowBack />
-                                    </button>
-                                ): (
-                                    <button 
-                                        className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-18181a"
-                                        onClick={(() => handleNextCardBtn(StoreID))}
-                                    >
-                                        <IoIosArrowBack />
-                                    </button>
-                                )}
+                            <div className="flex flex-col justify-center items-center mb-[2rem]">
+                                <div 
+                                    key={StoreID}  
+                                    className="flex justify-center items-center"
+                                >
+                                    {sliderState[StoreID] as number < 5 ? (
+                                        <button 
+                                            className="carousel-btn-switch-card right-28"
+                                            onClick={(() => handleNextCardBtn(StoreID))}
+                                        >
+                                            <IoIosArrowBack />
+                                        </button>
+                                    ): (
+                                        <button 
+                                            className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 right-28 text-18181a"
+                                            onClick={(() => handleNextCardBtn(StoreID))}
+                                        >
+                                            <IoIosArrowBack />
+                                        </button>
+                                    )}
 
 
-                                <div className="carousel-container">
+                                    <div className="carousel-container">
 
-                                    <LocationDetailsCard 
-                                        locationName={LocationName}
-                                        storeStatus={StoreStatus}
-                                        storeId={StoreID}
-                                        address={Address1}
-                                        suburb={Suburb}
-                                        postcode={Postcode}
-                                        state={State}
-                                        country={Country}
-                                        lastMenuUpdate={menuData?.LastUpdateDate}
-                                        activeIndex={sliderState[StoreID] as number}
-                                        index={3}
-                                        brand={router.query.brand as string}
-                                    />
+                                        <LocationDetailsCard 
+                                            locationName={LocationName}
+                                            storeStatus={StoreStatus}
+                                            storeId={StoreID}
+                                            address={Address1}
+                                            suburb={Suburb}
+                                            postcode={Postcode}
+                                            state={State}
+                                            country={Country}
+                                            lastMenuUpdate={menuData?.LastUpdateDate}
+                                            activeIndex={sliderState[StoreID] as number}
+                                            index={3}
+                                            brand={router.query.brand as string}
+                                            logs={filteredLogsByBrand}
+                                        />
 
-                                    <ConfigurationCard 
-                                        orderingEnabled={OrderingEnabled}
-                                        holidayName={HolidayName}
-                                        hiddenStore={HiddenStore}
-                                        longitude={Longitude}
-                                        avgOrderTime={AvgOrderTime}
-                                        latitude={Latitude}
-                                        orderAfterHours={OrderAfterHours}
-                                        timezone={Timezone}
-                                        posType={PosType}
-                                        phone={Phone}
-                                        activeIndex={sliderState[StoreID] as number}
-                                        index={2}
-                                    />
+                                        <ConfigurationCard 
+                                            orderingEnabled={OrderingEnabled}
+                                            holidayName={HolidayName}
+                                            hiddenStore={HiddenStore}
+                                            longitude={Longitude}
+                                            avgOrderTime={AvgOrderTime}
+                                            latitude={Latitude}
+                                            orderAfterHours={OrderAfterHours}
+                                            timezone={Timezone}
+                                            posType={PosType}
+                                            phone={Phone}
+                                            activeIndex={sliderState[StoreID] as number}
+                                            index={2}
+                                        />
 
-                                    <StoreTradingHoursCard 
-                                        openingHours={OpeningHours} 
-                                        activeIndex={sliderState[StoreID] as number}
-                                        index={1}
-                                        holidayName={HolidayName}
-                                        timezone={Timezone}
-                                    />
+                                        <StoreTradingHoursCard 
+                                            openingHours={OpeningHours} 
+                                            activeIndex={sliderState[StoreID] as number}
+                                            index={1}
+                                            holidayName={HolidayName}
+                                            timezone={Timezone}
+                                        />
 
-                                    <EndpointsCard 
-                                        activeIndex={sliderState[StoreID] as number}
-                                        index={0}
-                                        brand={router.query.brand as string}
-                                        storeId={StoreID}
-                                    />
+                                        <EndpointsCard 
+                                            activeIndex={sliderState[StoreID] as number}
+                                            index={0}
+                                            brand={router.query.brand as string}
+                                            storeId={StoreID}
+                                        />
 
-                                    <ProviderMenusCard 
-                                        orderingProviderMenus={OrderingProviderMenus} 
-                                        activeIndex={sliderState[StoreID] as number}
-                                        index={4}
-                                    />
+                                        <ProviderMenusCard 
+                                            orderingProviderMenus={OrderingProviderMenus} 
+                                            activeIndex={sliderState[StoreID] as number}
+                                            index={4}
+                                        />
 
-                                    <SaleTypeMenusCard 
-                                        saleTypeMenus={SaleTypeMenus} 
-                                        activeIndex={sliderState[StoreID] as number}
-                                        index={5}
-                                    />
+                                        <SaleTypeMenusCard 
+                                            saleTypeMenus={SaleTypeMenus} 
+                                            activeIndex={sliderState[StoreID] as number}
+                                            index={5}
+                                        />
+                                    </div>
+
+                                    {sliderState[StoreID] as number > 0 ? (
+                                        <button 
+                                            className="carousel-btn-switch-card left-28"
+                                            onClick={(() => handlePrevCardBtn(StoreID))}
+                                        >
+                                            <IoIosArrowForward />
+                                        </button>
+                                    ): (
+                                        <button 
+                                            className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-18181a"
+                                            onClick={(() => handlePrevCardBtn(StoreID))}
+                                        >
+                                            <IoIosArrowForward />
+                                        </button>
+                                    )}
+
                                 </div>
 
-                                {sliderState[StoreID] as number > 0 ? (
-                                    <button 
-                                        className="carousel-btn-switch-card left-28"
-                                        onClick={(() => handlePrevCardBtn(StoreID))}
-                                    >
-                                        <IoIosArrowForward />
-                                    </button>
-                                ): (
-                                    <button 
-                                        className="relative z-40 flex h-9 w-9 items-center cursor-default justify-center rounded-full border-2 border-18181a bg-18181a text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12 left-28 text-18181a"
-                                        onClick={(() => handlePrevCardBtn(StoreID))}
-                                    >
-                                        <IoIosArrowForward />
-                                    </button>
-                                )}
+                                <div className="carousel-indicator-container">
+                                    {Array.from(Array(6), (_, index) => (
+                                        <div 
+                                            key={index}
+                                            className={`carousel-indicator-dots ${sliderState[StoreID] === index ? "opacity-100 w-4" : "w-2 bg-ffffff/60" || ""}`}
+                                            onClick={() => {
+                                                setSliderState((prev) => {
+                                                    return {...prev, [StoreID]: index};
+                                                });
+                                            }}
+                                        >
+                                        </div>
+                                    ))}
+
+                                </div>
 
                             </div>
                         ))}
@@ -312,14 +345,13 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     
                 </div>
             ) : (
-                <>
-                    {user?.user && (
-                        <div className="text-center mt-[2rem]">
-                            <p>YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.</p>
-                            
-                        </div>
-                    )}
-                </>
+                    <div className="text-center mt-[2rem]">
+                        {counter === 1 && (
+                            <p className={`transition duration-1000 transform ${counter !== 1 && "opacity-0" || "opacity-100" }`}>
+                                YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.
+                            </p>
+                        )}
+                    </div>
             )}
         </>
     );

@@ -13,20 +13,20 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
     return (
         <>
             <div 
-                className='carousel-item'
+                className="carousel-item"
                 style={{
                     transform: cssTransformProperties(index, activeIndex),
                     opacity: cssOpacity(index, activeIndex),
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='w-full text-center my-[0.5rem] bg-2f334a/30 m-auto px-4 py-2 rounded-xl'>
-                    <p className='text-center text-2xl'>Ordering Provider Menus</p>
+                <div className="w-full text-center my-[0.5rem] bg-2f334a/30 m-auto px-4 py-2 rounded-xl">
+                    <p className="text-center text-2xl">Ordering Provider Menus</p>
 
                     <p className="text-xs font-light p-1">Keypad menu data that reflects for External Ordering Providers</p>
                 </div>
 
-                <div className='grid grid-cols-2 font-light text-xs rounded-xl space-y-1'>
+                <div className="grid grid-cols-2 font-light text-xs rounded-xl space-y-1">
                     <div className="flex items-center space">
                         <img 
                             src="http://www.greenspeares.co.uk/wp-content/uploads/2020/12/Deliveroo-logo.png" 
@@ -34,7 +34,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full w-14 h-14"
                         /> 
 
-                        <p>{orderingProviderMenus['2']? orderingProviderMenus['2']: 'None'}</p> 
+                        <p>{orderingProviderMenus["2"]? orderingProviderMenus["2"]: "None"}</p> 
                     </div>
 
                     <div className="flex items-center ml-1.5 space-x-3">
@@ -44,7 +44,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full w-8 h-8"
                         /> 
 
-                        <p>{orderingProviderMenus['4']? orderingProviderMenus['4']: 'None'}</p> 
+                        <p>{orderingProviderMenus["4"]? orderingProviderMenus["4"]: "None"}</p> 
                     </div>
 
                     <div className="flex items-center ml-2 space-x-2">
@@ -54,7 +54,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full w-10 h-10"
                         /> 
 
-                        <p>{orderingProviderMenus['7']? orderingProviderMenus['7']: 'None'}</p> 
+                        <p>{orderingProviderMenus["7"]? orderingProviderMenus["7"]: "None"}</p> 
                     </div>
 
                     <div className="flex items-center space-x-4 ml-2.5 pb-1.5">
@@ -64,7 +64,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full h-6 w-6"
                         /> 
 
-                        <p>{orderingProviderMenus['10']? orderingProviderMenus['10']["106"]: 'None'}</p> 
+                        <p>{orderingProviderMenus["10"]? orderingProviderMenus["10"]["106"]: "None"}</p> 
                     </div>
 
                     <div className="flex items-center space-x-3.5 ml-3.5">
@@ -74,7 +74,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full h-7 w-7"
                         /> 
 
-                        <p>{orderingProviderMenus['12']? orderingProviderMenus['12']: 'None'}</p> 
+                        <p>{orderingProviderMenus["12"]? orderingProviderMenus["12"]: "None"}</p> 
                     </div>
 
                     <div className="flex items-center space-x-1.5">
@@ -84,7 +84,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full w-12 h-12 -ml-0.5"
                         /> 
 
-                        <p>{orderingProviderMenus['14']? orderingProviderMenus['14']: 'None'}</p> 
+                        <p>{orderingProviderMenus["14"]? orderingProviderMenus["14"]: "None"}</p> 
                     </div>
 
                     <div className="flex items-center space-x-3.5 ml-3.5 pt-1">
@@ -94,7 +94,7 @@ const ProviderMenusCard = ({ orderingProviderMenus, activeIndex, index }: Props)
                             className="rounded-full w-7 h-7"
                         /> 
 
-                        <p>{orderingProviderMenus['15']? orderingProviderMenus['15']: 'None'}</p> 
+                        <p>{orderingProviderMenus["15"]? orderingProviderMenus["15"]: "None"}</p> 
                     </div>
 
 

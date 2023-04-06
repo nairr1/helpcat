@@ -26,7 +26,7 @@ const SideBar = ({ toggleSidebar, setToggleSidebar }: Props) => {
                                 src={helpcatLogo} 
                                 height={20}
                                 width={20}
-                                className='rounded-md'
+                                className="rounded-md"
                                 alt="Brand Logo"
                             />
                         </ShakeContainer>
@@ -40,7 +40,7 @@ const SideBar = ({ toggleSidebar, setToggleSidebar }: Props) => {
                                         src={brand.image} 
                                         height={35}
                                         width={35}
-                                        className='rounded-md'
+                                        className="rounded-md"
                                         alt="Brand Logo"
                                     />
                                 </ShakeContainer>

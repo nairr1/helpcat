@@ -62,32 +62,32 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
     return (
         <>
             <div 
-                className='carousel-item'
+                className="carousel-item"
                 style={{
                     transform: cssTransformProperties(index, activeIndex),
                     opacity: cssOpacity(index, activeIndex),
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center my-[0.5rem] space-y-1 bg-2f334a/30 py-2 rounded-xl'>
-                    <p className=' text-2xl'>
+                <div className="text-center my-[0.5rem] space-y-1 bg-2f334a/30 py-2 rounded-xl">
+                    <p className=" text-2xl">
                         Store Trading Hours
                     </p>
 
                     <p className="text-xs font-light">Trading hours configured in Polygon POS Management</p>
                 </div>
 
-                <div className='grid grid-cols-2 gap-6 p-4 text-xs font-light mb-[1rem]'>
+                <div className="grid grid-cols-2 gap-6 p-4 text-xs font-light mb-[1rem]">
                     <div className="flex items-center space-x-1">
                         {!holidayName && getDay(localDateTime) === 1 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
 
                         <p>
                             Monday:
                             {
-                                openingHours.Monday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Monday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Monday.OpeningTime)} - ${formatTradingTime(openingHours.Monday.ClosingTime)}`
                             }
                         </p>
@@ -95,14 +95,14 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center space-x-1">
                         {!holidayName && getDay(localDateTime) === 2 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
 
                         <p>
                             Tuesday: 
                             {
-                                openingHours.Tuesday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Tuesday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Tuesday.OpeningTime)} - ${formatTradingTime(openingHours.Tuesday.ClosingTime)}`
                             }
                         </p>
@@ -110,14 +110,14 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center space-x-1">
                         {!holidayName && getDay(localDateTime) === 3 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         
                         <p>
                             Wednesday: 
                             {
-                                openingHours.Wednesday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Wednesday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Wednesday.OpeningTime)} - ${formatTradingTime(openingHours.Wednesday.ClosingTime)}`
                             }
                         </p>
@@ -125,14 +125,14 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center space-x-1">
                         {!holidayName && getDay(localDateTime) === 4 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         
                         <p>
                             Thursday: 
                             {
-                                openingHours.Thursday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Thursday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Thursday.OpeningTime)} - ${formatTradingTime(openingHours.Thursday.ClosingTime)}`
                             }
                         </p>
@@ -140,13 +140,13 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center space-x-1">
                         {!holidayName && getDay(localDateTime) === 5 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         <p>
                             Friday: 
                             {
-                                openingHours.Friday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Friday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Friday.OpeningTime)} - ${formatTradingTime(openingHours.Friday.ClosingTime)}`
                             }
                         </p>
@@ -154,14 +154,14 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center sapce-x-1">
                         {!holidayName && getDay(localDateTime) === 6 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         
                         <p>
                             Saturday: 
                             {
-                                openingHours.Saturday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Saturday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Saturday.OpeningTime)} - ${formatTradingTime(openingHours.Saturday.ClosingTime)}`
                             }
                         </p>
@@ -169,14 +169,14 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center space-x-1">
                         {!holidayName && getDay(localDateTime) === 0 && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'></span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662"></span>
                         )}
 
                         <p>
                             Sunday: 
                             {
-                                openingHours.Sunday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Sunday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Sunday.OpeningTime)} - ${formatTradingTime(openingHours.Sunday.ClosingTime)}`
                             }
                         </p>
@@ -184,14 +184,14 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                     <div className="flex items-center space-x-1"> 
                         {holidayName && (
-                            <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'></span>
+                            <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662"></span>
                         )}
                         
                         <p>
                             Public Holiday: 
                             {
-                                openingHours.Publicholiday.OpeningTime === 'Closed' 
-                                ? ' Closed' 
+                                openingHours.Publicholiday.OpeningTime === "Closed" 
+                                ? " Closed" 
                                 : ` ${formatTradingTime(openingHours.Publicholiday.OpeningTime)} - ${formatTradingTime(openingHours.Publicholiday.ClosingTime)}`
                             }
                         </p>
@@ -200,9 +200,15 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                 </div>
 
                 <div className="flex items-center space-x-1 text-xs italic font-light">
-                    <span className='border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662'>{' '}</span>
+                    <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
 
-                    <p>Trading hours for the current local time - {`${localDateTime.slice(0, 14)}${localDateTime.slice(17)}`}.</p>
+                    {localDateTime.charAt(10) === "1" ? (
+                        <p>
+                            Trading hours for the current local time - {`${localDateTime.slice(0, 15)}${localDateTime.slice(18)}`}.
+                        </p>
+                    ) : (
+                        <p>Trading hours for the current local time - {`${localDateTime.slice(0, 14)}${localDateTime.slice(17)}`}.</p>
+                    )}
                 </div>
 
             </div>

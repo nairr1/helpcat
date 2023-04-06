@@ -24,7 +24,7 @@ const Home: NextPage = () => {
     <>
       <main className="hidden lg:flex flex-col justify-center items-center text-center ">
         <form 
-          className='flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light'
+          className="flex flex-col pb-[5rem] pt-[2rem] items-center justify-center text-center font-light"
           onSubmit={submitSearchBrand}
         >
           <div className="flex items- space-x-3">
@@ -34,10 +34,10 @@ const Home: NextPage = () => {
               alt="Redcat Logo"
             />
             <input 
-              type='text' 
-              className='text-2xl w-[15rem] outline-none bg-18181a'
-              placeholder='Search Redcat Brands' 
-              spellCheck='false' 
+              type="text" 
+              className="text-2xl w-[15rem] outline-none bg-18181a"
+              placeholder="Search Redcat Brands" 
+              spellCheck="false" 
               onChange={handleSearchBrand}
             />
           </div>
@@ -49,26 +49,26 @@ const Home: NextPage = () => {
           </button>
         </form>
 
-        <div className='grid grid-cols-5'>
+        <div className="grid grid-cols-5">
           {Brands.map((brand) => (
             <ul key={brand.id}>
-              <li className='px-[5rem] mb-1'>
+              <li className="px-[5rem] mb-1">
                 <Link href={`/${brand.query}`}>
                   <div>
                     <Image 
                       src={brand.image} 
                       height={50}
                       width={50}
-                      className='rounded-md cursor-pointer'
+                      className="rounded-md cursor-pointer"
                       alt="Brand Logo"
                     />
                   </div>
                 </Link>
               </li>
 
-              <p className='mb-[10rem]'>
+              <p className="mb-[10rem]">
                 <Link href={`/${brand.query}`}>
-                  <span className='cursor-pointer hover:underline text-sm'>{brand.title}</span>
+                  <span className="cursor-pointer hover:underline text-sm">{brand.title}</span>
                 </Link>
               </p>
 

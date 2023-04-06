@@ -13,46 +13,46 @@ const SaleTypeMenusCard = ({ saleTypeMenus, activeIndex, index }: Props) => {
     return (
         <>
             <div 
-                className='carousel-item'
+                className="carousel-item"
                 style={{
                     transform: cssTransformProperties(index, activeIndex),
                     opacity: cssOpacity(index, activeIndex),
                     display: cssDisplay(index, activeIndex)
                 }}
             >
-                <div className='text-center my-[0.5rem] bg-2f334a/30 py-2 rounded-xl'>
-                    <p className='text-2xl'>Sale Type Menus</p>
+                <div className="text-center my-[0.5rem] bg-2f334a/30 py-2 rounded-xl">
+                    <p className="text-2xl">Sale Type Menus</p>
 
                     <p className="font-light text-xs p-1">Keypad menu data that reflects for Polygon Central Web Ordering</p>
                 </div>
 
-                <div className='grid grid-cols-2 gap-6 p-4 font-light text-xs'>
+                <div className="grid grid-cols-2 gap-6 p-4 font-light text-xs">
                     <p>
-                        Dine In: {saleTypeMenus['100'] ? saleTypeMenus['100']: 'None'}
+                        Dine In: {saleTypeMenus["100"] ? saleTypeMenus["100"]: "None"}
                     </p>
 
                     <p>
-                        Takeaway: {saleTypeMenus['101'] ? saleTypeMenus['101'] : 'None'}
+                        Takeaway: {saleTypeMenus["101"] ? saleTypeMenus["101"] : "None"}
                     </p>
 
                     <p>
-                        Pick Up: {saleTypeMenus['102'] ? saleTypeMenus['102']: 'None'}
+                        Pick Up: {saleTypeMenus["102"] ? saleTypeMenus["102"]: "None"}
                     </p>
 
                     <p>
-                        Delivery: {saleTypeMenus['103'] ? saleTypeMenus['103']: 'None'}
+                        Delivery: {saleTypeMenus["103"] ? saleTypeMenus["103"]: "None"}
                     </p>
 
                     <p>
-                        Table Ordering: {saleTypeMenus['104'] ? saleTypeMenus['104'] : 'None'}
+                        Table Ordering: {saleTypeMenus["104"] ? saleTypeMenus["104"] : "None"}
                     </p>
 
                     <p>
-                        Web Ordering: {saleTypeMenus['106'] ? saleTypeMenus['106'] : 'None'}
+                        Web Ordering: {saleTypeMenus["106"] ? saleTypeMenus["106"] : "None"}
                     </p>
 
                     <p>
-                        Catering: {saleTypeMenus['107'] ? saleTypeMenus['107'] : 'None'}
+                        Catering: {saleTypeMenus["107"] ? saleTypeMenus["107"] : "None"}
                     </p>
 
                 </div>

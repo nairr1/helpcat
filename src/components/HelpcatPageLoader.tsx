@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState } from "react";
+import Image from "next/image";
 import helpcat from "~/components/assets/helpcat.jpeg"
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const HelpcatPageLoader = () => {
     const [counter, setCounter] = useState(0);
 
     setTimeout(() => {
-        setCounter(1);
+        if(counter < 1) {
+            setCounter(1);
+        }
     }, 1000);
 
     return (
@@ -15,7 +17,7 @@ const HelpcatPageLoader = () => {
             <div className={`text-center flex items-center justify-center z-999 backdrop-blur-lg transition transform duration-100 ${counter !== 1 && "opacity-0" || "opacity-100"}`}>
                 <div className="bg-18181a flex w-fit m-auto flex-col items-center justify-center p-10 rounded-lg">
                     <div>
-                        <p className='mt-[4rem] text-2xl'>
+                        <p className="mt-[4rem] text-2xl">
                             <H>H</H><E>E</E>LPCA<T>T</T> I<S>S</S> BU<I>I</I>LDI<N>N</N><G>G</G>..
                         </p>
                     </div>

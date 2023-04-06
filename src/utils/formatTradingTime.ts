@@ -9,6 +9,8 @@ export const formatTradingTime = (time: string) => {
         return `${formatTime}PM`;
     } else if(Number(hour) === 12) {
         return `${time}PM`;
+    } else if (Number(hour) === 0) {
+        return `${time}AM`
     } else {
         return `${time.replace(/^0+/, "")}AM`;
     }

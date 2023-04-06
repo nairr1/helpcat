@@ -1,6 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500;600&family=Rubik:wght@300;400;500&display=swap" rel="stylesheet');
 
 @tailwind base;
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--secondary) var(--primary);
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 15px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--primary);
+  border-radius: 5px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--secondary);
+  border-radius: 14px;
+  border: 3px solid var(--primary);
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -13,7 +34,7 @@
 
 @layer components {
   .carousel-container {
-    @apply relative flex items-center justify-center h-[22rem] w-[35rem] mb-[3rem] mt-[1rem];
+    @apply relative flex items-center justify-center h-[22rem] w-[35rem] mb-[1rem] mt-[1rem];
     perspective: 450px;
     transform-style: preserve-3d;
   }
@@ -26,4 +47,11 @@
     @apply relative z-40 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border-2 border-[#302e30] bg-[#181818] text-2xl opacity-75 transition duration-300 hover:opacity-100 md:h-12 md:w-12
   }
   
+  .carousel-indicator-dots {
+    @apply h-2 w-2 cursor-pointer rounded-full bg-ffffff opacity-50 transition-all duration-500 hover:w-4 hover:opacity-100;
+  }
+
+  .carousel-indicator-container {
+    @apply  flex h-5 w-24 transform items-center justify-center space-x-1 rotate-180
+  }
 }
