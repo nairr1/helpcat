@@ -361,7 +361,7 @@ const CreatePostWizard = ({
                 ) : (
                     <button 
                         className={`text-sm bg-282a36 border border-2f334a  w-fit m-auto px-2 py-1 rounded-lg 
-                            ${!formTitle || !formTopic || formContent === "<br/>" ? "" : "hover:bg-2f334a hover:border-5e4fb3/40 transform active:scale-75 transition-transform" || ""}
+                            ${!formTitle || !formTopic || formContent === "<br/>" ? "" : "hover:bg-2f334a hover:border-5e4fb3/40 transform active:scale-75 transition" || ""}
                         `}
                         disabled={!formTitle || !formTopic || formContent === "<br/>"}
                         onClick={() => createPost({ 

@@ -13,6 +13,7 @@ import helpcatLogo from "../components/assets/helpcatLogo.png";
 
 import { IoMdMenu } from "react-icons/io";
 import { IoIosCreate } from "react-icons/io";
+import { userVerification } from "~/utils/userVerification";
 
 type HeaderProps = {
     togglePostWizard?: boolean;
@@ -143,18 +144,16 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                         </div>
                     )}
 
-
-
                     {router.pathname === "/feed" ? (
                         <IoIosCreate 
-                            className={`cursor-pointer text-xl transform transition duration-500 hover:text-ffffff
+                            className={`cursor-pointer text-2xl transform transition duration-500 hover:text-ffffff
                                 ${togglePostWizard ? "text-ffffff" : "text-ffffff/70" || ""}
                             `} 
                             onClick={handlePostWizardToggle} 
                         />
                     ) : (
                         <>
-                            {userEmail.includes("@redcat.com.au") || userEmail === "rnair1199@gmail.com" && (
+                            {userVerification(userEmail, "feed") && (
                                 <Link href='/feed'>
                                     <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
@@ -165,7 +164,6 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                                         <path fillRule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z" clipRule="evenodd" />
                                     </svg>
                                 </Link>
-
                             )}
                         </>
                     )}

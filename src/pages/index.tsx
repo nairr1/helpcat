@@ -54,7 +54,10 @@ const Home: NextPage = () => {
           </div>
 
           <button  
-            className="bg-20222e mt-4 px-2 py-1 rounded-2xl text-sm border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 transition duration-500" 
+            className={`bg-20222e mt-4 px-2 py-1 rounded-2xl text-sm border border-282a36
+              ${searchBrand !== "" && " hover:bg-2f334a hover:border-5e4fb3/40 transition active:scale-75" || ""}
+            `}
+            disabled={searchBrand === ""}
           >
             Search
           </button>
