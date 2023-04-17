@@ -21,7 +21,14 @@ const config = {
         "cfca3c": "#cfca3c",
         "4549b5": "#4549b5",
         "6C47FF": "#6C47FF",
-        "ac4fb3": "#ac4fb3"
+        "ac4fb3": "#ac4fb3",
+        "2da3b3": "#2da3b3",
+        "3741bf": "#3741bf",
+        "6caba0": "#6caba0",
+        "7072bc": "#7072bc",
+        "9f70bc": "#9f70bc",
+        "68e2f4": "#68e2f4",
+
     },
     fontFamily: {
         mono: ['Roboto Mono', 'monospace'],

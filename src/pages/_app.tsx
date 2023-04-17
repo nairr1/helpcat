@@ -3,7 +3,6 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
-import Header from "~/components/Header";
 import { useEffect, useState } from "react";
 import { Router } from "next/router";
 import HelpcatPageLoader from "~/components/HelpcatPageLoader";
@@ -45,15 +44,11 @@ const MyApp: AppType = ({ Component, pageProps }) => {
         {loading ? (
           <HelpcatPageLoader />
         ) : (
-          <>
-            <Header />
-            
-            <Component {...pageProps} />
-          </>
+          <Component {...pageProps} />
         )}
       </div>
     </ClerkProvider>
-  )
+  );
 };
 
 export default api.withTRPC(MyApp);

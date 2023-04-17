@@ -14,3 +14,14 @@ model StoreStatusLogs {
   brand      String   @db.VarChar(255)
   storeId    Int
 }
+
+model Posts {
+  id                      Int      @id @default(autoincrement())
+  createdAt               DateTime @default(now())
+  content                 String   
+  title                   String   @db.VarChar(255)
+  topic                   String   @db.VarChar(255)
+  link                    String   @db.VarChar(255) @default("")
+  authorId                String   @db.VarChar(255)
+  updatedAuthorId         String   @db.VarChar(255) @default("")
+}

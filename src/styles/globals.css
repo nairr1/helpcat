@@ -54,4 +54,12 @@
   .carousel-indicator-container {
     @apply  flex h-5 w-24 transform items-center justify-center space-x-1 rotate-180
   }
+
+  .ProseMirror p.is-editor-empty:first-child::before {
+    color: #adb5bd;
+    content: attr(data-placeholder);
+    float: left;
+    height: 0;
+    pointer-events: none;
+  }
 }

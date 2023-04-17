@@ -1,4 +1,4 @@
-export const userVerification = (email: string, brand: string) => {
+export const userVerification = (email: string, path: string) => {
     const index = email.indexOf("@");
 
     const domain = email.slice(index);
@@ -10,104 +10,104 @@ export const userVerification = (email: string, brand: string) => {
             isVerified = true;
             break;
         case("@retailzoo.com.au"):
-            if(brand === "boostjuice"
-            || brand === "bettysburgers" 
-            || brand === "ciboespresso"
-            || brand === "salsas") {
+            if(path === "boostjuice"
+            || path === "bettysburgers" 
+            || path === "ciboespresso"
+            || path === "salsas") {
                 isVerified = true;
             }
             break;
         case("@augustusgelatery.com.au"):
-            if(brand === "augustusgelatery") {
+            if(path === "augustusgelatery") {
                 isVerified = true;
             }
             break;
         case("@banjos.com.au"):
-            if(brand === "banjos") {
+            if(path === "banjos") {
                 isVerified = true;
             }
             break;
         case("@burgerurge.com.au"):
-            if(brand === "burgerurge") {
+            if(path === "burgerurge") {
                 isVerified = true;
             }
             break;
         case("@chatimegroup.com.au"):
-            if(brand === "chatime") {
+            if(path === "chatime") {
                 isVerified = true;
             }
             break;
         case("@concepteight.com.au"):
-            if(brand === "concept8rewards") {
+            if(path === "concept8rewards") {
                 isVerified = true;
             }
             break;
         case("@danielsdonuts.com.au"):
-            if(brand === "danielsdonuts") {
+            if(path === "danielsdonuts") {
                 isVerified = true;
             }
             break;
         case("@eljannah.com.au"):
-            if(brand === "eljannah") {
+            if(path === "eljannah") {
                 isVerified = true;
             }
             break;
         case("@fondamexican.com.au"):
-            if(brand === "fondamexican") {
+            if(path === "fondamexican") {
                 isVerified = true;
             }
             break;
         case("@innoveilgami.com.au"):
-            if(brand === "gamichicken") {
+            if(path === "gamichicken") {
                 isVerified = true;
             }
             break;
         case("@grilld.com.au"):
-            if(brand === "grilld") {
+            if(path === "grilld") {
                 isVerified = true;
             }
             break;
         case("@hunkydoryfish.com.au"):
-            if(brand === "hunkydory") {
+            if(path === "hunkydory") {
                 isVerified = true;
             }
             break;
         case("@lonestarribhouse.com.au"):
-            if(brand === "lonestar") {
+            if(path === "lonestar") {
                 isVerified = true;
             }
         case("@maxbrenner.com.au"):
-            if(brand === "maxbrenner") {
+            if(path === "maxbrenner") {
                 isVerified = true;
             }
             break;
         case("@nandos.com.au"):
-            if(brand === "nandos") {
+            if(path === "nandos") {
                 isVerified = true;
             }
             break;
         case("@nenechicken.com.au"):
-            if(brand === "nenechicken") {
+            if(path === "nenechicken") {
                 isVerified = true;
             }
             break;
         case("@oakberry.com.au"):
-            if(brand === "oakberry") {
+            if(path === "oakberry") {
                 isVerified = true;
             }
             break;
         case("@olivers.com.au"):
-            if(brand === "olivers") {
+            if(path === "olivers") {
                 isVerified = true;
             }
             break;
         case("@sanchurro.com.au"):
-            if(brand === "sanchurro") {
+            if(path === "sanchurro") {
                 isVerified = true;
             }
             break;
         case("@schnitz.com.au"):
-            if(brand === "schnitz") {
+            if(path === "schnitz") {
                 isVerified = true;
             }
             break;
