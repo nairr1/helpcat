@@ -1,7 +1,7 @@
 import React, { type Dispatch, type SetStateAction, useState } from "react";
 import Image from "next/image";
 
-import { Editor, EditorContent, useEditor } from "@tiptap/react";
+import { type Editor, EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Underline from "@tiptap/extension-underline";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -188,8 +188,8 @@ const CreatePostWizard = ({
         
             <div 
             className={`flex flex-col p-6 rounded-2xl bg-20222e shadow-[0_3px_10px_rgb(0,0,0,0.5)] space-y-2 w-fit transition transform
-                ${!togglePostWizard && "opacity-0 translate-x-full duration-1000"}
-                ${!togglePostWizardDropdown && "hidden"}
+                ${!togglePostWizard && "opacity-0 translate-x-full duration-1000" || ""}
+                ${!togglePostWizardDropdown && "hidden" || ""}
             `}
             >
                 <div className='flex justify-start'>
@@ -693,6 +693,7 @@ const Feed = () => {
 
                                 {postsFilteredByTitle?.map(({ post, author, updatedAuthor }) => (
                                     <Post
+                                        key={post.id}
                                         id={post.id}
                                         authorId={author?.id || ""}
                                         authorProfileImageUrl={author?.profileImageUrl || ""}
@@ -725,6 +726,7 @@ const Feed = () => {
 
                             {latestPosts?.map(({ post, author, updatedAuthor }) => (
                                 <Post
+                                    key={post.id}
                                     id={post.id}
                                     authorId={author?.id || ""}
                                     authorProfileImageUrl={author?.profileImageUrl || ""}
@@ -784,6 +786,7 @@ const Feed = () => {
 
                                 {userPosts.map(({ post, author, updatedAuthor }) => (
                                     <Post
+                                        key={post.id}
                                         id={post.id}
                                         authorId={author?.id || ""}
                                         authorProfileImageUrl={author?.profileImageUrl || ""}
