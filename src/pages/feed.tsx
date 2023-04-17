@@ -150,6 +150,7 @@ const CreatePostWizard = ({
             setFormTopic("");
             editor?.commands.setContent("");
             Object.keys(topics).forEach((i) => topics[i] = false);
+            void ctx.posts.getLatest.invalidate();
             void ctx.posts.getAll.invalidate();
             void ctx.posts.getUserPosts.invalidate();
         }
@@ -162,6 +163,7 @@ const CreatePostWizard = ({
             setFormTopic("");
             editor?.commands.setContent("");
             Object.keys(topics).forEach((i) => topics[i] = false);
+            void ctx.posts.getLatest.invalidate();
             void ctx.posts.getAll.invalidate();
             void ctx.posts.getUserPosts.invalidate();
             setEditPost(false);
