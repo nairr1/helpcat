@@ -587,7 +587,7 @@ const Feed = () => {
         if(counter < 1) {
             setCounter(1);
         }
-    }, 1000);
+    }, 2000);
 
     const [togglePostWizard, setTogglePostWizard] = useState(false);
     const [togglePostWizardDropdown, setTogglePostWizardDropdown] = useState(false);
@@ -643,7 +643,7 @@ const Feed = () => {
         },
     });
 
-    if (!latestPosts || !allPosts || !userPosts) return <HelpcatPageLoader />
+     if (!latestPosts || !allPosts || !userPosts) return <HelpcatPageLoader />
 
     return (
         <>
@@ -665,7 +665,7 @@ const Feed = () => {
                         />
                     </div>
 
-                    <div className="fixed z-10 top-24 right-0 p-6">
+                    <div className="absolute z-10 top-10 right-0 p-6">
                         <CreatePostWizard 
                             togglePostWizard={togglePostWizard}
                             togglePostWizardDropdown={togglePostWizardDropdown}
@@ -820,7 +820,7 @@ const Feed = () => {
             ) : (
                 <div className="text-center mt-[2rem]">
                     {counter === 1 && (
-                        <p className={`transition duration-1000 transform ${counter !== 1 && "opacity-0" || "opacity-100" }`}>
+                        <p className={`transition duration-1000 transform ${counter === 1 && "opacity-100" || "opacity-0" }`}>
                             YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.
                         </p>
                     )}

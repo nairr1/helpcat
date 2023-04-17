@@ -11,8 +11,7 @@ import { Brands } from "~/utils/brands";
 
 import helpcatLogo from "../components/assets/helpcatLogo.png";
 
-import { IoMdMenu } from "react-icons/io";
-import { IoIosCreate } from "react-icons/io";
+import { IoIosCreate, IoMdMenu, IoIosSearch } from "react-icons/io";
 import { userVerification } from "~/utils/userVerification";
 
 type HeaderProps = {
@@ -146,7 +145,7 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
 
                     {router.pathname === "/feed" ? (
                         <IoIosCreate 
-                            className={`cursor-pointer text-2xl transform transition duration-500 hover:text-ffffff
+                            className={`cursor-pointer text-[2.25rem] px-2 transform transition duration-500 hover:text-ffffff
                                 ${togglePostWizard ? "text-ffffff" : "text-ffffff/70" || ""}
                             `} 
                             onClick={handlePostWizardToggle} 

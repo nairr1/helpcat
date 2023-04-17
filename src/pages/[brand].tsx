@@ -704,7 +704,7 @@ const SaleTypeMenusCard = ({ saleTypeMenus, activeIndex, index }: SaleTypeMenusC
 };
 
 const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, timezone }: StoreTradingHoursCardProps) => {
-    const localDateTime = new Date().toLocaleString("en-US", { timeZone: timezone });
+    const localDateTime = new Date().toLocaleString("en-AU", { timeZone: timezone });
 
     function getDay(dateTime: string) {
         const index = dateTime?.indexOf(",");
@@ -860,13 +860,18 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                 <div className="flex items-center space-x-1 text-xs italic font-light">
                     <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
 
-                    {localDateTime.charAt(10) === "1" ? (
+                    {localDateTime.length === 22 && (
                         <p>
-                            Trading hours for the current local time - {`${localDateTime.slice(0, 15)}${localDateTime.slice(18)}`}.
+                            Trading hours for the current local time - {`${localDateTime.slice(0, 16)}${localDateTime.slice(19).toUpperCase()}`}.
                         </p>
-                    ) : (
-                        <p>Trading hours for the current local time - {`${localDateTime.slice(0, 15)}${localDateTime.slice(18)}`}.</p>
                     )}
+
+                    {localDateTime.length === 23 && (
+                        <p>
+                            Trading hours for the current local time - {`${localDateTime.slice(0, 17)}${localDateTime.slice(20).toUpperCase()}`}.
+                        </p>
+                    )}
+
                 </div>
 
             </div>
@@ -911,7 +916,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         if(counter < 1) {
             setCounter(1);
         }
-    }, 1000);
+    }, 2000);
 
     const obj: {[key: number]: number} = {};
 
@@ -973,8 +978,6 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
             }
         }
     }
-
-    if (!statusLogs) return <HelpcatPageLoader />
 
     return (
         <>
