@@ -643,7 +643,7 @@ const Feed = () => {
         },
     });
 
-     if (!latestPosts || !allPosts || !userPosts) return <HelpcatPageLoader />
+     if (!latestPosts || !allPosts || !userPosts || !postsFilteredByTitle) return <HelpcatPageLoader />
 
     return (
         <>
@@ -689,9 +689,9 @@ const Feed = () => {
                     <div className="flex relative justify-between p-8">
                         {search !== "" && (
                             <div className="flex-1 flex flex-col items-center justify-start p-6 space-y-4">
-                                <h1 className="text-[2rem] text-282a36 border-b w-full">Search Results</h1>
+                                <h1 className="text-[2rem] text-282a36 border-b w-full">{postsFilteredByTitle?.length} Search Results</h1>
 
-                                {postsFilteredByTitle?.map(({ post, author, updatedAuthor }) => (
+                                {postsFilteredByTitle.map(({ post, author, updatedAuthor }) => (
                                     <Post
                                         key={post.id}
                                         id={post.id}
@@ -724,7 +724,7 @@ const Feed = () => {
                         <div className="flex-1 flex flex-col items-center justify-start p-6 space-y-4">
                             <h1 className="text-[2rem] text-282a36 border-b w-full">Latest Posts</h1>
 
-                            {latestPosts?.map(({ post, author, updatedAuthor }) => (
+                            {latestPosts.map(({ post, author, updatedAuthor }) => (
                                 <Post
                                     key={post.id}
                                     id={post.id}
