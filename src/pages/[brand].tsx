@@ -706,6 +706,8 @@ const SaleTypeMenusCard = ({ saleTypeMenus, activeIndex, index }: SaleTypeMenusC
 const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, timezone }: StoreTradingHoursCardProps) => {
     const localDateTime = new Date().toLocaleString("en-AU", { timeZone: timezone });
 
+    const dateTime = new Date().toLocaleString("en-US", { timeZone: timezone });
+
     function getDay(dateTime: string) {
         const index = dateTime?.indexOf(",");
 
@@ -736,7 +738,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
 
                 <div className="grid grid-cols-2 gap-6 p-4 text-xs font-light mb-[1rem]">
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 1 && (
+                        {!holidayName && getDay(dateTime) === 1 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
 
@@ -751,7 +753,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                     </div>
 
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 2 && (
+                        {!holidayName && getDay(dateTime) === 2 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
 
@@ -766,7 +768,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                     </div>
 
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 3 && (
+                        {!holidayName && getDay(dateTime) === 3 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         
@@ -781,7 +783,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                     </div>
 
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 4 && (
+                        {!holidayName && getDay(dateTime) === 4 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         
@@ -796,7 +798,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                     </div>
 
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 5 && (
+                        {!holidayName && getDay(dateTime) === 5 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
 
@@ -811,7 +813,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                     </div>
 
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 6 && (
+                        {!holidayName && getDay(dateTime) === 6 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662">{" "}</span>
                         )}
                         
@@ -826,7 +828,7 @@ const StoreTradingHoursCard = ({ openingHours, activeIndex, index, holidayName, 
                     </div>
 
                     <div className="flex items-center space-x-1">
-                        {!holidayName && getDay(localDateTime) === 0 && (
+                        {!holidayName && getDay(dateTime) === 0 && (
                             <span className="border border-4ca662 rounded-full h-1.5 w-1.5 bg-4ca662"></span>
                         )}
 
@@ -983,7 +985,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         <>
             <Header />
 
-            {userVerification(userEmail, router.query.brand as string) ? (
+            {!userVerification(userEmail, router.query.brand as string) ? (
                 <div className="hidden lg:flex flex-col items-center justify-center ">
                     <div className="sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]">
                         {Brands.map((brand) => (
