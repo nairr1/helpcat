@@ -174,7 +174,7 @@ const CreatePostWizard = ({
         return null;
     }
 
-    const formContent = String(editor.getHTML()).replaceAll("<p></p>", "<br/>").replaceAll(" ", "&nbsp;");
+    const formContent = String(editor.getHTML()).replaceAll("<p></p>", "<br/>").replaceAll("`", "&nbsp;");
 
     return (
         <>
