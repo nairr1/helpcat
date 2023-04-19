@@ -174,7 +174,7 @@ const CreatePostWizard = ({
         return null;
     }
 
-    const formContent = String(editor.getHTML()).replaceAll("<p></p>", "<br/>").replaceAll("`", "&nbsp;");
+    const formContent = String(editor.getHTML());
 
     return (
         <>
@@ -511,7 +511,7 @@ const Post = ({
                 </div>
 
                 <div className='px-6 text-wrap cursor-text'>
-                    {parse(content)}
+                    {parse(content.replaceAll("<p></p>", "<br/>").replaceAll("`", "&nbsp;"))}
                 </div>
 
                 <div className='flex justify-end items-end pl-2 group-hover:text-edc2d8ff'>
