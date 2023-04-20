@@ -652,7 +652,7 @@ const Feed = () => {
                 handlePostWizardToggle={handlePostWizardToggle}
             />
 
-            {userVerification(userEmail, "feed") ? (
+            {!userVerification(userEmail, "feed") ? (
                 <div className="relative min-h-screen">
                     <div className="p-6">
                         <input 
@@ -686,7 +686,7 @@ const Feed = () => {
                         />
                     </div>
 
-                    <div className="flex relative justify-between p-8">
+                    <div className="flex relative w-[100vw] justify-between p-8">
                         {search !== "" && (
                             <div className="flex-1 flex flex-col items-center justify-start p-6 space-y-4">
                                 <h1 className="text-[2rem] text-282a36 border-b w-full">{postsFilteredByTitle.length} Search {postsFilteredByTitle.length === 1 ? "Result" : "Results" || ""}</h1>
@@ -720,8 +720,9 @@ const Feed = () => {
                                 ))}
                             </div>
                         )}
+                        
 
-                        <div className="flex-1 flex flex-col items-center justify-start p-6 space-y-4">
+                        <div className={`flex-1 2xl:flex flex-col items-center justify-start p-6 space-y-4 ${search !== "" && "md:hidden" || ""}`}>
                             <h1 className="text-[2rem] text-282a36 border-b w-full">Latest Posts</h1>
 
                             {latestPosts.map(({ post, author, updatedAuthor }) => (
@@ -752,67 +753,6 @@ const Feed = () => {
                                 />
                             ))}
                         </div>
-
-                        {userPosts.length === 0 && (
-                            <div className='2xl:flex hidden flex-col p-6 space-y-4 items-center justify-start'>
-                                <h1 className="text-[2rem] text-282a36 border-b w-full">My Posts</h1>
-
-                                <div className="flex flex-col p-6 space-y-8 rounded-2xl bg-20222e shadow-[0_3px_10px_rgb(0,0,0,0.5)]">
-                                    <HelpcatErrorAnimation>
-                                        <Image 
-                                            className='m-auto rounded-full shadow-[0_3px_10px_rgb(0,0,0,0.5)]'
-                                            src={sadcat} 
-                                            width={200}
-                                            height={200}
-                                            alt=""
-                                        />
-                                    </HelpcatErrorAnimation>
-                    
-                                    <div className='text-center font-light flex flex-col text-ffffff/70 space-y-2 bg-282a36 p-2 rounded-lg shadow-lg'>
-                                        <p className="text-xs m-auto">No posts found :&#40;</p>
-
-                                        <p className=' text-xs flex items-center justify-center text-redError/70'>
-                                            Don&apos;t be an old mate and sleep on the job, create some posts!
-                                        </p>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        )}
-
-                        {userPosts.length > 0 && (
-                            <div className="flex-1 2xl:flex hidden flex-col items-center justify-start p-6 space-y-4">
-                                <h1 className="text-[2rem] text-282a36 border-b w-full">My Posts</h1>
-
-                                {userPosts.map(({ post, author, updatedAuthor }) => (
-                                    <Post
-                                        key={post.id}
-                                        id={post.id}
-                                        authorId={author?.id || ""}
-                                        authorProfileImageUrl={author?.profileImageUrl || ""}
-                                        authorFirstName={author?.firstName || ""}
-                                        authorLastName={author?.lastName || ""}
-                                        updatedAuthorLastName={updatedAuthor?.lastName || ""}
-                                        updatedAuthorFirstName={updatedAuthor?.firstName || ""}
-                                        createdAt={post.createdAt}
-                                        content={post.content}
-                                        link={post.link}
-                                        title={post.title}
-                                        topic={post.topic}
-                                        editor={editor}
-                                        setFormTitle={setFormTitle}
-                                        setFormLink={setFormLink}
-                                        setFormTopic={setFormTopic}
-                                        setEditPost={setEditPost}
-                                        setUpdatedPostId={setUpdatedPostId}
-                                        setTopics={setTopics}
-                                        setTogglePostWizard={setTogglePostWizard}
-                                        setTogglePostWizardDropdown={setTogglePostWizardDropdown}
-                                        topics={topics}
-                                    />
-                                ))}
-                            </div>
-                        )}
 
                     </div>
 
