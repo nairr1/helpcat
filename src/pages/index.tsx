@@ -15,7 +15,6 @@ import Header from "~/components/Header";
 const Home: NextPage = () => {
   api.posts.getLatest.useQuery();
   api.posts.getAll.useQuery();
-  api.posts.getUserPosts.useQuery();
 
   const [searchBrand, setSearchbrand] = useState("");
 

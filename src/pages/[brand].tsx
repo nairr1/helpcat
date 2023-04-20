@@ -886,7 +886,6 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
     api.posts.getLatest.useQuery();
     api.posts.getAll.useQuery();
-    api.posts.getUserPosts.useQuery();
     
     const { data: storeStatusData } = res1;
 

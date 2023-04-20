@@ -152,7 +152,6 @@ const CreatePostWizard = ({
             Object.keys(topics).forEach((i) => topics[i] = false);
             void ctx.posts.getLatest.invalidate();
             void ctx.posts.getAll.invalidate();
-            void ctx.posts.getUserPosts.invalidate();
         }
     });
 
@@ -165,7 +164,6 @@ const CreatePostWizard = ({
             Object.keys(topics).forEach((i) => topics[i] = false);
             void ctx.posts.getLatest.invalidate();
             void ctx.posts.getAll.invalidate();
-            void ctx.posts.getUserPosts.invalidate();
             setEditPost(false);
         }
     });
@@ -410,7 +408,6 @@ const Post = ({
         onSuccess: () => {
             void ctx.posts.getLatest.invalidate();
             void ctx.posts.getAll.invalidate();
-            void ctx.posts.getUserPosts.invalidate();
         }
     });
 
@@ -565,8 +562,6 @@ const Feed = () => {
 
     const { data: allPosts } = api.posts.getAll.useQuery();
 
-    const { data: userPosts } = api.posts.getUserPosts.useQuery();
-
     const user = useUser();
 
     let userEmail = "";
@@ -643,7 +638,7 @@ const Feed = () => {
         },
     });
 
-     if (!latestPosts || !allPosts || !userPosts || !postsFilteredByTitle) return <HelpcatPageLoader />
+     if (!latestPosts || !allPosts || !postsFilteredByTitle) return <HelpcatPageLoader />
 
     return (
         <>
@@ -652,7 +647,7 @@ const Feed = () => {
                 handlePostWizardToggle={handlePostWizardToggle}
             />
 
-            {!userVerification(userEmail, "feed") ? (
+            {userVerification(userEmail, "feed") ? (
                 <div className="relative min-h-screen">
                     <div className="p-6">
                         <input 
