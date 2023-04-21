@@ -100,6 +100,7 @@ const Exceptions = ({ exceptionData }: ExceptionProps) => {
             <div className="place-content-center grid grid-cols-6 p-6 gap-4">
                 {exceptionData?.map(({ locationName, storeStatus, storeId, phone, brand, openNow }) => (
                     <ExceptionCard 
+                        key={storeId}
                         locationName={locationName}
                         storeStatus={storeStatus}
                         storeId={storeId}
@@ -173,7 +174,6 @@ export const getServerSideProps: GetServerSideProps = async () => {
         openNow: OpenNow,
         brand: "boostjuice"
     }));
-
 
     const exceptionData = augustusGelateryExceptions.concat(
         banjosExceptions,

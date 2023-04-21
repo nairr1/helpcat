@@ -11,7 +11,7 @@ import { Brands } from "~/utils/brands";
 
 import helpcatLogo from "../components/assets/helpcatLogo.png";
 
-import { IoIosCreate, IoMdMenu, IoIosSearch } from "react-icons/io";
+import { IoIosCreate, IoMdMenu } from "react-icons/io";
 import { userVerification } from "~/utils/userVerification";
 
 type HeaderProps = {
