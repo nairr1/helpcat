@@ -491,7 +491,7 @@ const LocationDetailsCard = ({
 
                         {!openNow && (
                             <p className="font-light">
-                                This location will begin trading at {nextOpenDateTime.toLocaleString('en-AU', { timeZone: timezone, day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase()}.
+                                This location will begin trading at {nextOpenDateTime.toLocaleString('en-AU', { timeZone: timezone, day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase()}
                             </p>
                         )}
 
