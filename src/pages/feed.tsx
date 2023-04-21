@@ -32,6 +32,7 @@ import sadcat from "../components/assets/helpcatNotFound.jpeg";
 import helpcat from "../components/assets/helpcat.jpeg";
 import Header from "~/components/Header";
 import { userVerification } from "~/utils/userVerification";
+
 import HelpcatPageLoader from "~/components/HelpcatPageLoader";
 
 type CreatePostWizardProps = {

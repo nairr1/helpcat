@@ -26,7 +26,7 @@ const HelpcatPageLoader = () => {
                     <div className="text-xs text-center mt-[2rem] space-y-2 font-light shadow-[0_3px_10px_rgb(0,0,0,0)]">
                         <p>© Copyright 2022 Helpcat Pty Ltd. All Rights Reserved.</p>
 
-                        <p>Version 2.1.0</p>
+                        <p>Version 2.1.2</p>
                     </div>
                     
                 </div>

@@ -1,27 +1,17 @@
-import { type GetServerSideProps } from "next";
 import Image from "next/image";
 import React from "react";
 
 import { AiOutlinePhone } from "react-icons/ai";
 
+import Header from "~/components/Header";
+import HelpcatPageLoader from "~/components/HelpcatPageLoader";
+import sadcat from "../components/assets/helpcatNotFound.jpeg";
+
 import { api } from "~/utils/api";
 import { Brands } from "~/utils/brands";
 import { formatDateTime } from "~/utils/formatDateTime";
 
-type ServerProps = {
-    data: StoreStatusData[];
-}
-
-type ExceptionProps = {
-    exceptionData: {
-        locationName: string;
-        storeStatus: string;
-        storeId: number;
-        phone: string;
-        openNow: boolean | undefined;
-        brand: string;
-    }[];
-}
+import styled from "styled-components";
 
 type ExceptionCardProps = {
     locationName: string;
@@ -29,164 +19,143 @@ type ExceptionCardProps = {
     storeId: number;
     phone: string;
     brand: string;
-    openNow: boolean | undefined;
+    lastOnline: Date;
 }
 
-const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, openNow }: ExceptionCardProps) => {
-    const { data: logs } = api.logs.getAll.useQuery({ brand: brand });
-
-    const log = logs?.find(log => log.storeId === storeId);
-
+const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, lastOnline }: ExceptionCardProps) => {
     const currentBrand = Brands.find(item => item.query === brand);
 
     if (!currentBrand) return null;
 
     return (
-        <>
-            {openNow && log && (
-                <div className="flex flex-col space-y-3 p-6 bg-20222e rounded-2xl">
-                    <div className="flex items-center justify-between">
-                        <p className="text-sm">ID: {storeId}</p>
+        <div className="flex flex-col space-y-3 p-6 bg-20222e rounded-2xl">
+            <div className="flex items-center justify-between">
+                <p className="text-sm">ID: {storeId}</p>
 
-                        <Image 
-                            src={currentBrand.image} 
-                            height={30}
-                            width={30}
-                            className="rounded-md"
-                            alt="Brand Logo"
-                        />
-                    </div>
+                <Image 
+                    src={currentBrand.image} 
+                    height={35}
+                    width={35}
+                    className="rounded-md"
+                    alt="Brand Logo"
+                />
+            </div>
 
-                    <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2">
 
 
-                        <h1 className="text-sm">{locationName}</h1>
+                <h1 className="text-sm">{locationName}</h1>
 
-                    </div>
+            </div>
 
-                    <div className="flex items-center text-xs ">
-                        {storeStatus === "OffLine" && (
-                            <p className="text-b32d2d">{storeStatus.charAt(0).toUpperCase()}{storeStatus.slice(1).toLowerCase()}</p>
-                        )}
+            <div className="flex items-center text-xs ">
+                {storeStatus === "OffLine" && (
+                    <p className="text-b32d2d">{storeStatus.charAt(0).toUpperCase()}{storeStatus.slice(1).toLowerCase()}</p>
+                )}
 
-                        {storeStatus === "Unknown" && (
-                            <p className="text-5e4fb3">{storeStatus}</p>
-                        )}
+                {storeStatus === "Unknown" && (
+                    <p className="text-5e4fb3">{storeStatus}</p>
+                )}
 
-                        <span className="border border-ffffff/70 mr-1 bg-ffffff/70 rounded-full h-1 w-1 ml-1">{" "}</span> 
+                <span className="border border-ffffff/70 mr-1 bg-ffffff/70 rounded-full h-1 w-1 ml-1">{" "}</span> 
 
-                        <p className="text-ffffff/70 font-light">{formatDateTime(log?.lastOnline.toISOString())?.slice(0, 20)}</p>
-                    </div>
+                <p className="text-ffffff/70 font-light">{formatDateTime(lastOnline.toISOString())?.slice(0, 20)}</p>
+            </div>
 
-                    <p className="flex text-xs font-light items-center"> 
-                        <span className="mr-1 text-sm"><AiOutlinePhone /></span>
-                        {phone ? `${phone}` : "None"}
-                    </p>
+            <p className="flex text-xs font-light items-center"> 
+                <span className="mr-1 text-sm"><AiOutlinePhone /></span>
+                {phone ? `${phone}` : "None"}
+            </p>
 
-                </div>
-            )}
-        </>
-
+        </div>
     );
 };
 
-const Exceptions = ({ 
-    exceptionData
-}: ExceptionProps) => {
+const Exceptions = () => {
+    const ctx = api.useContext();
+
+    setInterval(function() {
+        void ctx.logs.getAll.invalidate();
+    }, 300000);
+
+    const { data: logs } = api.logs.getAll.useQuery();
+
+    if (!logs) return <HelpcatPageLoader />
+    
     return (
-        <div className="flex justify-center items-center">
-            <div className="place-content-center grid grid-cols-6 p-6 gap-4">
-                {exceptionData?.map(({ locationName, storeStatus, storeId, phone, brand, openNow }) => (
-                    <ExceptionCard 
-                        key={storeId}
-                        locationName={locationName}
-                        storeStatus={storeStatus}
-                        storeId={storeId}
-                        phone={phone}
-                        brand={brand}
-                        openNow={openNow}
-                    />
-                ))}
+        <>
+            <Header />
+
+            <div className="flex flex-col justify-center items-center px-10 py-2">
+                <div className="flex flex-col justify-center items-center space-y-1 mb-2 font-light text-sm">
+                    <p>
+                        The exceptions page will return all major clients that are <span className="italic">currently trading</span>, but <span className="underline">aren&apos;t</span> able to process web transactions.
+                    </p>
+
+                    <p>
+                        This data is polled every 5 minutes, the server has been running since <span className="text-68e2f4 font-normal">2023-04-21, 22:15:34</span> AEST.
+                    </p>
+                </div>
+
+                <div className="grid justify-center grid-cols-5 p-6 gap-4">
+                    {logs?.map(({ locationName, status, storeId, phone, brand, lastOnline }) => (
+                        <ExceptionCard 
+                            key={storeId}
+                            locationName={locationName || ""}
+                            storeStatus={status || ""}
+                            storeId={storeId}
+                            phone={phone || ""}
+                            brand={brand}
+                            lastOnline={lastOnline}
+                        />
+                    ))}
+                </div>
+
+                {logs && logs.length === 0 && (
+                    <div className="flex items-center space-x-2">
+                        <HelpcatErrorAnimation>
+                            <Image 
+                                className='m-auto rounded-full p-1'
+                                src={sadcat} 
+                                width={40}
+                                height={40}
+                                alt=""
+                            />
+                        </HelpcatErrorAnimation>
+
+                        <p className="text-2xl">No current exceptions!</p>
+
+                        <HelpcatErrorAnimation>
+                            <Image 
+                                className='m-auto rounded-full p-1'
+                                src={sadcat} 
+                                width={40}
+                                height={40}
+                                alt=""
+                            />
+                        </HelpcatErrorAnimation>
+                        
+                    </div>
+                )}
 
             </div>
-        </div>
+        </>
+
 
     );
 };
 
 export default Exceptions;
 
-export const getServerSideProps: GetServerSideProps = async () => {
-    const res1: unknown = await fetch("https://augustusgelatery.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-    const res2: unknown = await fetch("https://banjos.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-    const res3: unknown = await fetch("https://bettysburgers.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-    const res4: unknown = await fetch("https://boostjuice.redcatcloud.com.au/api/v1/stores").then(res => res.json());
+// stylesheet
 
-    const { data: augustusGelateryData } = res1 as ServerProps;
-    
-    const augustusGelateryExceptions = augustusGelateryData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "augustusgelatery"
-    }));
+const HelpcatErrorAnimation = styled.div`
+    animation: gelatine 0.5s infinite;
 
-    const { data: banjosData } = res2 as ServerProps;
-
-    const banjosExceptions = banjosData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "banjos"
-    }));
-
-    const { data: bettysBurgersData } = res3 as ServerProps;
-    
-    const bettysBurgersExceptions = bettysBurgersData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "bettysburgers"
-    }));
-
-    const { data: boostJuiceData } = res4 as ServerProps;
-
-    const boostJuiceExceptions = boostJuiceData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "boostjuice"
-    }));
-
-    const exceptionData = augustusGelateryExceptions.concat(
-        banjosExceptions,
-        bettysBurgersExceptions,
-        boostJuiceExceptions,
-    );
-
-    return {
-        props: {
-            exceptionData,
-        },
-    };
-};
+    @keyframes gelatine {
+        from, to { transform: scale(1, 1); }
+        25% { transform: scale(0.9, 1.1); }
+        50% { transform: scale(1.1, 0.9); }
+        75% { transform: scale(0.95, 1.05); }
+    }
+`

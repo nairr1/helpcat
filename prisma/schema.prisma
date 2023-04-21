@@ -16,12 +16,30 @@ model StoreStatusLogs {
 }
 
 model Posts {
-  id                      Int      @id @default(autoincrement())
-  createdAt               DateTime @default(now())
-  content                 String   
-  title                   String   @db.VarChar(255)
-  topic                   String   @db.VarChar(255)
-  link                    String   @db.VarChar(255) @default("")
-  authorId                String   @db.VarChar(255)
-  updatedAuthorId         String   @db.VarChar(255) @default("")
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  content         String
+  title           String   @db.VarChar(255)
+  topic           String   @db.VarChar(255)
+  link            String   @default("") @db.VarChar(255)
+  authorId        String   @db.VarChar(255)
+  updatedAuthorId String   @default("") @db.VarChar(255)
+}
+
+model AusMajorsStoreStatusLogs {
+  id           Int      @id @default(autoincrement())
+  createdAt    DateTime @default(now())
+  lastOnline   DateTime
+  brand        String   @db.VarChar(255)
+  storeId      Int
+  phone        String?  @db.VarChar
+  status       String?  @db.VarChar
+  locationName String?  @db.VarChar
+  openNow      Boolean?
+}
+
+model AustralianMajorBrands {
+  id        BigInt    @id(map: "Brands_pkey") @default(autoincrement())
+  createdAt DateTime? @default(now()) @db.Timestamptz(6)
+  title     String?   @db.VarChar
 }

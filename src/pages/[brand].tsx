@@ -6,8 +6,6 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { useUser } from "@clerk/nextjs";
 
-import type { StoreStatusLogs } from "@prisma/client";
-
 import Header from "~/components/Header";
 
 import { Brands } from "~/utils/brands";
@@ -59,7 +57,10 @@ type LocationDetailsCardProps = {
     activeIndex: number;
     index: number;
     brand: string;
-    logs: StoreStatusLogs[] | undefined
+    logs: {
+        lastOnline: Date;
+        storeId: number;
+    }[] | undefined;
 }
 
 type ProviderMenusCardProps = {
@@ -890,7 +891,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
     const { data: menuData } = res2;
 
-    const { data: statusLogs } = api.logs.getAll.useQuery({ brand: router.query.brand as string});
+    const { data: statusLogs } = api.logs.getAllByBrand.useQuery({ brand: router.query.brand as string});
 
     const user = useUser();
 
@@ -899,10 +900,6 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     if (user.user?.primaryEmailAddress) {
         userEmail = user.user.primaryEmailAddress.toString();
     }
-
-    const filteredLogsByBrand = statusLogs?.filter(function(log): boolean {
-        return log.brand === router.query.brand;
-    });
 
     const [searchLocation, setSearchLocation] = useState("");
 
@@ -1130,7 +1127,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                             activeIndex={sliderState[StoreID] as number}
                                             index={3}
                                             brand={router.query.brand as string}
-                                            logs={filteredLogsByBrand}
+                                            logs={statusLogs}
                                         />
 
                                         <ConfigurationCard 
