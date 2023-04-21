@@ -153,7 +153,7 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                         />
                     ) : (
                         <>
-                            {!userVerification(userEmail, "feed") && (
+                            {userVerification(userEmail, "feed") && (
                                 <Link href='/feed'>
                                     <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
@@ -168,7 +168,7 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                         </>
                     )}
 
-                    {!userVerification(userEmail, "exceptions") && (
+                    {userVerification(userEmail, "exceptions") && (
                         <Link href='/exceptions'>
                             <AiOutlineExclamation className={`text-xl hover:text-b32d2d transform transition duration-500  ${router.pathname === "/exceptions" ? "text-b32d2d " : "text-ffffff/70 hover:scale-110"}`} />
                         </Link>
