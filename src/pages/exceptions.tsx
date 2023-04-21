@@ -12,19 +12,19 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-type ServerSideProps = {
-    data: StoreStatusData[];
-}
-
 type ExceptionProps = {
-    exceptionData: {
-        locationName: string;
-        storeStatus: string;
-        storeId: number;
-        phone: string;
-        brand: string;
-        openNow: boolean | undefined;
-    }[];
+    res1: {
+        data: StoreStatusData[];
+    };
+    res2: {
+        data: StoreStatusData[];
+    };
+    res3: {
+        data: StoreStatusData[];
+    };
+    res4: {
+        data: StoreStatusData[];
+    };
 }
 
 type ExceptionCardProps = {
@@ -94,7 +94,75 @@ const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, openN
     );
 };
 
-const Exceptions = ({ exceptionData }: ExceptionProps) => {
+const Exceptions = ({ 
+    res1,
+    res2,
+    res3,
+    res4,
+}: ExceptionProps) => {
+    const { data: augustusGelateryData } = res1;
+    
+    const augustusGelateryExceptions = augustusGelateryData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "augustusgelatery"
+    }));
+
+
+    const { data: banjosData } = res2;
+
+    const banjosExceptions = banjosData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "banjos"
+    }));
+
+    const { data: bettysBurgersData } = res3;
+    
+    const bettysBurgersExceptions = bettysBurgersData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "bettysburgers"
+    }));
+
+    const { data: boostJuiceData } = res4;
+
+    const boostJuiceExceptions = boostJuiceData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "boostjuice"
+    }));
+
+    const exceptionData = augustusGelateryExceptions.concat(
+        banjosExceptions,
+        bettysBurgersExceptions,
+        boostJuiceExceptions,
+    );
+
     return (
         <div className="flex justify-center items-center">
             <div className="place-content-center grid grid-cols-6 p-6 gap-4">
@@ -119,71 +187,17 @@ const Exceptions = ({ exceptionData }: ExceptionProps) => {
 export default Exceptions;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const { data: augustusGelateryData }: ServerSideProps = await fetch("https://augustusgelatery.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-
-    const augustusGelateryExceptions = augustusGelateryData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "augustusgelatery"
-    }));
-
-    const { data: banjosData }: ServerSideProps = await fetch("https://banjos.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-
-    const banjosExceptions = banjosData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "banjos"
-    }));
-
-    const { data: bettysBurgersData }: ServerSideProps = await fetch("https://bettysburgers.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-
-    const bettysBurgersExceptions = bettysBurgersData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "bettysburgers"
-    }));
-
-    const { data: boostJuiceData }: ServerSideProps = await fetch("https://boostjuice.redcatcloud.com.au/api/v1/stores").then(res => res.json());
-
-    const boostJuiceExceptions = boostJuiceData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "boostjuice"
-    }));
-
-    const exceptionData = augustusGelateryExceptions.concat(
-        banjosExceptions,
-        bettysBurgersExceptions,
-        boostJuiceExceptions,
-    );
+    const res1: unknown = await fetch("https://augustusgelatery.redcatcloud.com.au/api/v1/stores").then(res => res.json());
+    const res2: unknown = await fetch("https://banjos.redcatcloud.com.au/api/v1/stores").then(res => res.json());
+    const res3: unknown = await fetch("https://bettysburgers.redcatcloud.com.au/api/v1/stores").then(res => res.json());
+    const res4: unknown = await fetch("https://boostjuice.redcatcloud.com.au/api/v1/stores").then(res => res.json());
 
     return {
         props: {
-            exceptionData
+            res1,
+            res2,
+            res3,
+            res4,
         },
     };
 };
