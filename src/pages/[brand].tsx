@@ -61,6 +61,9 @@ type LocationDetailsCardProps = {
         lastOnline: Date;
         storeId: number;
     }[] | undefined;
+    openNow: boolean;
+    nextOpen: string;
+    timezone: string;
 }
 
 type ProviderMenusCardProps = {
@@ -432,9 +435,16 @@ const LocationDetailsCard = ({
     activeIndex,
     index,
     brand,
-    logs
+    logs,
+    openNow,
+    nextOpen,
+    timezone
 }: LocationDetailsCardProps) => {
     const log = logs?.find(log => log.storeId === storeId);
+
+    const nextOpenDateTime = new Date(nextOpen);
+    const lastMenuUpdateDateTime = new Date(lastMenuUpdate);
+    const logDateTime = new Date(log?.lastOnline.toISOString().slice(0, 19) || "");
 
     return (
         <div 
@@ -462,7 +472,7 @@ const LocationDetailsCard = ({
             </div>
 
             <div className="flex font-light text-xs mb-[1rem]">
-                <div className="flex-1 px-4 py-2">
+                <div className="flex-1 px-4 font-normal py-2">
 
                     <div className="space-y-3">
                         {storeStatus === "Online" && (
@@ -478,7 +488,14 @@ const LocationDetailsCard = ({
                         )}
 
                         <p className="text-xl">ID: {storeId}</p>
+
+                        <p className="font-light">
+                            {openNow ? "This location is currently trading." 
+                            : `This location will begin trading at ${nextOpenDateTime.toLocaleString('en-AU', { timeZone: timezone, day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase()}.` || ""}
+                        </p>
+
                     </div>
+                    
                 </div>
 
                 <div className="space-y-3 p-4">
@@ -494,7 +511,7 @@ const LocationDetailsCard = ({
                             </span>
 
                             <p>
-                                Last Online: {log ? formatDateTime(log?.lastOnline.toISOString())?.slice(0, 20) : "None"}
+                                Last Online: {log ? logDateTime.toLocaleString('en-AU', { day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase() : "None"}
                             </p>
                             
                         </div>
@@ -503,7 +520,7 @@ const LocationDetailsCard = ({
                     <div className="flex items-center space-x-1">
                         <span className="border border-cfca3c rounded-full h-1.5 w-1.5 bg-cfca3c">{" "}</span>
 
-                        <p>Menu Synced: {lastMenuUpdate ? formatDateTime(lastMenuUpdate) : "None"}</p>
+                        <p>Menu Synced: {lastMenuUpdate ? lastMenuUpdateDateTime.toLocaleString('en-AU', { day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase() : "None"}</p>
                     </div>
 
                     <div>
@@ -980,7 +997,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         <>
             <Header />
 
-            {userVerification(userEmail, router.query.brand as string) ? (
+            {!userVerification(userEmail, router.query.brand as string) ? (
                 <div className="hidden lg:flex flex-col items-center justify-center ">
                     <div className="sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]">
                         {Brands.map((brand) => (
@@ -1088,7 +1105,9 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                             SaleTypeMenus,
                             OpeningHours,
                             OrderAfterHours,
-                            Phone
+                            Phone,
+                            OpenNow,
+                            NextOpen
                         }) => (
                             <div 
                                 key={StoreID}  
@@ -1128,6 +1147,9 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                             index={3}
                                             brand={router.query.brand as string}
                                             logs={statusLogs}
+                                            openNow={OpenNow}
+                                            nextOpen={NextOpen}
+                                            timezone={Timezone}
                                         />
 
                                         <ConfigurationCard 

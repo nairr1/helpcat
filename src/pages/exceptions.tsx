@@ -23,6 +23,8 @@ type ExceptionCardProps = {
 }
 
 const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, lastOnline }: ExceptionCardProps) => {
+    const logDateTime = new Date(lastOnline.toISOString().slice(0, 19) || "");
+
     const currentBrand = Brands.find(item => item.query === brand);
 
     if (!currentBrand) return null;
@@ -59,7 +61,7 @@ const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, lastO
 
                 <span className="border border-ffffff/70 mr-1 bg-ffffff/70 rounded-full h-1 w-1 ml-1">{" "}</span> 
 
-                <p className="text-ffffff/70 font-light">{formatDateTime(lastOnline.toISOString())?.slice(0, 20)}</p>
+                <p className="text-ffffff/70 font-light">{logDateTime.toLocaleString('en-AU', { day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase()}</p>
             </div>
 
             <p className="flex text-xs font-light items-center"> 
