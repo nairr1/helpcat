@@ -74,6 +74,9 @@ const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, lastO
 const Exceptions = () => {
     const ctx = api.useContext();
 
+    api.posts.getLatest.useQuery();
+    api.posts.getAll.useQuery();
+
     setInterval(function() {
         void ctx.logs.getAll.invalidate();
     }, 300000);

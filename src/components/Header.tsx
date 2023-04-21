@@ -13,6 +13,7 @@ import helpcatLogo from "../components/assets/helpcatLogo.png";
 
 import { IoIosCreate, IoMdMenu } from "react-icons/io";
 import { userVerification } from "~/utils/userVerification";
+import { AiOutlineExclamation } from "react-icons/ai";
 
 type HeaderProps = {
     togglePostWizard?: boolean;
@@ -145,14 +146,14 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
 
                     {router.pathname === "/feed" ? (
                         <IoIosCreate 
-                            className={`cursor-pointer text-[2.25rem] px-2 transform transition duration-500 hover:text-ffffff
+                            className={`cursor-pointer text-[2.25rem] px-2 transform hover:scale-110 transition duration-500 hover:text-ffffff
                                 ${togglePostWizard ? "text-ffffff" : "text-ffffff/70" || ""}
                             `} 
                             onClick={handlePostWizardToggle} 
                         />
                     ) : (
                         <>
-                            {userVerification(userEmail, "feed") && (
+                            {!userVerification(userEmail, "feed") && (
                                 <Link href='/feed'>
                                     <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
@@ -166,6 +167,13 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                             )}
                         </>
                     )}
+
+                    {!userVerification(userEmail, "exceptions") && (
+                        <Link href='/exceptions'>
+                            <AiOutlineExclamation className={`text-xl hover:text-b32d2d transform transition duration-500  ${router.pathname === "/exceptions" ? "text-b32d2d " : "text-ffffff/70 hover:scale-110"}`} />
+                        </Link>
+                    )}
+
                 </div>
 
             </div>
