@@ -997,7 +997,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         <>
             <Header />
 
-            {!userVerification(userEmail, router.query.brand as string) ? (
+            {userVerification(userEmail, router.query.brand as string) ? (
                 <div className="hidden lg:flex flex-col items-center justify-center ">
                     <div className="sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]">
                         {Brands.map((brand) => (
