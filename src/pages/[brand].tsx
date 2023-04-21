@@ -490,8 +490,7 @@ const LocationDetailsCard = ({
                         <p className="text-xl">ID: {storeId}</p>
 
                         <p className="font-light">
-                            {openNow ? "This location is currently trading." 
-                            : `This location will begin trading at ${nextOpenDateTime.toLocaleString('en-AU', { timeZone: timezone, day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase()}.` || ""}
+                            {!openNow && `This location will begin trading at ${nextOpenDateTime.toLocaleString('en-AU', { timeZone: timezone, day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase()}.` || ""}
                         </p>
 
                     </div>
@@ -520,7 +519,9 @@ const LocationDetailsCard = ({
                     <div className="flex items-center space-x-1">
                         <span className="border border-cfca3c rounded-full h-1.5 w-1.5 bg-cfca3c">{" "}</span>
 
-                        <p>Menu Synced: {lastMenuUpdate ? lastMenuUpdateDateTime.toLocaleString('en-AU', { day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase() : "None"}</p>
+                        <p>
+                            Menu Synced: {lastMenuUpdate ? lastMenuUpdateDateTime.toLocaleString('en-AU', { day:"2-digit", month:"2-digit", year:"2-digit", hour: 'numeric', minute: 'numeric', hour12: true }).toLocaleUpperCase() : "None"}
+                        </p>
                     </div>
 
                     <div>
