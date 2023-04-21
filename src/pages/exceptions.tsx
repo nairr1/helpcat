@@ -6,25 +6,21 @@ import { AiOutlinePhone } from "react-icons/ai";
 
 import { api } from "~/utils/api";
 import { Brands } from "~/utils/brands";
+import { formatDateTime } from "~/utils/formatDateTime";
 
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
-
-dayjs.extend(relativeTime);
+type ServerProps = {
+    data: StoreStatusData[];
+}
 
 type ExceptionProps = {
-    res1: {
-        data: StoreStatusData[];
-    };
-    res2: {
-        data: StoreStatusData[];
-    };
-    res3: {
-        data: StoreStatusData[];
-    };
-    res4: {
-        data: StoreStatusData[];
-    };
+    exceptionData: {
+        locationName: string;
+        storeStatus: string;
+        storeId: number;
+        phone: string;
+        openNow: boolean | undefined;
+        brand: string;
+    }[];
 }
 
 type ExceptionCardProps = {
@@ -79,7 +75,7 @@ const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, openN
 
                         <span className="border border-ffffff/70 mr-1 bg-ffffff/70 rounded-full h-1 w-1 ml-1">{" "}</span> 
 
-                        <p className="text-ffffff/70 font-light">{dayjs(log?.lastOnline).fromNow()}</p>
+                        <p className="text-ffffff/70 font-light">{formatDateTime(log?.lastOnline.toISOString())?.slice(0, 20)}</p>
                     </div>
 
                     <p className="flex text-xs font-light items-center"> 
@@ -95,74 +91,8 @@ const ExceptionCard = ({ locationName, storeStatus, storeId, phone, brand, openN
 };
 
 const Exceptions = ({ 
-    res1,
-    res2,
-    res3,
-    res4,
+    exceptionData
 }: ExceptionProps) => {
-    const { data: augustusGelateryData } = res1;
-    
-    const augustusGelateryExceptions = augustusGelateryData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "augustusgelatery"
-    }));
-
-
-    const { data: banjosData } = res2;
-
-    const banjosExceptions = banjosData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "banjos"
-    }));
-
-    const { data: bettysBurgersData } = res3;
-    
-    const bettysBurgersExceptions = bettysBurgersData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "bettysburgers"
-    }));
-
-    const { data: boostJuiceData } = res4;
-
-    const boostJuiceExceptions = boostJuiceData.filter(function(location): boolean {
-        return location.StoreStatus !== "Online" && location.OpenNow === true;
-    })
-    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
-        locationName: LocationName,
-        storeStatus: StoreStatus,
-        storeId: StoreID,
-        phone: Phone,
-        openNow: OpenNow,
-        brand: "boostjuice"
-    }));
-
-    const exceptionData = augustusGelateryExceptions.concat(
-        banjosExceptions,
-        bettysBurgersExceptions,
-        boostJuiceExceptions,
-    );
-
     return (
         <div className="flex justify-center items-center">
             <div className="place-content-center grid grid-cols-6 p-6 gap-4">
@@ -192,12 +122,71 @@ export const getServerSideProps: GetServerSideProps = async () => {
     const res3: unknown = await fetch("https://bettysburgers.redcatcloud.com.au/api/v1/stores").then(res => res.json());
     const res4: unknown = await fetch("https://boostjuice.redcatcloud.com.au/api/v1/stores").then(res => res.json());
 
+    const { data: augustusGelateryData } = res1 as ServerProps;
+    
+    const augustusGelateryExceptions = augustusGelateryData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "augustusgelatery"
+    }));
+
+    const { data: banjosData } = res2 as ServerProps;
+
+    const banjosExceptions = banjosData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "banjos"
+    }));
+
+    const { data: bettysBurgersData } = res3 as ServerProps;
+    
+    const bettysBurgersExceptions = bettysBurgersData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "bettysburgers"
+    }));
+
+    const { data: boostJuiceData } = res4 as ServerProps;
+
+    const boostJuiceExceptions = boostJuiceData.filter(function(location): boolean {
+        return location.StoreStatus !== "Online" && location.OpenNow === true;
+    })
+    .map(({ StoreStatus, LocationName, StoreID, Phone, OpenNow }) =>  ({
+        locationName: LocationName,
+        storeStatus: StoreStatus,
+        storeId: StoreID,
+        phone: Phone,
+        openNow: OpenNow,
+        brand: "boostjuice"
+    }));
+
+    const exceptionData = augustusGelateryExceptions.concat(
+        banjosExceptions,
+        bettysBurgersExceptions,
+        boostJuiceExceptions,
+    );
+
     return {
         props: {
-            res1,
-            res2,
-            res3,
-            res4,
+            exceptionData,
         },
     };
 };
