@@ -54,6 +54,7 @@ interface StoreStatusData {
             OpeningTime: string;
         },
     };
+    OpenNow?: boolean;
 };
 
 interface MenuData {

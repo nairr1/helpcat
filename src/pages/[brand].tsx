@@ -23,7 +23,6 @@ import { formatTradingTime } from "~/utils/formatTradingTime";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { HiOutlineDesktopComputer } from "react-icons/hi";
 import { AiOutlinePhone } from "react-icons/ai";
-import HelpcatPageLoader from "~/components/HelpcatPageLoader";
 
 type ConfigurationCardProps = {
     orderingEnabled: boolean;
