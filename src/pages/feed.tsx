@@ -648,7 +648,7 @@ const Feed = () => {
                 handlePostWizardToggle={handlePostWizardToggle}
             />
 
-            {!userVerification(userEmail, "feed") ? (
+            {userVerification(userEmail, "feed") ? (
                 <div className="relative min-h-screen">
                     <div className="p-6">
                         <input 
