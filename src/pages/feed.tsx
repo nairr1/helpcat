@@ -91,7 +91,7 @@ dayjs.extend(relativeTime);
 
 const HelpcatLoading = () => {
     return (
-        <div className='absolute w-[100%] rounded-2xl h-[100%] top-0 left-0 backdrop-blur-sm z-50'>
+        <div className='fixed w-[100%] rounded-2xl h-[100%] top-0 left-0 backdrop-blur-sm z-50'>
             <div className='flex flex-col items-center justify-center relative top-1/3'>
                 <HelpcatLoadingAnimation>
                     <Image 
@@ -648,7 +648,7 @@ const Feed = () => {
                 handlePostWizardToggle={handlePostWizardToggle}
             />
 
-            {userVerification(userEmail, "feed") ? (
+            {!userVerification(userEmail, "feed") ? (
                 <div className="relative min-h-screen">
                     <div className="p-6">
                         <input 
@@ -682,7 +682,7 @@ const Feed = () => {
                         />
                     </div>
 
-                    <div className="flex relative w-[100vw] justify-between p-8">
+                    <div className="flex relative justify-between p-8">
                         {search !== "" && (
                             <div className="flex-1 flex flex-col items-center justify-start p-6 space-y-4">
                                 <h1 className="text-[2rem] text-282a36 border-b w-full">{postsFilteredByTitle.length} Search {postsFilteredByTitle.length === 1 ? "Result" : "Results" || ""}</h1>
