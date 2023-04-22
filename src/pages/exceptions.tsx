@@ -83,7 +83,7 @@ const Exceptions = () => {
 
     setInterval(function() {
         void ctx.logs.getAll.invalidate();
-    }, 300000);
+    }, 120000);
 
     const { data: logs } = api.logs.getAll.useQuery();
 
