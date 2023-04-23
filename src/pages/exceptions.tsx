@@ -104,7 +104,7 @@ const Exceptions = () => {
                     </p>
                 </div>
 
-                <div className="grid justify-center sm:grid-cols-1 2xl:grid-cols-5 p-6 gap-4">
+                <div className="grid justify-center sm:grid-cols-1 xl:grid-cols-5 p-6 gap-4">
                     {logs.map(({ locationName, status, storeId, phone, brand, lastOnline }) => (
                         <ExceptionCard 
                             key={storeId}
