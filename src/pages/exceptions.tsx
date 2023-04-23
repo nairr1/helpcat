@@ -93,7 +93,7 @@ const Exceptions = () => {
         <>
             <Header />
 
-            <div className="flex flex-col justify-center items-center px-10 py-2">
+            <div className="flex flex-col justify-center items-center px-10 py-4">
                 <div className="flex flex-col justify-center items-center space-y-1 mb-2 font-light text-sm">
                     <p>
                         The exceptions page will return all major clients that are <span className="italic">currently trading</span>, but <span className="underline">aren&apos;t</span> able to process web transactions.
@@ -104,8 +104,8 @@ const Exceptions = () => {
                     </p>
                 </div>
 
-                <div className="grid justify-center grid-cols-5 p-6 gap-4">
-                    {logs?.map(({ locationName, status, storeId, phone, brand, lastOnline }) => (
+                <div className="grid justify-center sm:grid-cols-1 2xl:grid-cols-5 p-6 gap-4">
+                    {logs.map(({ locationName, status, storeId, phone, brand, lastOnline }) => (
                         <ExceptionCard 
                             key={storeId}
                             locationName={locationName || ""}
