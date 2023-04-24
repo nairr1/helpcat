@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as xlsx from 'xlsx/xlsx.mjs';
+import { read, utils } from "xlsx";
 import Header from "~/components/Header";
 
 interface Event<T = EventTarget> {
@@ -108,13 +108,13 @@ const Fixcat = () => {
 
             reader.onload = (e) => {
                 const data = e.target?.result;
-                const workbook = xlsx.read(data, { type: "array" });
+                const workbook = read(data, { type: "array" });
                 const sheetName = workbook.SheetNames[0] || "";
                 const worksheet = workbook.Sheets[sheetName];
-                setSalesData(xlsx.utils.sheet_to_json(worksheet!));
+                setSalesData(utils.sheet_to_json(worksheet!));
             };
 
-            reader.readAsArrayBuffer(e.target.files[0]!);
+            reader.readAsArrayBuffer(e.target.files[0] as File);
         }
     };
 
@@ -171,6 +171,7 @@ const Fixcat = () => {
                         paymentTipsTotal = 0;
                         saleTip = SaleTipTotal;
                         items = [];
+                        paymentTipsArr = [];
                     }
 
                     if (Line === 2 && SaleID === saleId) {
@@ -189,6 +190,7 @@ const Fixcat = () => {
                         if (Line === 3 && SaleID === saleId && paymentTotal < saleTotal) {
                             return (
                                 <UnbalancedSale  
+                                    key={index}
                                     saleId={saleId}
                                     saleTotal={saleTotal}
                                     items={items}
@@ -204,6 +206,7 @@ const Fixcat = () => {
                         if (Line === 3 && SaleID === saleId && saleTotal !== Math.round(itemsTotal * 10) / 10) {
                             return (
                                 <UnbalancedSale  
+                                    key={index}
                                     saleId={saleId}
                                     saleTotal={saleTotal}
                                     items={items}
@@ -218,7 +221,8 @@ const Fixcat = () => {
     
                         if (Line === 3 && SaleID === saleId && paymentTotal < Math.round(itemsTotal * 10) / 10) {
                             return (
-                                <UnbalancedSale  
+                                <UnbalancedSale 
+                                    key={index} 
                                     saleId={saleId}
                                     saleTotal={saleTotal}
                                     items={items}
@@ -234,6 +238,7 @@ const Fixcat = () => {
                         if (Line === 3 && SaleID === saleId && paymentTotal + paymentTipsTotal < saleTotal + saleTip) {
                             return (
                                 <UnbalancedSale  
+                                    key={index}
                                     saleId={saleId}
                                     saleTotal={saleTotal}
                                     items={items}
@@ -249,6 +254,7 @@ const Fixcat = () => {
                         if (Line === 3 && SaleID === saleId && paymentTipsTotal !== saleTip) {
                             return (
                                 <UnbalancedSale  
+                                    key={index}
                                     saleId={saleId}
                                     saleTotal={saleTotal}
                                     items={items}

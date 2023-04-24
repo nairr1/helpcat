@@ -73,5 +73,3 @@ interface StoreStatus {
 
     user: User | string | null;
 };
-
-declare module "xlsx/xlsx.mjs";
