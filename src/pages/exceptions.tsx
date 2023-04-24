@@ -9,7 +9,6 @@ import sadcat from "../components/assets/helpcatNotFound.jpeg";
 
 import { api } from "~/utils/api";
 import { Brands } from "~/utils/brands";
-import { formatDateTime } from "~/utils/formatDateTime";
 
 import styled from "styled-components";
 
