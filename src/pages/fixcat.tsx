@@ -66,8 +66,11 @@ const UnbalancedSale = ({ saleId, saleTotal, items, itemsTotal, paymentTotal, sa
                     <p className="font-medium text-7072bc">Items</p>
 
                     <div className="mb-2">
-                        {items.map((item) => (
-                            <div className="flex">
+                        {items.map((item, index) => (
+                            <div
+                                key={index} 
+                                className="flex"
+                            >
                                 <p className="mr-2">{item.title ? item.title : "Unreadable"}</p>
 
                                 <p>${item.price}</p>
