@@ -78,7 +78,7 @@ const UnbalancedSale = ({ saleId, saleTotal, items, itemsTotal, paymentTotal, sa
                         ))}
                     </div>
 
-                    <p className="italic text-xs">Total: ${itemsTotal.toFixed(2)}</p>
+                    <p className="italic text-xs">Total: ${Math.round(itemsTotal * 100) / 100}</p>
                 </div>
 
                 <div className="flex items-end justify-end space-x-4">
@@ -201,12 +201,12 @@ const Fixcat = () => {
                                     paymentTotal={paymentTotal}
                                     saleTip={saleTip}
                                     paymentTipsTotal={paymentTipsTotal}
-                                    message="Theres a discrepancy between the subtotal and the payment amount."
+                                    message="There's a discrepancy between the subtotal and the payment amount."
                                 />
                             );
                         }
     
-                        if (Line === 3 && SaleID === saleId && saleTotal !== Math.round(itemsTotal * 10) / 10) {
+                        if (Line === 3 && SaleID === saleId && saleTotal !== Math.round(itemsTotal * 100) / 100) {
                             return (
                                 <UnbalancedSale  
                                     key={index}
@@ -222,7 +222,7 @@ const Fixcat = () => {
                             );
                         }
     
-                        if (Line === 3 && SaleID === saleId && paymentTotal < Math.round(itemsTotal * 10) / 10) {
+                        if (Line === 3 && SaleID === saleId && paymentTotal < Math.round(itemsTotal * 100) / 100) {
                             return (
                                 <UnbalancedSale 
                                     key={index} 
