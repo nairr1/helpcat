@@ -196,7 +196,7 @@ const Fixcat = () => {
                             <div className="flex items-center space-x-1">
                                 <span className="border border-ffffff rounded-full h-1 w-1 bg-ffffff">{" "}</span>
 
-                                <p>If the <span className="font-medium">tips</span> subtotal doesn't match the tips payment.</p>
+                                <p>If the <span className="font-medium">tips</span> subtotal doesn&apos;t match the tips payment.</p>
                             </div>
 
                         </div>
