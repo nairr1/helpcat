@@ -1239,13 +1239,13 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                     
                 </div>
             ) : (
-                    <div className="text-center mt-[2rem]">
-                        {counter === 1 && (
-                            <p className={`transition duration-1000 transform ${counter !== 1 && "opacity-0" || "opacity-100" }`}>
-                                YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.
-                            </p>
-                        )}
-                    </div>
+                <div className="text-center mt-[2rem]">
+                    {counter === 1 && (
+                        <p className={`transition duration-1000 transform ${counter !== 1 && "opacity-0" || "opacity-100" }`}>
+                            YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.
+                        </p>
+                    )}
+                </div>
             )}
         </>
     );

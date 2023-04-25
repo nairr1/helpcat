@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 import { AiOutlinePhone } from "react-icons/ai";
 
@@ -11,6 +11,8 @@ import { api } from "~/utils/api";
 import { Brands } from "~/utils/brands";
 
 import styled from "styled-components";
+import { useUser } from "@clerk/nextjs";
+import { userVerification } from "~/utils/userVerification";
 
 type ExceptionCardProps = {
     locationName: string;
@@ -80,6 +82,22 @@ const Exceptions = () => {
     api.posts.getLatest.useQuery();
     api.posts.getAll.useQuery();
 
+    const [counter, setCounter] = useState(0);
+
+    setTimeout(() => {
+        if(counter < 1) {
+            setCounter(1);
+        }
+    }, 2000);
+
+    const user = useUser();
+
+    let userEmail = "";
+
+    if (user.user?.primaryEmailAddress) {
+        userEmail = user.user.primaryEmailAddress.toString();
+    }
+
     setInterval(function() {
         void ctx.logs.getAll.invalidate();
     }, 120000);
@@ -92,59 +110,69 @@ const Exceptions = () => {
         <>
             <Header />
 
-            <div className="flex flex-col justify-center items-center px-10 py-4">
-                <div className="flex flex-col justify-center items-center space-y-1 mb-2 font-light text-sm">
-                    <p>
-                        The exceptions page will return all major clients that are <span className="italic">currently trading</span>, but <span className="underline">aren&apos;t</span> able to process web transactions.
-                    </p>
+            {userVerification(userEmail, "exceptions") ? (
+                <div className="flex flex-col justify-center items-center px-10 py-4">
+                    <div className="flex flex-col justify-center items-center space-y-1 mb-2 font-light text-sm">
+                        <p>
+                            The exceptions page will return all major clients that are <span className="italic">currently trading</span>, but <span className="underline">aren&apos;t</span> able to process web transactions.
+                        </p>
 
-                    <p>
-                        This data is polled every 5 minutes, the server has been running since <span className="text-68e2f4 font-normal">2023-04-21, 22:15:34</span> AEST.
-                    </p>
-                </div>
-
-                <div className="grid justify-center sm:grid-cols-1 xl:grid-cols-5 p-6 gap-4">
-                    {logs.map(({ locationName, status, storeId, phone, brand, lastOnline }) => (
-                        <ExceptionCard 
-                            key={storeId}
-                            locationName={locationName || ""}
-                            storeStatus={status || ""}
-                            storeId={storeId}
-                            phone={phone || ""}
-                            brand={brand}
-                            lastOnline={lastOnline}
-                        />
-                    ))}
-                </div>
-
-                {logs && logs.length === 0 && (
-                    <div className="flex items-center space-x-2">
-                        <HelpcatErrorAnimation>
-                            <Image 
-                                className='m-auto rounded-full p-1'
-                                src={sadcat} 
-                                width={40}
-                                height={40}
-                                alt=""
-                            />
-                        </HelpcatErrorAnimation>
-
-                        <p className="text-2xl">No current exceptions!</p>
-
-                        <HelpcatErrorAnimation>
-                            <Image 
-                                className='m-auto rounded-full p-1'
-                                src={sadcat} 
-                                width={40}
-                                height={40}
-                                alt=""
-                            />
-                        </HelpcatErrorAnimation>
-                        
+                        <p>
+                            This data is polled every 5 minutes, the server has been running since <span className="text-68e2f4 font-normal">2023-04-21, 22:15:34</span> AEST.
+                        </p>
                     </div>
-                )}
 
-            </div>
+                    <div className="grid justify-center sm:grid-cols-1 xl:grid-cols-5 p-6 gap-4">
+                        {logs.map(({ locationName, status, storeId, phone, brand, lastOnline }) => (
+                            <ExceptionCard 
+                                key={storeId}
+                                locationName={locationName || ""}
+                                storeStatus={status || ""}
+                                storeId={storeId}
+                                phone={phone || ""}
+                                brand={brand}
+                                lastOnline={lastOnline}
+                            />
+                        ))}
+                    </div>
+
+                    {logs && logs.length === 0 && (
+                        <div className="flex items-center space-x-2">
+                            <HelpcatErrorAnimation>
+                                <Image 
+                                    className='m-auto rounded-full p-1'
+                                    src={sadcat} 
+                                    width={40}
+                                    height={40}
+                                    alt=""
+                                />
+                            </HelpcatErrorAnimation>
+
+                            <p className="text-2xl">No current exceptions!</p>
+
+                            <HelpcatErrorAnimation>
+                                <Image 
+                                    className='m-auto rounded-full p-1'
+                                    src={sadcat} 
+                                    width={40}
+                                    height={40}
+                                    alt=""
+                                />
+                            </HelpcatErrorAnimation>
+                            
+                        </div>
+                    )}
+
+                </div>
+            ) : (
+                <div className="text-center mt-[2rem]">
+                    {counter === 1 && (
+                        <p className={`transition duration-1000 transform ${counter !== 1 && "opacity-0" || "opacity-100" }`}>
+                            YOU AREN&apos;T AUTHORIZED TO VIEW THIS PAGE.
+                        </p>
+                    )}
+                </div>
+            )}
         </>
 
 

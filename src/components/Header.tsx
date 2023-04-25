@@ -11,7 +11,7 @@ import { Brands } from "~/utils/brands";
 
 import helpcatLogo from "../components/assets/helpcatLogo.png";
 
-import { IoIosCreate, IoMdMenu } from "react-icons/io";
+import { IoIosCreate, IoMdMenu, IoLogoOctocat } from "react-icons/io";
 import { userVerification } from "~/utils/userVerification";
 import { AiOutlineExclamation } from "react-icons/ai";
 
@@ -92,7 +92,7 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
     return (
         <div className={`text-sm sticky top-0 bg-18181a hidden lg:flex lg:flex-col z-50 pb-[0.5rem]`}>
             <div className="flex items-center">
-                <div className="flex-1 flex items-center justify-start p-[2rem]">
+                <div className="flex-1 flex space-x-8 items-center justify-start p-[2rem]">
                     {toggleSidebar ? (
                         <SideBar  
                             toggleSidebar={toggleSidebar}
@@ -100,48 +100,9 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                         />
                     ) : (
                         <IoMdMenu 
-                            className="text-xl transition duration-500 cursor-pointer bg-282a36 w-8 h-8 p-1.5 rounded-md shadow-md" 
+                            className="text-xl duration-500 cursor-pointer bg-282a36 w-8 h-8 p-1.5 rounded-md shadow-md border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40" 
                             onClick={(() => setToggleSidebar(!toggleSidebar))}
                         />
-                    )}
-                </div>
-
-                <Link href={"/"}>
-                    <div className="flex flex-1 font-sans text-[3rem] items-center justify-center">
-                        <Image 
-                            src={helpcatLogo} 
-                            width={30} 
-                            height={50} 
-                            alt="Helpcar Logo"
-                        />
-
-                        <p className="ml-2">Helpcat&#8482;</p> 
-                    </div>
-                </Link>
-
-                <div className="flex-1 flex items-center justify-end p-[2rem] space-x-6 font-light">
-                    {user.isSignedIn ? (
-                            <UserButton 
-                                appearance={{
-                                    variables: {
-                                        colorBackground: "#20222e",
-                                        colorText: "#ffffff",
-                                        colorPrimary: "#6C47FF",
-                                        fontWeight: { normal: 300 },
-                                        colorInputBackground: "#292c3e",
-                                        colorInputText: "#ffffff",
-                                        colorTextSecondary: "#ffffff",
-                                        colorAlphaShade: "#ffffff",
-                                    }
-                                }}
-                            />
-                    ) : (
-                        <div 
-                            className="px-2 py-1 rounded-md bg-6C47FF cursor-pointer border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 duration-500"
-                            onClick={handleSignInClick}
-                        >
-                            <p>Sign in</p>
-                        </div>
                     )}
 
                     {router.pathname === "/feed" ? (
@@ -166,6 +127,51 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                                 </Link>
                             )}
                         </>
+                    )}
+                </div>
+
+                <Link href={"/"}>
+                    <div className="flex flex-1 font-sans text-[3rem] items-center justify-center">
+                        <Image 
+                            src={helpcatLogo} 
+                            width={30} 
+                            height={50} 
+                            alt="Helpcar Logo"
+                        />
+
+                        <p className="ml-2">Helpcat&#8482;</p> 
+                    </div>
+                </Link>
+
+                <div className="flex-1 flex items-center justify-end p-[2rem] space-x-8 font-light">
+                    {user.isSignedIn ? (
+                            <UserButton 
+                                appearance={{
+                                    variables: {
+                                        colorBackground: "#20222e",
+                                        colorText: "#ffffff",
+                                        colorPrimary: "#6C47FF",
+                                        fontWeight: { normal: 300 },
+                                        colorInputBackground: "#292c3e",
+                                        colorInputText: "#ffffff",
+                                        colorTextSecondary: "#ffffff",
+                                        colorAlphaShade: "#ffffff",
+                                    }
+                                }}
+                            />
+                    ) : (
+                        <div 
+                            className="px-2 py-1 rounded-md bg-20222e cursor-pointer border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 duration-500"
+                            onClick={handleSignInClick}
+                        >
+                            <p>Sign in</p>
+                        </div>
+                    )}
+
+                    {userVerification(userEmail, "feed") && (
+                        <Link href='/fixcat'>
+                            <IoLogoOctocat className="w-5 h-5  text-ffffff/70 hover:text-ffffff transform transition duration-500 cursor-pointer hover:scale-110" />
+                        </Link>
                     )}
 
                     {userVerification(userEmail, "exceptions") && (
