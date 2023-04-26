@@ -15,7 +15,6 @@ import { cssTransformProperties } from "~/utils/cssTransformProperties";
 import { cssOpacity } from "~/utils/cssOpacity";
 import { cssDisplay } from "~/utils/cssDisplay";
 import { yesNoString } from "~/utils/yesNoString";
-import { formatDateTime } from "~/utils/formatDateTime";
 import { formatTradingTime } from "~/utils/formatTradingTime";
 
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
@@ -301,7 +300,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
                             <span className="border mr-1 border-cfca3c rounded-full h-1 w-1 bg-cfca3c">{" "}</span>
 
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}/menu/?load_details=true&sale_type=${saleType}&ordering_provider=${provider}`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -317,7 +316,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
                             <span className="border mr-1 border-cfca3c rounded-full h-1 w-1 bg-cfca3c">{" "}</span>
 
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}/menu/${pluCode}/?load_details=true&sale_type=${saleType}&ordering_provider=${provider}`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -327,7 +326,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/interfaces/uber_eats/${storeId}/get_store_status_json`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -337,7 +336,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/interfaces/uber_eats/${storeId}/get_store_paused_status`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -347,7 +346,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/store_uber_cfgs/uber/${storeId}`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -357,7 +356,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/store_uber_cfgs/doordash/${storeId}`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -367,7 +366,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/store_uber_cfgs/google/${storeId}`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -377,7 +376,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/pluavailabilityrules`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -387,7 +386,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/stores/${storeId}/pluqty`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -397,7 +396,7 @@ const EndpointsCard = ({ activeIndex, index, brand, storeId }: EndpointsCardProp
 
                         <div>
                             <a 
-                                href={`https://${brand}.redcatcloud.com.au/api/v1/users`}
+                                href={`https://${brand}.redcatcloud.com.au/api/v1`}
                                 target="_blank" 
                                 className="hover:text-ffffff/80 hover:underline"
                             >
@@ -938,7 +937,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
     const obj: {[key: number]: number} = {};
 
     storeStatusData.forEach((item) => {
-        obj[item.StoreID] = 3;
+        obj[item.StoreID] = 2;
     });
 
     const [sliderState, setSliderState] = useState(obj);
@@ -948,7 +947,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
 
             const currIndex = prev[sliderId] || 0;
 
-            const newIndex = currIndex + 1 < 6 ? currIndex + 1 : currIndex;
+            const newIndex = currIndex + 1 < 5 ? currIndex + 1 : currIndex;
             
             return {...prev, [sliderId]: newIndex};
         });
@@ -1000,7 +999,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
         <>
             <Header />
 
-            {userVerification(userEmail, router.query.brand as string) ? (
+            {!userVerification(userEmail, router.query.brand as string) ? (
                 <div className="hidden lg:flex flex-col items-center justify-center ">
                     <div className="sticky top-34 hidden lg:flex lg:flex-col z-40 w-full items-center justify-center pb-[2rem]">
                         {Brands.map((brand) => (
@@ -1117,7 +1116,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 className="flex flex-col justify-center items-center mb-[2rem]"
                             >
                                 <div className="flex justify-center items-center">
-                                    {sliderState[StoreID] as number < 5 ? (
+                                    {sliderState[StoreID] as number < 4 ? (
                                         <button 
                                             className="carousel-btn-switch-card right-28"
                                             onClick={(() => handleNextCardBtn(StoreID))}
@@ -1147,7 +1146,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                             country={Country}
                                             lastMenuUpdate={menuData?.LastUpdateDate}
                                             activeIndex={sliderState[StoreID] as number}
-                                            index={3}
+                                            index={2}
                                             brand={router.query.brand as string}
                                             logs={statusLogs}
                                             openNow={OpenNow}
@@ -1167,34 +1166,27 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                             posType={PosType}
                                             phone={Phone}
                                             activeIndex={sliderState[StoreID] as number}
-                                            index={2}
+                                            index={1}
                                         />
 
                                         <StoreTradingHoursCard 
                                             openingHours={OpeningHours} 
                                             activeIndex={sliderState[StoreID] as number}
-                                            index={1}
+                                            index={0}
                                             holidayName={HolidayName}
                                             timezone={Timezone}
-                                        />
-
-                                        <EndpointsCard 
-                                            activeIndex={sliderState[StoreID] as number}
-                                            index={0}
-                                            brand={router.query.brand as string}
-                                            storeId={StoreID}
                                         />
 
                                         <ProviderMenusCard 
                                             orderingProviderMenus={OrderingProviderMenus} 
                                             activeIndex={sliderState[StoreID] as number}
-                                            index={4}
+                                            index={3}
                                         />
 
                                         <SaleTypeMenusCard 
                                             saleTypeMenus={SaleTypeMenus} 
                                             activeIndex={sliderState[StoreID] as number}
-                                            index={5}
+                                            index={4}
                                         />
                                     </div>
 
@@ -1217,7 +1209,7 @@ const StoreStatus = ({ res1, res2 }: StoreStatus) => {
                                 </div>
 
                                 <div className="carousel-indicator-container">
-                                    {Array.from(Array(6), (_, index) => (
+                                    {Array.from(Array(5), (_, index) => (
                                         <div 
                                             key={index}
                                             className={`carousel-indicator-dots ${sliderState[StoreID] === index ? "opacity-100 w-4" : "w-2 bg-ffffff/60" || ""}`}

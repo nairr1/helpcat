@@ -110,7 +110,7 @@ const Exceptions = () => {
         <>
             <Header />
 
-            {userVerification(userEmail, "exceptions") ? (
+            {!userVerification(userEmail, "exceptions") ? (
                 <div className="flex flex-col justify-center items-center px-10 py-4">
                     <div className="flex flex-col justify-center items-center space-y-1 mb-2 font-light text-sm">
                         <p>
@@ -118,7 +118,7 @@ const Exceptions = () => {
                         </p>
 
                         <p>
-                            This data is polled every 5 minutes, the server has been running since <span className="text-68e2f4 font-normal">2023-04-21, 22:15:34</span> AEST.
+                            This data is polled every 5 minutes and will display in real time.
                         </p>
                     </div>
 

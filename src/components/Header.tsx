@@ -1,17 +1,15 @@
-import React, { type Dispatch, type SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { SignIn, UserButton, useUser } from "@clerk/nextjs";
 
-import styled from "styled-components";
-
 import { Brands } from "~/utils/brands";
 
 import helpcatLogo from "../components/assets/helpcatLogo.png";
 
-import { IoIosCreate, IoMdMenu, IoLogoOctocat } from "react-icons/io";
+import { IoIosCreate, IoLogoOctocat, IoMdMenu } from "react-icons/io";
 import { userVerification } from "~/utils/userVerification";
 import { AiOutlineExclamation } from "react-icons/ai";
 
@@ -20,48 +18,24 @@ type HeaderProps = {
     handlePostWizardToggle?: () => void;
 }
 
-type SidebarProps = {
-    toggleSidebar: boolean;
-    setToggleSidebar: Dispatch<SetStateAction<boolean>>;
-}
-
-const SideBar = ({ toggleSidebar, setToggleSidebar }: SidebarProps) => {
+const SideBar = () => {
     return (
-            <div 
-                className="bg-20222e rounded-xl transition absolute top-10 cursor-pointer duration-500 shadow-[0_3px_10px_rgb(0,0,0,0.5)]"
-                onMouseLeave={(() => setToggleSidebar(!toggleSidebar))}
-            >
-                <div className="grid grid-cols-4 gap-y-6 gap-x-10 p-4">
-                    <Link href={"/"} className="flex justify-center items-center">
-                        <ShakeContainer>
-                            <Image 
-                                src={helpcatLogo} 
-                                height={20}
-                                width={20}
-                                className="rounded-md"
-                                alt="Brand Logo"
-                            />
-                        </ShakeContainer>
-                    </Link>
+        <div className="absolute left-4 top-32">
+            <div className="flex flex-col space-y-2 text-xs font-light">
+                <Link href={"/"} className="hover:underline">
+                    Home
+                </Link>
 
-                    {Brands.map((brand) => (
-                        <div key={brand.id}>
-                            <Link href={`/${brand.query}`}>
-                                <ShakeContainer>
-                                    <Image 
-                                        src={brand.image} 
-                                        height={35}
-                                        width={35}
-                                        className="rounded-md"
-                                        alt="Brand Logo"
-                                    />
-                                </ShakeContainer>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                {Brands.map((brand) => (
+                    <div key={brand.id}>
+                        <Link href={`/${brand.query}`} className="hover:underline">
+                            {brand.title}
+                        </Link>
+                    </div>
+                ))}
             </div>
-        );
+        </div>
+    );
 };
 
 const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
@@ -69,11 +43,9 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
 
     const router = useRouter();
 
-    const [toggleSidebar, setToggleSidebar] = useState(false);
-
     const [fadeIn, setFadeIn] = useState(false);
-
     const [displaySignIn, setDisplaySignIn] = useState(false);
+    const [toggleSidebar, setToggleSidebar] = useState(false);
 
     const handleSignInClick = () => {
         setDisplaySignIn(!displaySignIn);
@@ -92,18 +64,16 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
     return (
         <div className={`text-sm sticky top-0 bg-18181a hidden lg:flex lg:flex-col z-50 pb-[0.5rem]`}>
             <div className="flex items-center">
-                <div className="flex-1 flex space-x-8 items-center justify-start p-[2rem]">
-                    {toggleSidebar ? (
-                        <SideBar  
-                            toggleSidebar={toggleSidebar}
-                            setToggleSidebar={setToggleSidebar}
-                        />
-                    ) : (
-                        <IoMdMenu 
-                            className="text-xl duration-500 cursor-pointer bg-282a36 w-8 h-8 p-1.5 rounded-md shadow-md border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40" 
-                            onClick={(() => setToggleSidebar(!toggleSidebar))}
-                        />
+                    {toggleSidebar && (
+                        <SideBar />
                     )}
+                    
+                <div className="flex-1 flex space-x-8 items-center justify-start p-[2rem]">
+
+                    <IoMdMenu 
+                        className={`text-xl duration-500 cursor-pointer bg-282a36 w-8 h-8 p-1.5 rounded-md shadow-md border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 ${toggleSidebar && "border-5e4fb3/40 bg-2f334a"} `}
+                        onClick={(() => setToggleSidebar(!toggleSidebar))}
+                    />
 
                     {router.pathname === "/feed" ? (
                         <IoIosCreate 
@@ -114,7 +84,7 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                         />
                     ) : (
                         <>
-                            {userVerification(userEmail, "feed") && (
+                            {!userVerification(userEmail, "feed") && (
                                 <Link href='/feed'>
                                     <svg 
                                         xmlns="http://www.w3.org/2000/svg" 
@@ -210,22 +180,3 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
 };
 
 export default Header;
-
-const ShakeContainer = styled.div`
-    :hover {
-        animation: shake 1s ease-in-out;
-    }
-
-    @keyframes shake {
-        10% { transform: rotate(8deg); }
-        20% { transform: rotate(-8deg); }
-        30% { transform: rotate(6deg); }
-        40% { transform: rotate(-6deg); }
-        50% { transform: rotate(4deg); }
-        60% { transform: rotate(-4deg); }
-        70% { transform: rotate(2deg); }
-        80% { transform: rotate(-2deg); }
-        90% { transform: rotate(1deg); }
-        100% { transform: initial; }
-    }
-`
