@@ -71,7 +71,7 @@ const Header = ({ togglePostWizard, handlePostWizardToggle }: HeaderProps) => {
                 <div className="flex-1 flex space-x-8 items-center justify-start p-[2rem]">
 
                     <IoMdMenu 
-                        className={`text-xl duration-500 cursor-pointer bg-282a36 w-8 h-8 p-1.5 rounded-md shadow-md border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 ${toggleSidebar && "border-5e4fb3/40 bg-2f334a"} `}
+                        className={`text-xl duration-500 cursor-pointer bg-282a36 w-8 h-8 p-1.5 rounded-md shadow-md border border-282a36 hover:bg-2f334a hover:border-5e4fb3/40 ${toggleSidebar && "border-5e4fb3/40 bg-2f334a" || ""}`}
                         onClick={(() => setToggleSidebar(!toggleSidebar))}
                     />
 
