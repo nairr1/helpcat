@@ -136,7 +136,7 @@ const Fixcat = () => {
                 setSalesData(utils.sheet_to_json(worksheet!));
             };
 
-            reader.readAsArrayBuffer(e.target.files[0] as File);
+            reader.readAsArrayBuffer(e.target.files[0]);
 
             setFileName(fileName);
         }
