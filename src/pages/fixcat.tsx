@@ -156,7 +156,7 @@ const Fixcat = () => {
         <>
             <Header />
 
-            {!userVerification(userEmail, "fixcat") ? (
+            {userVerification(userEmail, "fixcat") ? (
                 <div className="flex flex-col justify-center items-center space-y-6 p-4 pb-10">
                     <div className="flex flex-col justify-center items-center space-y-4 mb-2 font-light text-sm">
                         <p>

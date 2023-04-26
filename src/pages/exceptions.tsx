@@ -110,7 +110,7 @@ const Exceptions = () => {
         <>
             <Header />
 
-            {!userVerification(userEmail, "exceptions") ? (
+            {userVerification(userEmail, "exceptions") ? (
                 <div className="flex flex-col justify-center items-center px-10 py-4">
                     <div className="flex flex-col justify-center items-center space-y-1 mb-2 font-light text-sm">
                         <p>
